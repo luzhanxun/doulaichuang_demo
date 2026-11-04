@@ -1,0 +1,102 @@
+/* =========================================================
+   斗来创 · 设计令牌 (Design Tokens)
+   湾区青蓝 · 乡创暖橙 · 生态绿
+   ========================================================= */
+:root {
+  /* 主色：湾区青蓝 */
+  --blue-800: #0F3557;
+  --blue-700: #17497F;
+  --blue-600: #1F5FAF;
+  --blue-500: #2F7FD1;
+  --blue-300: #8CB7E6;
+  --blue-100: #DCE9F8;
+  --blue-50: #EDF3FB;
+
+  /* 辅助色：生态绿 */
+  --green-700: #24724A;
+  --green-600: #2E8B57;
+  --green-500: #3A9D7A;
+  --green-100: #D8EEE3;
+  --green-50: #E9F5EF;
+
+  /* 点缀色：暖橙 */
+  --orange-700: #B8590A;
+  --orange-600: #D96F14;
+  --orange-500: #F28C28;
+  --orange-400: #FF7A45;
+  --orange-100: #FCE2C8;
+  --orange-50: #FFF3E8;
+
+  /* 中性色 */
+  --ink-900: #16202B;
+  --ink-800: #22303E;
+  --ink-700: #33414F;
+  --ink-600: #475767;
+  --ink-500: #5C6B7A;
+  --ink-400: #8794A1;
+  --ink-300: #AEB8C2;
+  --ink-200: #CBD3DB;
+  --line: #E3E8EE;
+  --line-strong: #D2DAE3;
+  --bg: #F4F7FA;
+  --bg-deep: #EDF1F6;
+  --surface: #FFFFFF;
+  --surface-2: #FAFCFE;
+
+  /* 状态色 */
+  --success: #2E8B57;
+  --success-50: #E9F5EF;
+  --info: #2F7FD1;
+  --info-50: #EDF3FB;
+  --warn: #B7791F;
+  --warn-700: #8A5A12;
+  --warn-50: #FFF6E5;
+  --danger: #D14343;
+  --danger-700: #A53232;
+  --danger-50: #FDECEC;
+
+  /* 圆角 */
+  --r-xs: 6px;
+  --r-sm: 8px;
+  --r-md: 12px;
+  --r-lg: 16px;
+  --r-xl: 20px;
+  --r-2xl: 28px;
+  --r-pill: 999px;
+
+  /* 阴影：轻、淡，以层次分隔为主 */
+  --sh-1: 0 1px 2px rgba(16, 32, 52, .05);
+  --sh-2: 0 4px 14px rgba(16, 32, 52, .07);
+  --sh-3: 0 12px 32px rgba(16, 32, 52, .11);
+  --sh-4: 0 24px 60px rgba(9, 30, 54, .16);
+  --ring: 0 0 0 3px rgba(31, 95, 175, .18);
+
+  /* 间距 */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 20px;
+  --sp-6: 24px;
+  --sp-8: 32px;
+  --sp-10: 40px;
+  --sp-12: 48px;
+
+  /* 字体 */
+  --font: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB",
+    "Microsoft YaHei", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-num: "SF Pro Display", "DIN Alternate", -apple-system, "Segoe UI", sans-serif;
+
+  /* 动效 */
+  --ease: cubic-bezier(.2, .8, .2, 1);
+  --dur-fast: 120ms;
+  --dur: 200ms;
+  --dur-slow: 300ms;
+
+  /* 层级 */
+  --z-sticky: 20;
+  --z-nav: 40;
+  --z-drawer: 60;
+  --z-modal: 80;
+  --z-toast: 100;
+}

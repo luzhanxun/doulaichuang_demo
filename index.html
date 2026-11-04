@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>斗来创 · 设计系统</title>
+<!--
+  方向契约
+  THESIS    一个让港澳青年看得懂、信得过、愿意迈出第一步的乡创入口；不是政务信息发布页。
+  OWN-WORLD 湾区青蓝承载政务可信度，暖橙只用于"青年此刻可行动"的位置，生态绿归属乡创本身；
+            水乡波纹是唯一装饰语言，出现在头图与图片占位里，不进入内容区。
+  STORY     看见斗门 → 读懂机会 → 查清政策 → 找到组织 → 提交申请 → 等待反馈。
+  FIRST VIEW 首屏一句话说明平台是什么，紧跟三个可点的内容入口与一条最新重大信息；
+            不做轮播横幅、不做纯装饰大图。
+  FORM      小程序 390×844 内容优先单列；后台深青蓝侧栏 + 浅底工作区，状态先于装饰。
+-->
+<link rel="stylesheet" href="assets/css/tokens.css">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/overview.css">
+</head>
+<body>
+
+<nav class="ov-nav">
+  <div class="ov-nav-inner">
+    <a class="ov-brand" href="index.html">
+      <span class="ov-mark">斗</span>
+      <strong>斗来创 · 设计系统</strong>
+    </a>
+    <div class="ov-nav-links">
+      
+    </div>
+    <div class="ov-nav-actions">
+      <a class="btn btn-secondary btn-sm" href="miniprogram/index.html"><i data-icon="phone"></i>小程序原型</a>
+      <a class="btn btn-primary btn-sm" href="admin/index.html"><i data-icon="dashboard"></i>后台原型</a>
+    </div>
+  </div>
+</nav>
+
+<header class="ov-hero">
+  <div class="ov-hero-inner">
+    <div class="ov-brand">
+      <span class="ov-mark">斗</span>
+      <strong style="color:#fff">“斗来创” 港澳青年乡创线上推广平台</strong>
+    </div>
+    <h1>湾区青蓝托住可信，<br><em>暖橙</em> 留给青年可行动的那一下。</h1>
+    <p class="ov-hero-desc">
+      面向港澳青年的斗门乡创推广平台，一端是微信小程序的内容与申请入口，一端是融媒体中心的
+      内容管理与甲方终审后台。本页是两端共用的设计依据：颜色、字阶、图标、组件与状态用语都从这里取值。
+    </p>
+    <div class="ov-hero-actions">
+      <a class="btn btn-accent" href="miniprogram/index.html"><i data-icon="phone"></i>查看小程序 14 屏</a>
+      <a class="btn btn-glass" href="admin/index.html"><i data-icon="dashboard"></i>查看后台 8 视图</a>
+    </div>
+    <div class="ov-hero-stats">
+      <div class="ov-stat"><strong>3</strong><span>主色 · 60-30-10</span></div>
+      <div class="ov-stat"><strong>7</strong><span>字阶</span></div>
+      <div class="ov-stat"><strong>71</strong><span>线性图标</span></div>
+      <div class="ov-stat"><strong>22</strong><span>界面</span></div>
+    </div>
+  </div>
+</header>
+
+<main class="ov-page">
+
+  <section class="ov-section" id="confirm">
+    <div class="ov-section-head">
+      <h2>待甲方确认</h2>
+      <p>以下八项会直接影响视觉与流程，当前原型按“标注的默认值”实现，确认后即可按结论调整，不影响整体结构。</p>
+    </div>
+    <div class="confirm-list">
+      <div class="confirm-item"><i data-icon="info"></i><span>是否认可“湾区青蓝 · 乡创暖橙”的主风格方向，或需结合斗门区现有视觉规范调整。<em style="font-style:normal;color:var(--ink-400)">当前按认可实现</em></span></div>
+      <div class="confirm-item"><i data-icon="info"></i><span>主色、辅助色与点缀色的具体色值及使用比例。<em style="font-style:normal;color:var(--ink-400)">当前 60-30-10</em></span></div>
+      <div class="confirm-item"><i data-icon="info"></i><span>首页内容优先级：产业项目、重大信息、港澳政策、找到组织的排序。<em style="font-style:normal;color:var(--ink-400)">当前 项目 &gt; 重大信息 &gt; 政策 &gt; 组织</em></span></div>
+      <div class="confirm-item"><i data-icon="info"></i><span>联系对接入口的开放规则：未登录用户是否可见、登录后如何使用。<em style="font-style:normal;color:var(--ink-400)">当前：可见但需登录</em></span></div>
+      <div class="confirm-item"><i data-icon="info"></i><span>入会申请表单字段与审核状态定义。<em style="font-style:normal;color:var(--ink-400)">当前：6 个必填 + 4 个状态</em></span></div>
+      <div class="confirm-item"><i data-icon="info"></i><span>后台内容状态流转名称与审核环节设置。<em style="font-style:normal;color:var(--ink-400)">当前：草稿 → 待审核 → 已发布 / 已下架</em></span></div>
+      <div class="confirm-item"><i data-icon="info"></i><span>是否使用斗门区视觉元素、地图或标识，及其使用规范。<em style="font-style:normal;color:var(--ink-400)">当前未使用任何标识</em></span></div>
+      <div class="confirm-item"><i data-icon="info"></i><span>小程序端与后台的浏览器、移动端适配范围。<em style="font-style:normal;color:var(--ink-400)">当前：后台 ≥1280，窄屏降级到 900</em></span></div>
+    </div>
+  </section>
+
+  <footer class="ov-foot">
+    <span>斗来创 · 设计系统 v1.0 · 演示数据均为虚构，正式内容由甲方终审后发布</span>
+    <span><a class="link" href="miniprogram/index.html">小程序原型</a> · <a class="link" href="admin/index.html">后台原型</a></span>
+  </footer>
+</main>
+
+<script src="assets/js/icons.js"></script>
+<script>
+  (function () {
+    var grid = document.getElementById('iconGrid');
+    var names = Object.keys(window.DLC.icons).sort();
+    grid.innerHTML = names.map(function (n) {
+      return '<div class="icon-cell"><i data-icon="' + n + '"></i><span>' + n + '</span></div>';
+    }).join('');
+    window.DLC.hydrateIcons(grid);
+  })();
+</script>
+</body>
+</html>

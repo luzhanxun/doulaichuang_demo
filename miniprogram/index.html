@@ -1,0 +1,1230 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>斗来创 · 微信小程序高保真原型</title>
+<!--
+  方向契约
+  THESIS    一个让港澳青年看得懂、信得过、愿意迈出第一步的乡创入口；不是政务信息发布页。
+  OWN-WORLD 湾区青蓝承载政务可信度，暖橙只用于"青年此刻可行动"的位置，生态绿归属乡创本身；
+            水乡波纹是唯一装饰语言，出现在头图与图片占位里，不进入内容区。
+  STORY     看见斗门 → 读懂机会 → 查清政策 → 找到组织 → 提交申请 → 等待反馈。
+  FIRST VIEW 首屏一句话说明平台是什么，紧跟三个可点的内容入口与一条最新重大信息；
+            不做轮播横幅、不做纯装饰大图。
+  FORM      390×844 内容优先单列，底部四 Tab 固定；卡片圆角 16px，层级靠留白与 1px 描边而非重阴影。
+-->
+<link rel="stylesheet" href="../assets/css/tokens.css">
+<link rel="stylesheet" href="../assets/css/base.css">
+<link rel="stylesheet" href="../assets/css/miniprogram.css">
+</head>
+<body>
+<div class="mp-page">
+  <div class="mp-layout">
+
+    <!-- ================= 顶部 ================= -->
+    <header class="mp-shell-header">
+      <div class="shell-brand">
+        <div class="shell-mark">斗</div>
+        <div>
+          <h1>斗来创 · 微信小程序</h1>
+          <p>港澳青年乡创线上推广平台 · 高保真交互原型 v1.0</p>
+        </div>
+      </div>
+      <div class="shell-actions">
+        <a class="btn btn-secondary" href="../index.html"><i data-icon="arrow-left"></i>设计总览</a>
+        <a class="btn btn-secondary" href="../index.html#color"><i data-icon="grid"></i>设计规范</a>
+        <a class="btn btn-primary" href="../admin/index.html"><i data-icon="dashboard"></i>后台管理系统</a>
+      </div>
+    </header>
+
+    <!-- ================= 左侧页面目录 ================= -->
+    <aside class="mp-rail" aria-label="页面目录">
+      <p class="rail-title">页面目录 · 14</p>
+
+      <div class="rail-group">
+        <p class="rail-group-label"><i data-icon="home"></i>首页</p>
+        <button class="rail-item active" data-go="home"><span class="idx">01</span>首页</button>
+      </div>
+
+      <div class="rail-group">
+        <p class="rail-group-label"><i data-icon="building"></i>产业项目</p>
+        <button class="rail-item" data-go="projects"><span class="idx">02</span>项目列表</button>
+        <button class="rail-item" data-go="project-detail"><span class="idx">03</span>项目详情</button>
+      </div>
+
+      <div class="rail-group">
+        <p class="rail-group-label"><i data-icon="megaphone"></i>重大信息</p>
+        <button class="rail-item" data-go="news"><span class="idx">04</span>资讯列表</button>
+        <button class="rail-item" data-go="news-detail"><span class="idx">05</span>资讯详情</button>
+      </div>
+
+      <div class="rail-group">
+        <p class="rail-group-label"><i data-icon="document"></i>港澳政策</p>
+        <button class="rail-item" data-go="policies"><span class="idx">06</span>政策列表</button>
+        <button class="rail-item" data-go="policy-detail"><span class="idx">07</span>政策详情</button>
+      </div>
+
+      <div class="rail-group">
+        <p class="rail-group-label"><i data-icon="users"></i>找到组织</p>
+        <button class="rail-item" data-go="orgs"><span class="idx">08</span>组织名录</button>
+        <button class="rail-item" data-go="org-detail"><span class="idx">09</span>组织详情</button>
+        <button class="rail-item" data-go="apply"><span class="idx">10</span>入会申请</button>
+      </div>
+
+      <div class="rail-group">
+        <p class="rail-group-label"><i data-icon="user"></i>账户与个人</p>
+        <button class="rail-item" data-go="login"><span class="idx">11</span>登录</button>
+        <button class="rail-item" data-go="profile"><span class="idx">12</span>个人中心</button>
+        <button class="rail-item" data-go="applications"><span class="idx">13</span>我的申请</button>
+      </div>
+
+      <div class="rail-group">
+        <p class="rail-group-label"><i data-icon="message"></i>对接流程</p>
+        <button class="rail-item" data-go="contact"><span class="idx">14</span>联系对接</button>
+      </div>
+
+      <p class="rail-foot">原型内容为演示数据<br>最终以甲方提供素材为准</p>
+    </aside>
+
+    <!-- ================= 设备舞台 ================= -->
+    <main class="mp-stage">
+      <div class="stage-top">
+        <span class="pill"><span class="dot"></span>可交互原型</span>
+        <span class="pill"><i data-icon="pin"></i>珠海 · 斗门</span>
+        <span class="pill"><i data-icon="refresh"></i>点击目录切换页面</span>
+      </div>
+
+      <div class="device status-blue" id="device">
+        <div class="device-inner">
+          <div class="statusbar">
+            <span class="sb-time">9:41</span>
+            <div class="sb-right">
+              <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor" aria-hidden="true"><rect x="0" y="7" width="3" height="4" rx="1"/><rect x="4.5" y="5" width="3" height="6" rx="1"/><rect x="9" y="2.5" width="3" height="8.5" rx="1"/><rect x="13.5" y="0" width="3" height="11" rx="1"/></svg>
+              <svg width="16" height="12" viewBox="0 0 16 12" fill="currentColor" aria-hidden="true"><path d="M8 10.8 5.6 8.2a3.4 3.4 0 0 1 4.8 0zM2.2 4.8a8.2 8.2 0 0 1 11.6 0l-1.4 1.5a6.2 6.2 0 0 0-8.8 0zM.3 2.9a11 11 0 0 1 15.4 0l-1.4 1.4a9 9 0 0 0-12.6 0z"/></svg>
+              <svg width="25" height="12" viewBox="0 0 25 12" fill="none" aria-hidden="true"><rect x=".5" y=".5" width="21" height="11" rx="3" stroke="currentColor" opacity=".4"/><rect x="2" y="2" width="16" height="8" rx="1.8" fill="currentColor"/><path d="M23 4v4a2.2 2.2 0 0 0 0-4z" fill="currentColor" opacity=".5"/></svg>
+            </div>
+          </div>
+
+          <div class="screen-host" id="screenHost">
+
+            <!-- ============ 01 首页 ============ -->
+            <section class="screen active" data-screen="home" aria-label="首页">
+              <header class="home-hero">
+                <div class="hero-brand">
+                  <div class="hero-brand-left">
+                    <div class="hero-mark">斗</div>
+                    <div>
+                      <strong>斗来创</strong>
+                      <span>港澳青年乡创线上推广平台</span>
+                    </div>
+                  </div>
+                  <button class="icon-btn light" aria-label="消息通知" data-toast="暂无新通知"><i data-icon="bell"></i></button>
+                </div>
+                <div class="hero-loc"><i data-icon="pin"></i>广东 · 珠海 · 斗门</div>
+                <h1>让港澳青年<br>看见斗门的<em>乡村机遇</em></h1>
+                <p class="hero-desc">产业项目 · 政策资讯 · 组织对接</p>
+                <div class="hero-actions">
+                  <button class="btn btn-accent" data-go="projects">探索产业项目<i data-icon="arrow-right"></i></button>
+                  <button class="btn btn-glass" data-go="orgs">找到组织</button>
+                </div>
+                <div class="hero-stats">
+                  <div class="stat"><strong>42</strong><span>乡创项目</span></div>
+                  <div class="stat"><strong>18</strong><span>合作组织</span></div>
+                  <div class="stat"><strong>36</strong><span>港澳政策</span></div>
+                </div>
+              </header>
+
+              <div class="quick-grid">
+                <article class="quick-card green" data-go="projects" role="button" tabindex="0">
+                  <div class="q-icon"><i data-icon="building"></i></div>
+                  <div class="q-title">产业项目</div>
+                  <div class="q-desc">现代农业 · 文旅文创 · 民宿康养</div>
+                  <i class="q-arrow" data-icon="chevron-right"></i>
+                </article>
+                <article class="quick-card blue" data-go="news" role="button" tabindex="0">
+                  <div class="q-icon"><i data-icon="megaphone"></i></div>
+                  <div class="q-title">重大信息</div>
+                  <div class="q-desc">两会 · 党代会 · 统战要闻</div>
+                  <i class="q-arrow" data-icon="chevron-right"></i>
+                </article>
+                <article class="quick-card orange" data-go="policies" role="button" tabindex="0">
+                  <div class="q-icon"><i data-icon="document"></i></div>
+                  <div class="q-title">港澳政策</div>
+                  <div class="q-desc">政策汇编 · 解读 · 文件查阅</div>
+                  <i class="q-arrow" data-icon="chevron-right"></i>
+                </article>
+                <article class="quick-card teal" data-go="orgs" role="button" tabindex="0">
+                  <div class="q-icon"><i data-icon="users"></i></div>
+                  <div class="q-title">找到组织</div>
+                  <div class="q-desc">联合会 · 统战社团 · 乡创基地</div>
+                  <i class="q-arrow" data-icon="chevron-right"></i>
+                </article>
+              </div>
+
+              <div class="mp-body" style="padding-top:20px;">
+                <section class="mp-section">
+                  <div class="section-head">
+                    <h3>重点产业项目</h3>
+                    <button class="link-more" data-go="projects">全部 <i data-icon="chevron-right"></i></button>
+                  </div>
+                  <div class="hscroll">
+                    <article class="project-mini" data-go="project-detail" role="button" tabindex="0">
+                      <div class="pm-media media tone-green">
+                        <span class="media-tag"><i data-icon="leaf"></i>重点推荐</span>
+                      </div>
+                      <div class="pm-body">
+                        <h4>白蕉海鲈预制菜产业园</h4>
+                        <p>现代农业 · 预制菜加工</p>
+                        <div class="pm-foot">
+                          <span class="pm-loc"><i data-icon="pin"></i>白蕉镇</span>
+                          <span class="tag tag-green">招商中</span>
+                        </div>
+                      </div>
+                    </article>
+                    <article class="project-mini" data-go="project-detail" role="button" tabindex="0">
+                      <div class="pm-media media tone-warm">
+                        <span class="media-tag">文旅文创</span>
+                      </div>
+                      <div class="pm-body">
+                        <h4>斗门旧街文创街区</h4>
+                        <p>历史街区 · 文创零售</p>
+                        <div class="pm-foot">
+                          <span class="pm-loc"><i data-icon="pin"></i>斗门镇</span>
+                          <span class="tag tag-blue">合作运营</span>
+                        </div>
+                      </div>
+                    </article>
+                    <article class="project-mini" data-go="project-detail" role="button" tabindex="0">
+                      <div class="pm-media media tone-teal">
+                        <span class="media-tag">民宿康养</span>
+                      </div>
+                      <div class="pm-body">
+                        <h4>莲江村乡村民宿集群</h4>
+                        <p>水乡民宿 · 研学基地</p>
+                        <div class="pm-foot">
+                          <span class="pm-loc"><i data-icon="pin"></i>莲洲镇</span>
+                          <span class="tag tag-orange">招募中</span>
+                        </div>
+                      </div>
+                    </article>
+                  </div>
+                </section>
+
+                <section class="mp-section">
+                  <div class="section-head">
+                    <h3>最新资讯</h3>
+                    <button class="link-more" data-go="news">更多 <i data-icon="chevron-right"></i></button>
+                  </div>
+                  <article class="news-row" data-go="news-detail" role="button" tabindex="0">
+                    <div class="nr-body">
+                      <div class="nr-meta"><span class="tag tag-blue">统战工作</span><span>2026-10-24</span></div>
+                      <h4>区委统战部召开港澳青年乡创工作推进会</h4>
+                      <div class="nr-meta"><span>斗门融媒</span><span>·</span><span>阅读 1,286</span></div>
+                    </div>
+                    <div class="nr-thumb media tone-blue"></div>
+                  </article>
+                  <article class="news-row" data-go="news-detail" role="button" tabindex="0">
+                    <div class="nr-body">
+                      <div class="nr-meta"><span class="tag tag-blue">两会</span><span>2026-10-22</span></div>
+                      <h4>斗门区两会专题：以乡创为抓手推动乡村振兴</h4>
+                      <div class="nr-meta"><span>斗门融媒</span><span>·</span><span>阅读 968</span></div>
+                    </div>
+                    <div class="nr-thumb media tone-green"></div>
+                  </article>
+                </section>
+
+                <section class="mp-section">
+                  <div class="section-head">
+                    <h3>政策速递</h3>
+                    <button class="link-more" data-go="policies">全部 <i data-icon="chevron-right"></i></button>
+                  </div>
+                  <article class="policy-item" data-go="policy-detail" role="button" tabindex="0">
+                    <div class="pi-icon"><i data-icon="document"></i></div>
+                    <div class="pi-body">
+                      <h4>《珠海市斗门区支持港澳青年创新创业若干措施》</h4>
+                      <div class="pi-meta"><span>区科技创新局</span><span>·</span><span>2026-10-18</span></div>
+                    </div>
+                  </article>
+                  <article class="policy-item" data-go="policy-detail" role="button" tabindex="0">
+                    <div class="pi-icon"><i data-icon="file"></i></div>
+                    <div class="pi-body">
+                      <h4>《港澳居民在斗门就业创业服务指南》</h4>
+                      <div class="pi-meta"><span>区人力资源和社会保障局</span><span>·</span><span>2026-10-12</span></div>
+                    </div>
+                  </article>
+                </section>
+              </div>
+
+              <button class="org-banner" data-go="orgs">
+                <div class="ob-top"><i data-icon="users"></i>找到组织 · 融入湾区</div>
+                <h4>加入斗门区港澳青年乡创联合会</h4>
+                <p>与在地乡创伙伴建立联系，获取项目、政策与活动信息。</p>
+                <span class="ob-btn">查看组织名录<i data-icon="arrow-right"></i></span>
+              </button>
+
+              <div style="height:24px;flex:none;"></div>
+            </section>
+
+            <!-- ============ 02 产业项目列表 ============ -->
+            <section class="screen" data-screen="projects" aria-label="产业项目列表">
+              <header class="mp-page-head">
+                <div class="head-row">
+                  <div>
+                    <h2>产业项目</h2>
+                    <p class="sub">发现斗门乡创资源，对接合作机会</p>
+                  </div>
+                  <button class="mp-head-action" data-toast="筛选面板：可按镇街、领域、合作方式筛选"><i data-icon="filter"></i>筛选</button>
+                </div>
+                <div class="mp-search" style="margin-top:12px;">
+                  <i data-icon="search"></i>
+                  <input type="search" placeholder="搜索项目名称、领域或镇街" aria-label="搜索项目">
+                </div>
+              </header>
+              <div class="filter-bar">
+                <button class="chip active">全部</button>
+                <button class="chip">现代农业</button>
+                <button class="chip">文旅文创</button>
+                <button class="chip">预制菜</button>
+                <button class="chip">民宿康养</button>
+                <button class="chip">数字乡村</button>
+              </div>
+              <div class="mp-body">
+                <div class="list-count"><span>共 <strong>42</strong> 个项目</span><span>按更新时间排序</span></div>
+
+                <article class="feature-project" data-go="project-detail" role="button" tabindex="0">
+                  <div class="fp-media media tone-green">
+                    <span class="media-tag accent"><i data-icon="sparkles"></i>重点推荐</span>
+                    <div class="fp-body">
+                      <h4>白蕉海鲈预制菜产业园</h4>
+                      <p>从养殖到预制菜，打造湾区海鲈全产业链合作平台</p>
+                      <div class="fp-meta"><span><i data-icon="pin"></i>白蕉镇</span><span>·</span><span>现代农业</span><span>·</span><span>招商中</span></div>
+                    </div>
+                  </div>
+                </article>
+
+                <article class="project-card" data-go="project-detail" role="button" tabindex="0">
+                  <div class="pc-media media tone-warm"></div>
+                  <div class="pc-body">
+                    <h4>斗门旧街文创街区</h4>
+                    <div class="pc-tags"><span class="tag tag-blue">文旅文创</span><span class="tag tag-gray">合作运营</span></div>
+                    <p class="pc-desc">依托百年骑楼老街，引入文创零售、非遗体验与青年共创空间。</p>
+                    <div class="pc-foot">
+                      <span class="pc-loc"><i data-icon="pin"></i>斗门镇</span>
+                      <span class="pc-go">查看详情<i data-icon="chevron-right"></i></span>
+                    </div>
+                  </div>
+                </article>
+
+                <article class="project-card" data-go="project-detail" role="button" tabindex="0">
+                  <div class="pc-media media tone-teal"></div>
+                  <div class="pc-body">
+                    <h4>莲江村乡村民宿集群</h4>
+                    <div class="pc-tags"><span class="tag tag-green">民宿康养</span><span class="tag tag-gray">招募中</span></div>
+                    <p class="pc-desc">水乡院落改造与运营，配套研学、骑行与农事体验业态。</p>
+                    <div class="pc-foot">
+                      <span class="pc-loc"><i data-icon="pin"></i>莲洲镇</span>
+                      <span class="pc-go">查看详情<i data-icon="chevron-right"></i></span>
+                    </div>
+                  </div>
+                </article>
+
+                <article class="project-card" data-go="project-detail" role="button" tabindex="0">
+                  <div class="pc-media media tone-blue"></div>
+                  <div class="pc-body">
+                    <h4>接霞庄数字乡创基地</h4>
+                    <div class="pc-tags"><span class="tag tag-blue">数字乡村</span><span class="tag tag-gray">合资合作</span></div>
+                    <p class="pc-desc">古村落数字化展示、青年影像创作与乡村内容孵化空间。</p>
+                    <div class="pc-foot">
+                      <span class="pc-loc"><i data-icon="pin"></i>斗门镇</span>
+                      <span class="pc-go">查看详情<i data-icon="chevron-right"></i></span>
+                    </div>
+                  </div>
+                </article>
+
+                <article class="project-card" data-go="project-detail" role="button" tabindex="0">
+                  <div class="pc-media media tone-green"></div>
+                  <div class="pc-body">
+                    <h4>黄杨山生态茶园</h4>
+                    <div class="pc-tags"><span class="tag tag-green">现代农业</span><span class="tag tag-gray">品牌共建</span></div>
+                    <p class="pc-desc">高山生态茶园与茶文化体验，寻求品牌联名与渠道合作。</p>
+                    <div class="pc-foot">
+                      <span class="pc-loc"><i data-icon="pin"></i>斗门镇</span>
+                      <span class="pc-go">查看详情<i data-icon="chevron-right"></i></span>
+                    </div>
+                  </div>
+                </article>
+
+                <button class="btn btn-secondary btn-block" data-toast="已加载更多项目">加载更多</button>
+              </div>
+            </section>
+
+            <!-- ============ 03 产业项目详情 ============ -->
+            <section class="screen" data-screen="project-detail" aria-label="产业项目详情">
+              <div class="detail-hero media tone-green">
+                <div class="dh-overlay"></div>
+                <button class="dh-back" data-back aria-label="返回"><i data-icon="chevron-left"></i></button>
+                <button class="dh-share" aria-label="分享" data-toast="已调起微信分享"><i data-icon="share"></i></button>
+                <span class="media-tag accent dh-badge"><i data-icon="sparkles"></i>重点推荐</span>
+              </div>
+              <div class="detail-body">
+                <div>
+                  <h1 class="detail-title">白蕉海鲈预制菜产业园</h1>
+                  <div class="detail-tags" style="margin-top:9px;">
+                    <span class="tag tag-green tag-lg">现代农业</span>
+                    <span class="tag tag-blue tag-lg">预制菜</span>
+                    <span class="tag tag-orange tag-lg">招商中</span>
+                  </div>
+                  <div class="detail-meta" style="margin-top:10px;">
+                    <span><i data-icon="pin"></i>珠海市斗门区白蕉镇</span>
+                    <span><i data-icon="clock"></i>更新于 2026-10-22</span>
+                  </div>
+                </div>
+
+                <div class="info-grid">
+                  <div class="info-cell"><div class="ic-label">所属镇街</div><div class="ic-value">白蕉镇</div></div>
+                  <div class="info-cell"><div class="ic-label">项目类型</div><div class="ic-value">现代农业</div></div>
+                  <div class="info-cell"><div class="ic-label">合作方式</div><div class="ic-value">合资合作</div></div>
+                  <div class="info-cell"><div class="ic-label">项目状态</div><div class="ic-value" style="color:var(--green-600)">招商中</div></div>
+                </div>
+
+                <div class="content-block">
+                  <h4>项目简介</h4>
+                  <p>白蕉镇是"中国海鲈之乡"，拥有从种苗、养殖到加工、冷链的完整产业链。园区规划建设标准化预制菜加工区、冷链仓储与产品研发中心，面向港澳青年创业者开放合作。</p>
+                  <p>项目重点引入品牌策划、食品研发、跨境电商与青年主理人团队，共同开发适合港澳及海外市场的海鲈预制菜产品。</p>
+                </div>
+
+                <div class="content-block">
+                  <h4>项目亮点</h4>
+                  <ul class="cb-list">
+                    <li><i data-icon="check-circle"></i><span>依托国家地理标志产品"白蕉海鲈"，原料供应稳定。</span></li>
+                    <li><i data-icon="check-circle"></i><span>园区提供标准化厂房、冷链仓储与检测认证支持。</span></li>
+                    <li><i data-icon="check-circle"></i><span>对接港澳渠道资源，支持跨境电商与品牌联名。</span></li>
+                  </ul>
+                </div>
+
+                <div class="content-block">
+                  <h4>图文展示</h4>
+                  <div class="media-grid">
+                    <div class="mg-item media tone-green"></div>
+                    <div class="mg-item media tone-blue"></div>
+                    <div class="mg-item media tone-warm"></div>
+                  </div>
+                </div>
+
+                <div class="contact-locked">
+                  <div class="cl-icon"><i data-icon="lock"></i></div>
+                  <div class="cl-body">
+                    <h5>联系方式登录后可见</h5>
+                    <p>登录后可查看联系人并发起对接申请</p>
+                  </div>
+                  <button class="btn btn-primary btn-sm" data-go="login">去登录</button>
+                </div>
+              </div>
+
+              <div class="action-bar">
+                <button class="ab-icon" data-toast="已收藏该项目"><i data-icon="heart"></i>收藏</button>
+                <button class="ab-icon" data-toast="已复制项目链接"><i data-icon="share"></i>分享</button>
+                <button class="btn btn-primary" data-go="contact">联系对接</button>
+              </div>
+            </section>
+
+            <!-- ============ 04 重大信息列表 ============ -->
+            <section class="screen" data-screen="news" aria-label="重大信息列表">
+              <header class="mp-page-head">
+                <div class="head-row">
+                  <div>
+                    <h2>重大信息</h2>
+                    <p class="sub">两会 · 党代会 · 区委区政府 · 统战工作</p>
+                  </div>
+                  <button class="mp-head-action" data-toast="已开启资讯订阅"><i data-icon="bell"></i>订阅</button>
+                </div>
+                <div class="mp-search" style="margin-top:12px;">
+                  <i data-icon="search"></i>
+                  <input type="search" placeholder="搜索资讯标题或关键词" aria-label="搜索资讯">
+                </div>
+                <div class="mp-tabs">
+                  <button class="mp-tab active">全部</button>
+                  <button class="mp-tab">两会</button>
+                  <button class="mp-tab">党代会</button>
+                  <button class="mp-tab">区委区政府</button>
+                  <button class="mp-tab">统战工作</button>
+                </div>
+              </header>
+              <div class="mp-body">
+                <article class="feature-project" data-go="news-detail" role="button" tabindex="0">
+                  <div class="fp-media media tone-blue" style="height:148px;">
+                    <span class="media-tag">要闻</span>
+                    <div class="fp-body">
+                      <h4>区委统战部召开港澳青年乡创工作推进会</h4>
+                      <p>聚焦项目对接、政策落地与组织服务</p>
+                      <div class="fp-meta"><span>斗门融媒</span><span>·</span><span>2026-10-24</span></div>
+                    </div>
+                  </div>
+                </article>
+
+                <article class="news-row" data-go="news-detail" role="button" tabindex="0">
+                  <div class="nr-body">
+                    <div class="nr-meta"><span class="tag tag-blue">两会</span><span>2026-10-22</span></div>
+                    <h4>斗门区两会专题：以乡创为抓手推动乡村振兴</h4>
+                    <div class="nr-meta"><span>斗门融媒</span><span>·</span><span>阅读 968</span></div>
+                  </div>
+                  <div class="nr-thumb media tone-green"></div>
+                </article>
+
+                <article class="news-row" data-go="news-detail" role="button" tabindex="0">
+                  <div class="nr-body">
+                    <div class="nr-meta"><span class="tag tag-blue">统战工作</span><span>2026-10-21</span></div>
+                    <h4>港澳青年走进莲洲镇开展乡创研学交流</h4>
+                    <div class="nr-meta"><span>斗门融媒</span><span>·</span><span>阅读 742</span></div>
+                  </div>
+                  <div class="nr-thumb media tone-teal"></div>
+                </article>
+
+                <article class="news-row" data-go="news-detail" role="button" tabindex="0">
+                  <div class="nr-body">
+                    <div class="nr-meta"><span class="tag tag-blue">区委区政府</span><span>2026-10-20</span></div>
+                    <h4>区政府常务会议部署文旅融合与乡创空间建设</h4>
+                    <div class="nr-meta"><span>斗门融媒</span><span>·</span><span>阅读 1,104</span></div>
+                  </div>
+                  <div class="nr-thumb media tone-warm"></div>
+                </article>
+
+                <article class="news-row" data-go="news-detail" role="button" tabindex="0">
+                  <div class="nr-body">
+                    <div class="nr-meta"><span class="tag tag-blue">党代会</span><span>2026-10-18</span></div>
+                    <h4>区党代会报告解读：构建城乡融合发展新格局</h4>
+                    <div class="nr-meta"><span>斗门融媒</span><span>·</span><span>阅读 1,532</span></div>
+                  </div>
+                  <div class="nr-thumb media tone-blue"></div>
+                </article>
+
+                <button class="btn btn-secondary btn-block" data-toast="已加载更多资讯">加载更多</button>
+              </div>
+            </section>
+
+            <!-- ============ 05 重大信息详情 ============ -->
+            <section class="screen" data-screen="news-detail" aria-label="重大信息详情">
+              <nav class="detail-nav">
+                <button class="dn-back" data-back aria-label="返回"><i data-icon="chevron-left"></i></button>
+                <span class="dn-title">重大信息</span>
+                <div class="dn-actions">
+                  <button aria-label="收藏" data-toast="已收藏该资讯"><i data-icon="star"></i></button>
+                  <button aria-label="分享" data-toast="已调起微信分享"><i data-icon="share"></i></button>
+                </div>
+              </nav>
+              <div class="article-head">
+                <h1>区委统战部召开港澳青年乡创工作推进会</h1>
+                <div class="article-meta">
+                  <span class="am-source">斗门融媒</span>
+                  <span>2026-10-24 15:30</span>
+                  <span>阅读 1,286</span>
+                </div>
+              </div>
+              <div class="article-body">
+                <p class="lead">10月24日，区委统战部召开港澳青年乡创工作推进会，围绕项目对接、政策落地、组织服务等重点事项进行研究部署。</p>
+                <p>会议指出，要充分发挥斗门乡创资源优势，持续完善"斗来创"平台功能，让港澳青年更便捷地了解斗门、走进斗门、扎根斗门。</p>
+                <figure class="article-figure">
+                  <div class="af-media media tone-blue"></div>
+                  <figcaption>会议现场 · 斗门区融媒体中心</figcaption>
+                </figure>
+                <p>会议强调，要健全项目对接机制，梳理形成乡创项目清单，推动港澳青年团队与在地项目精准匹配；要优化政策服务，做好港澳青年在斗门就业创业的政策解读与申报指引。</p>
+                <h3>完善组织服务，建立常态化联系</h3>
+                <p>会议要求，依托区内联合会、统战社团和乡创基地，建立港澳青年常态化联系机制，定期开展研学交流、项目路演和创业辅导活动。</p>
+                <p>下一步，平台将持续更新产业项目、重大信息与港澳政策内容，并开通线上入会申请与联系对接服务。</p>
+              </div>
+              <div class="article-source">
+                <strong>来源：</strong>珠海市斗门区融媒体中心<br>
+                <strong>责任编辑：</strong>李明 · 内容经甲方终审后发布
+              </div>
+              <div style="height:24px;flex:none;"></div>
+            </section>
+
+            <!-- ============ 06 港澳政策列表 ============ -->
+            <section class="screen" data-screen="policies" aria-label="港澳政策列表">
+              <header class="mp-page-head">
+                <div class="head-row">
+                  <div>
+                    <h2>港澳政策</h2>
+                    <p class="sub">扶持政策汇编 · 解读 · 文件查阅</p>
+                  </div>
+                  <button class="mp-head-action" data-toast="政策订阅已开启"><i data-icon="bell"></i>订阅</button>
+                </div>
+                <div class="mp-search" style="margin-top:12px;">
+                  <i data-icon="search"></i>
+                  <input type="search" placeholder="搜索政策名称、发文机关" aria-label="搜索政策">
+                </div>
+                <div class="mp-tabs">
+                  <button class="mp-tab active">政策汇编</button>
+                  <button class="mp-tab">政策解读</button>
+                  <button class="mp-tab">文件查阅</button>
+                </div>
+              </header>
+              <div class="mp-body">
+                <div class="notice">
+                  <i data-icon="info"></i>
+                  <span>政策文件以官方发布为准。平台提供汇编与解读，具体申报以主管部门要求为准。</span>
+                </div>
+
+                <article class="policy-item" data-go="policy-detail" role="button" tabindex="0" style="border-color:#F3D9BE;background:linear-gradient(180deg,#FFF9F2,#fff);">
+                  <div class="pi-icon" style="background:#FDEBD7;"><i data-icon="sparkles"></i></div>
+                  <div class="pi-body">
+                    <div style="display:flex;align-items:center;gap:6px;margin-bottom:4px;">
+                      <span class="tag tag-orange">最新</span>
+                      <span class="tag tag-gray">政策汇编</span>
+                    </div>
+                    <h4>《珠海市斗门区支持港澳青年创新创业若干措施》</h4>
+                    <div class="pi-meta"><span>区科技创新局</span><span>·</span><span>2026-10-18</span><span>·</span><span>阅读 2,104</span></div>
+                  </div>
+                </article>
+
+                <article class="policy-item" data-go="policy-detail" role="button" tabindex="0">
+                  <div class="pi-icon"><i data-icon="document"></i></div>
+                  <div class="pi-body">
+                    <h4>《港澳居民在斗门就业创业服务指南》</h4>
+                    <div class="pi-meta"><span class="tag tag-green">就业创业</span><span>区人社局</span><span>2026-10-12</span></div>
+                  </div>
+                </article>
+
+                <article class="policy-item" data-go="policy-detail" role="button" tabindex="0">
+                  <div class="pi-icon"><i data-icon="file"></i></div>
+                  <div class="pi-body">
+                    <h4>《斗门区乡村振兴产业扶持资金管理办法》</h4>
+                    <div class="pi-meta"><span class="tag tag-blue">资金扶持</span><span>区农业农村局</span><span>2026-10-08</span></div>
+                  </div>
+                </article>
+
+                <article class="policy-item" data-go="policy-detail" role="button" tabindex="0">
+                  <div class="pi-icon"><i data-icon="document"></i></div>
+                  <div class="pi-body">
+                    <h4>《港澳青年乡创项目申报指引（2026）》</h4>
+                    <div class="pi-meta"><span class="tag tag-green">申报指引</span><span>区委统战部</span><span>2026-09-28</span></div>
+                  </div>
+                </article>
+
+                <article class="policy-item" data-go="policy-detail" role="button" tabindex="0">
+                  <div class="pi-icon"><i data-icon="file"></i></div>
+                  <div class="pi-body">
+                    <h4>《珠海市人才住房保障实施办法》</h4>
+                    <div class="pi-meta"><span class="tag tag-blue">住房保障</span><span>市住房城乡建设局</span><span>2026-09-20</span></div>
+                  </div>
+                </article>
+
+                <button class="btn btn-secondary btn-block" data-toast="已加载更多政策">加载更多</button>
+              </div>
+            </section>
+
+            <!-- ============ 07 政策详情 ============ -->
+            <section class="screen" data-screen="policy-detail" aria-label="港澳政策详情">
+              <nav class="detail-nav">
+                <button class="dn-back" data-back aria-label="返回"><i data-icon="chevron-left"></i></button>
+                <span class="dn-title">港澳政策</span>
+                <div class="dn-actions">
+                  <button aria-label="收藏" data-toast="已收藏该政策"><i data-icon="star"></i></button>
+                  <button aria-label="分享" data-toast="已调起微信分享"><i data-icon="share"></i></button>
+                </div>
+              </nav>
+              <header class="policy-hero">
+                <div class="ph-label"><i data-icon="document"></i>政策汇编 · 珠海市斗门区</div>
+                <h1>珠海市斗门区支持港澳青年创新创业若干措施</h1>
+                <div class="ph-tags">
+                  <span class="tag">就业创业</span>
+                  <span class="tag">资金扶持</span>
+                  <span class="tag">2026年</span>
+                </div>
+              </header>
+              <div class="detail-body">
+                <div class="doc-meta">
+                  <div class="dm-row"><span class="dm-label">文号</span><span class="dm-value">斗府办〔2026〕18号</span></div>
+                  <div class="dm-row"><span class="dm-label">发布日期</span><span class="dm-value">2026-10-18</span></div>
+                  <div class="dm-row"><span class="dm-label">实施日期</span><span class="dm-value">2026-11-01</span></div>
+                  <div class="dm-row"><span class="dm-label">适用对象</span><span class="dm-value">港澳青年、港澳乡创主体</span></div>
+                  <div class="dm-row"><span class="dm-label">来源</span><span class="dm-value">珠海市斗门区人民政府</span></div>
+                </div>
+
+                <div class="policy-points">
+                  <h5><i data-icon="sparkles"></i>政策要点</h5>
+                  <ul>
+                    <li>港澳青年创办企业可申请最高 30 万元创业资助。</li>
+                    <li>入驻乡创基地的项目，前两年租金按 50% 给予补贴。</li>
+                    <li>符合条件的港澳青年可申请人才住房与生活补贴。</li>
+                  </ul>
+                </div>
+
+                <div class="policy-article">
+                  <div class="pa-head">
+                    <h2>珠海市斗门区支持港澳青年<br>创新创业若干措施</h2>
+                    <p>斗府办〔2026〕18号</p>
+                  </div>
+                  <div class="pa-body">
+                    <p><span class="clause">第一条</span> 为支持港澳青年来斗门创新创业，融入粤港澳大湾区发展，结合本区实际，制定本措施。</p>
+                    <p><span class="clause">第二条</span> 本措施适用于在斗门区依法登记注册、由港澳青年创办或实际参与经营的企业、个体工商户及乡创项目。</p>
+                    <p><span class="clause">第三条</span> 对符合条件的港澳青年创业项目，经评审给予最高 30 万元的创业资助，分阶段拨付。</p>
+                    <p><span class="clause">第四条</span> 对入驻区级乡创基地的港澳青年项目，前两年按租金 50% 给予补贴，单个项目每年最高 5 万元。</p>
+                    <p><span class="clause">第五条</span> 支持港澳青年参加乡创培训、研学交流与项目路演，按规定给予活动费用支持。</p>
+                  </div>
+                </div>
+
+                <div>
+                  <div class="mini-head">
+                    <h3>政策文件</h3>
+                    <span class="count">共 2 个附件</span>
+                  </div>
+                  <div class="attach-list">
+                    <button class="attach-item" data-toast="文件下载需登录后操作">
+                      <div class="ai-icon"><i data-icon="file"></i></div>
+                      <div class="ai-body"><h5>斗府办〔2026〕18号 全文.pdf</h5><p>PDF · 1.2 MB</p></div>
+                      <div class="ai-dl"><i data-icon="download"></i></div>
+                    </button>
+                    <button class="attach-item" data-toast="文件下载需登录后操作">
+                      <div class="ai-icon"><i data-icon="file"></i></div>
+                      <div class="ai-body"><h5>政策申报材料清单.docx</h5><p>DOCX · 86 KB</p></div>
+                      <div class="ai-dl"><i data-icon="download"></i></div>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="notice notice-warn">
+                  <i data-icon="alert"></i>
+                  <span>本页面内容为演示数据。正式政策文本、文号及申报条件以主管部门官方发布为准。</span>
+                </div>
+              </div>
+              <div class="action-bar">
+                <button class="ab-icon" data-toast="已收藏该政策"><i data-icon="star"></i>收藏</button>
+                <button class="btn btn-primary" data-toast="文件下载需登录后操作"><i data-icon="download"></i>下载文件</button>
+              </div>
+            </section>
+
+            <!-- ============ 08 组织名录 ============ -->
+            <section class="screen" data-screen="orgs" aria-label="找到组织">
+              <nav class="detail-nav">
+                <button class="dn-back" data-back aria-label="返回"><i data-icon="chevron-left"></i></button>
+                <span class="dn-title">找到组织</span>
+                <div class="dn-actions">
+                  <button aria-label="我的申请" data-go="applications"><i data-icon="clipboard"></i></button>
+                </div>
+              </nav>
+              <div class="mp-body" style="gap:14px;">
+                <div class="org-banner" style="margin:0;">
+                  <div class="ob-top"><i data-icon="users"></i>联结港澳青年与斗门乡创组织</div>
+                  <h4>找到适合你的组织</h4>
+                  <p>浏览联合会、统战社团、乡创基地与行业协会，在线提交入会申请。</p>
+                  <button class="ob-btn" data-go="applications">我的申请<i data-icon="arrow-right"></i></button>
+                </div>
+
+                <div class="mp-search">
+                  <i data-icon="search"></i>
+                  <input type="search" placeholder="搜索组织名称" aria-label="搜索组织">
+                </div>
+
+                <div class="chips">
+                  <button class="chip active">全部</button>
+                  <button class="chip">联合会</button>
+                  <button class="chip">统战社团</button>
+                  <button class="chip">乡创基地</button>
+                  <button class="chip">行业协会</button>
+                </div>
+
+                <article class="org-card" data-go="org-detail" role="button" tabindex="0">
+                  <div class="org-logo">港</div>
+                  <div class="oc-body">
+                    <h4>斗门区港澳青年乡创联合会</h4>
+                    <p class="oc-desc">联系服务港澳青年乡创主体，开展项目对接、研学交流与创业辅导。</p>
+                    <div class="oc-foot">
+                      <div class="oc-stats"><span><strong>128</strong> 成员</span><span><strong>16</strong> 场活动</span></div>
+                      <span class="tag tag-green">可申请入会</span>
+                    </div>
+                  </div>
+                </article>
+
+                <article class="org-card" data-go="org-detail" role="button" tabindex="0">
+                  <div class="org-logo blue">新</div>
+                  <div class="oc-body">
+                    <h4>斗门区新的社会阶层人士联谊会</h4>
+                    <p class="oc-desc">团结新的社会阶层人士，搭建交流合作与建言献策平台。</p>
+                    <div class="oc-foot">
+                      <div class="oc-stats"><span><strong>86</strong> 成员</span><span><strong>12</strong> 场活动</span></div>
+                      <span class="tag tag-green">可申请入会</span>
+                    </div>
+                  </div>
+                </article>
+
+                <article class="org-card" data-go="org-detail" role="button" tabindex="0">
+                  <div class="org-logo teal">莲</div>
+                  <div class="oc-body">
+                    <h4>莲洲镇乡村振兴促进会</h4>
+                    <p class="oc-desc">汇聚乡村运营、民宿、研学等主体，推动莲洲镇乡村产业发展。</p>
+                    <div class="oc-foot">
+                      <div class="oc-stats"><span><strong>64</strong> 成员</span><span><strong>9</strong> 场活动</span></div>
+                      <span class="tag tag-green">可申请入会</span>
+                    </div>
+                  </div>
+                </article>
+
+                <article class="org-card" data-go="org-detail" role="button" tabindex="0">
+                  <div class="org-logo orange">青</div>
+                  <div class="oc-body">
+                    <h4>斗门区青年企业家协会</h4>
+                    <p class="oc-desc">服务青年企业家成长，促进企业间资源对接与协同发展。</p>
+                    <div class="oc-foot">
+                      <div class="oc-stats"><span><strong>152</strong> 成员</span><span><strong>21</strong> 场活动</span></div>
+                      <span class="tag tag-gray">需推荐入会</span>
+                    </div>
+                  </div>
+                </article>
+              </div>
+            </section>
+
+            <!-- ============ 09 组织详情 ============ -->
+            <section class="screen" data-screen="org-detail" aria-label="组织详情">
+              <nav class="detail-nav">
+                <button class="dn-back" data-back aria-label="返回"><i data-icon="chevron-left"></i></button>
+                <span class="dn-title">组织详情</span>
+                <div class="dn-actions">
+                  <button aria-label="分享" data-toast="已调起微信分享"><i data-icon="share"></i></button>
+                </div>
+              </nav>
+              <header class="org-hero">
+                <div class="oh-top">
+                  <div class="org-logo">港</div>
+                  <div>
+                    <h1>斗门区港澳青年乡创联合会</h1>
+                    <div class="oh-tags">
+                      <span class="tag">联合会</span>
+                      <span class="tag">港澳青年</span>
+                      <span class="tag">乡创服务</span>
+                    </div>
+                  </div>
+                </div>
+                <div class="oh-stats">
+                  <div><strong>128</strong><span>在册成员</span></div>
+                  <div><strong>16</strong><span>年度活动</span></div>
+                  <div><strong>2021</strong><span>成立年份</span></div>
+                </div>
+              </header>
+              <div class="detail-body">
+                <div class="content-block">
+                  <h4>组织简介</h4>
+                  <p>斗门区港澳青年乡创联合会由区内乡创主体、港澳青年代表及相关服务机构自愿组成，致力于搭建港澳青年了解斗门、对接项目、融入湾区的服务平台。</p>
+                </div>
+                <div class="content-block">
+                  <h4>主要职责</h4>
+                  <ul class="cb-list">
+                    <li><i data-icon="check-circle"></i><span>开展乡创项目对接、路演与资源链接。</span></li>
+                    <li><i data-icon="check-circle"></i><span>组织港澳青年研学交流、创业培训活动。</span></li>
+                    <li><i data-icon="check-circle"></i><span>协助会员了解港澳政策与申报流程。</span></li>
+                  </ul>
+                </div>
+                <div class="content-block">
+                  <h4>近期活动</h4>
+                  <div class="act-list">
+                    <div class="act-item">
+                      <div class="act-thumb media tone-green"></div>
+                      <div>
+                        <h5>港澳青年乡创研学营 · 莲洲站</h5>
+                        <p>2026-10-21 · 莲江村</p>
+                      </div>
+                    </div>
+                    <div class="act-item">
+                      <div class="act-thumb media tone-warm"></div>
+                      <div>
+                        <h5>乡创项目路演与资本对接会</h5>
+                        <p>2026-09-28 · 斗门旧街</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="contact-locked">
+                  <div class="cl-icon"><i data-icon="phone"></i></div>
+                  <div class="cl-body">
+                    <h5>联系方式登录后可见</h5>
+                    <p>入会申请提交后由组织工作人员联系</p>
+                  </div>
+                  <button class="btn btn-secondary btn-sm" data-go="login">登录</button>
+                </div>
+                <div class="notice notice-green">
+                  <i data-icon="shield"></i>
+                  <span>入会申请信息仅用于资格审核，平台与组织将严格保密。</span>
+                </div>
+              </div>
+              <div class="action-bar">
+                <button class="ab-icon" data-toast="已收藏该组织"><i data-icon="star"></i>收藏</button>
+                <button class="btn btn-green" data-go="apply"><i data-icon="user-check"></i>申请入会</button>
+              </div>
+            </section>
+
+            <!-- ============ 10 入会申请 ============ -->
+            <section class="screen" data-screen="apply" aria-label="入会申请">
+              <nav class="detail-nav">
+                <button class="dn-back" data-back aria-label="返回"><i data-icon="chevron-left"></i></button>
+                <span class="dn-title">入会申请</span>
+                <div class="dn-actions">
+                  <button aria-label="入会须知" data-toast="入会须知：请如实填写信息，审核周期约 5 个工作日"><i data-icon="info"></i></button>
+                </div>
+              </nav>
+              <div class="stepper">
+                <div class="step done"><span class="s-dot"><i data-icon="check"></i></span><span class="s-label">基本信息</span></div>
+                <div class="step active"><span class="s-dot">2</span><span class="s-label">申请信息</span></div>
+                <div class="step"><span class="s-dot">3</span><span class="s-label">确认提交</span></div>
+              </div>
+              <div class="mp-body" style="gap:14px;">
+                <div class="summary-card">
+                  <div class="sc-avatar">陈</div>
+                  <div class="sc-body">
+                    <h5>陈晓琳 · 香港</h5>
+                    <p>港澳居民来往内地通行证 · 已填写</p>
+                  </div>
+                  <button class="sc-edit" data-toast="返回上一步修改基本信息">修改</button>
+                </div>
+
+                <div class="form-section">
+                  <div class="form-section-title"><i data-icon="users"></i>申请信息<span class="opt">带 * 为必填</span></div>
+
+                  <div class="mp-field">
+                    <label>申请组织 <span class="req">*</span></label>
+                    <select class="mp-select" aria-label="申请组织">
+                      <option>斗门区港澳青年乡创联合会</option>
+                      <option>斗门区新的社会阶层人士联谊会</option>
+                      <option>莲洲镇乡村振兴促进会</option>
+                    </select>
+                  </div>
+
+                  <div class="mp-field">
+                    <label>申请理由 <span class="req">*</span></label>
+                    <textarea class="mp-textarea" maxlength="300" placeholder="请简要说明您对乡创领域的兴趣、经历与期望">希望参与斗门乡创项目对接，结合自身在品牌设计方面的经验，为乡村文旅项目提供支持。</textarea>
+                    <span class="counter">78 / 300</span>
+                  </div>
+
+                  <div class="mp-field">
+                    <label>相关经历</label>
+                    <textarea class="mp-textarea" style="min-height:70px;" placeholder="可填写工作、创业、志愿服务或社团经历（选填）"></textarea>
+                  </div>
+
+                  <div class="mp-field">
+                    <label>证明材料</label>
+                    <button class="upload-box" data-toast="演示环境暂不支持上传">
+                      <i data-icon="upload"></i>
+                      <span>上传身份证明或推荐材料</span>
+                      <span style="font-size:9px;color:var(--ink-300);">支持 JPG / PDF，单个不超过 5MB</span>
+                    </button>
+                  </div>
+                </div>
+
+                <div class="privacy-note">
+                  <i data-icon="shield"></i>
+                  <span>您提交的个人信息仅用于入会资格审核，不会用于其他用途。审核周期约 5 个工作日，结果可在"我的申请"中查看。</span>
+                </div>
+
+                <label class="check" style="padding:0 2px;">
+                  <input type="checkbox" checked>
+                  <span>我已阅读并同意《入会须知》与《个人信息保护说明》</span>
+                </label>
+              </div>
+              <div class="action-bar">
+                <button class="btn btn-secondary" data-toast="已返回上一步">上一步</button>
+                <button class="btn btn-primary" data-toast="申请已提交，等待初审">提交申请</button>
+              </div>
+            </section>
+
+            <!-- ============ 11 登录 ============ -->
+            <section class="screen" data-screen="login" aria-label="登录">
+              <div class="login-screen">
+                <div class="login-brand">
+                  <div class="hero-mark">斗</div>
+                  <div>
+                    <strong>斗来创</strong>
+                    <span>港澳青年乡创线上推广平台</span>
+                  </div>
+                </div>
+                <h2>登录后<br>开启乡创对接</h2>
+                <p class="login-sub">使用微信一键登录，即可联系项目、申请入会并查看申请进度。</p>
+
+                <div class="login-perks">
+                  <div class="login-perk"><span class="lp-icon"><i data-icon="message"></i></span>查看项目联系方式，发起对接申请</div>
+                  <div class="login-perk"><span class="lp-icon"><i data-icon="user-check"></i></span>在线提交入会申请，跟踪审核进度</div>
+                  <div class="login-perk"><span class="lp-icon"><i data-icon="star"></i></span>收藏项目、资讯与政策，随时回看</div>
+                </div>
+
+                <div class="login-actions">
+                  <button class="btn-wechat" data-go="profile" data-toast="登录成功，欢迎回来">
+                    <i data-icon="wechat"></i>微信一键登录
+                  </button>
+                  <button class="login-skip" data-go="home">暂不登录，先逛逛</button>
+                  <p class="login-agree">登录即表示同意 <a href="#" data-toast="打开《用户协议》">《用户协议》</a> 与 <a href="#" data-toast="打开《隐私政策》">《隐私政策》</a></p>
+                </div>
+              </div>
+            </section>
+
+            <!-- ============ 12 个人中心 ============ -->
+            <section class="screen" data-screen="profile" aria-label="个人中心">
+              <header class="profile-hero">
+                <div class="ph-top">
+                  <span>个人中心</span>
+                  <button class="icon-btn light" aria-label="设置" data-toast="设置中心"><i data-icon="settings"></i></button>
+                </div>
+                <div class="profile-main">
+                  <div class="profile-avatar">陈</div>
+                  <div>
+                    <h2>陈晓琳</h2>
+                    <div class="pm-sub">
+                      <span class="tag">港澳青年</span>
+                      <span class="tag">已实名</span>
+                    </div>
+                  </div>
+                  <button class="pm-edit" aria-label="编辑资料" data-toast="编辑个人资料"><i data-icon="edit"></i></button>
+                </div>
+                <div class="profile-stats">
+                  <div><strong>2</strong><span>我的申请</span></div>
+                  <div><strong>6</strong><span>我的收藏</span></div>
+                  <div><strong>18</strong><span>浏览记录</span></div>
+                </div>
+              </header>
+
+              <div class="mp-body" style="gap:16px;">
+                <div>
+                  <p class="menu-group-title">我的服务</p>
+                  <div class="menu-group">
+                    <button class="menu-item" data-go="applications">
+                      <span class="mi-icon"><i data-icon="clipboard"></i></span>
+                      <span class="mi-label">入会申请记录</span>
+                      <span class="mi-value">1 条审核中</span>
+                      <i class="mi-arrow" data-icon="chevron-right"></i>
+                    </button>
+                    <button class="menu-item" data-toast="收藏夹：项目 3 · 资讯 2 · 政策 1">
+                      <span class="mi-icon orange"><i data-icon="star"></i></span>
+                      <span class="mi-label">我的收藏</span>
+                      <span class="mi-value">6</span>
+                      <i class="mi-arrow" data-icon="chevron-right"></i>
+                    </button>
+                    <button class="menu-item" data-toast="暂无对接记录">
+                      <span class="mi-icon green"><i data-icon="message"></i></span>
+                      <span class="mi-label">联系对接记录</span>
+                      <span class="mi-value">0</span>
+                      <i class="mi-arrow" data-icon="chevron-right"></i>
+                    </button>
+                    <button class="menu-item" data-go="orgs">
+                      <span class="mi-icon green"><i data-icon="users"></i></span>
+                      <span class="mi-label">找到组织</span>
+                      <span class="mi-value">18 个组织</span>
+                      <i class="mi-arrow" data-icon="chevron-right"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <div>
+                  <p class="menu-group-title">设置与帮助</p>
+                  <div class="menu-group">
+                    <button class="menu-item" data-toast="打开《隐私政策》">
+                      <span class="mi-icon gray"><i data-icon="shield"></i></span>
+                      <span class="mi-label">隐私政策</span>
+                      <i class="mi-arrow" data-icon="chevron-right"></i>
+                    </button>
+                    <button class="menu-item" data-toast="打开《用户协议》">
+                      <span class="mi-icon gray"><i data-icon="file"></i></span>
+                      <span class="mi-label">用户协议</span>
+                      <i class="mi-arrow" data-icon="chevron-right"></i>
+                    </button>
+                    <button class="menu-item" data-toast="意见反馈已打开">
+                      <span class="mi-icon gray"><i data-icon="message"></i></span>
+                      <span class="mi-label">意见反馈</span>
+                      <i class="mi-arrow" data-icon="chevron-right"></i>
+                    </button>
+                    <button class="menu-item" data-toast="斗来创 v1.0.0 · 演示原型">
+                      <span class="mi-icon gray"><i data-icon="info"></i></span>
+                      <span class="mi-label">关于平台</span>
+                      <span class="mi-value">v1.0.0</span>
+                      <i class="mi-arrow" data-icon="chevron-right"></i>
+                    </button>
+                  </div>
+                </div>
+
+                <p style="text-align:center;font-size:10px;color:var(--ink-300);line-height:1.7;">
+                  主办：中共珠海市斗门区委统一战线工作部<br>
+                  承办：珠海市斗门区融媒体中心
+                </p>
+              </div>
+            </section>
+
+            <!-- ============ 13 我的申请 ============ -->
+            <section class="screen" data-screen="applications" aria-label="我的申请">
+              <nav class="detail-nav">
+                <button class="dn-back" data-back aria-label="返回"><i data-icon="chevron-left"></i></button>
+                <span class="dn-title">我的申请</span>
+                <div class="dn-actions">
+                  <button aria-label="帮助" data-toast="审核周期约 5 个工作日"><i data-icon="info"></i></button>
+                </div>
+              </nav>
+              <div class="mp-page-head" style="padding-top:6px;">
+                <div class="mp-tabs" style="margin-top:0;">
+                  <button class="mp-tab active">全部 <span class="count">2</span></button>
+                  <button class="mp-tab">审核中 <span class="count">1</span></button>
+                  <button class="mp-tab">已通过</button>
+                  <button class="mp-tab">未通过</button>
+                </div>
+              </div>
+              <div class="mp-body">
+                <article class="app-card">
+                  <div class="app-top">
+                    <div>
+                      <h4>斗门区港澳青年乡创联合会</h4>
+                      <p class="app-no">APP-20261018-001</p>
+                    </div>
+                    <span class="status status-pending">审核中</span>
+                  </div>
+                  <div class="app-org">
+                    <div class="org-logo" style="width:24px;height:24px;border-radius:7px;font-size:10px;">港</div>
+                    <span>提交于 2026-10-18 10:20</span>
+                  </div>
+                  <div class="app-timeline">
+                    <div class="tl-item done"><span class="tl-dot"></span><div class="tl-body"><h5>已提交申请</h5><p>2026-10-18 10:20</p></div></div>
+                    <div class="tl-item current"><span class="tl-dot"></span><div class="tl-body"><h5>平台初审中</h5><p>工作人员将在 5 个工作日内完成初审</p></div></div>
+                    <div class="tl-item pending"><span class="tl-dot"></span><div class="tl-body"><h5>甲方终审</h5><p>初审通过后进入终审环节</p></div></div>
+                    <div class="tl-item pending"><span class="tl-dot"></span><div class="tl-body"><h5>结果通知</h5><p>通过后将收到微信服务通知</p></div></div>
+                  </div>
+                </article>
+
+                <article class="app-card">
+                  <div class="app-top">
+                    <div>
+                      <h4>斗门区青年企业家协会</h4>
+                      <p class="app-no">APP-20260926-004</p>
+                    </div>
+                    <span class="status status-approved">已通过</span>
+                  </div>
+                  <div class="app-org">
+                    <div class="org-logo orange" style="width:24px;height:24px;border-radius:7px;font-size:10px;">青</div>
+                    <span>通过于 2026-09-30 16:45</span>
+                  </div>
+                  <div class="app-timeline">
+                    <div class="tl-item done"><span class="tl-dot"></span><div class="tl-body"><h5>已提交申请</h5><p>2026-09-26 09:12</p></div></div>
+                    <div class="tl-item done"><span class="tl-dot"></span><div class="tl-body"><h5>平台初审通过</h5><p>2026-09-28 11:30</p></div></div>
+                    <div class="tl-item done"><span class="tl-dot"></span><div class="tl-body"><h5>甲方终审通过</h5><p>2026-09-30 16:45</p></div></div>
+                    <div class="tl-item done"><span class="tl-dot"></span><div class="tl-body"><h5>已加入组织</h5><p>请联系组织获取会员服务</p></div></div>
+                  </div>
+                </article>
+
+                <div class="notice">
+                  <i data-icon="info"></i>
+                  <span>如需修改或撤销申请，请联系平台工作人员。审核结果以最终通知为准。</span>
+                </div>
+              </div>
+            </section>
+
+            <!-- ============ 14 联系对接 ============ -->
+            <section class="screen" data-screen="contact" aria-label="联系对接">
+              <nav class="detail-nav">
+                <button class="dn-back" data-back aria-label="返回"><i data-icon="chevron-left"></i></button>
+                <span class="dn-title">联系对接</span>
+                <div class="dn-actions">
+                  <button aria-label="对接说明" data-toast="提交后由平台工作人员协助对接"><i data-icon="info"></i></button>
+                </div>
+              </nav>
+              <div class="mp-body" style="gap:14px;">
+                <div class="contact-summary">
+                  <div class="cs-media media tone-green"></div>
+                  <div class="cs-body">
+                    <h4>白蕉海鲈预制菜产业园</h4>
+                    <p>现代农业 · 白蕉镇 · 招商中</p>
+                  </div>
+                  <span class="tag tag-green" style="align-self:flex-start;">对接中</span>
+                </div>
+
+                <div class="form-section">
+                  <div class="form-section-title"><i data-icon="message"></i>对接信息</div>
+
+                  <div class="mp-field">
+                    <label>对接方式 <span class="req">*</span></label>
+                    <div class="radio-row">
+                      <label class="radio-pill"><input type="radio" name="way" checked><span>电话沟通</span></label>
+                      <label class="radio-pill"><input type="radio" name="way"><span>微信沟通</span></label>
+                      <label class="radio-pill"><input type="radio" name="way"><span>线下拜访</span></label>
+                    </div>
+                  </div>
+
+                  <div class="mp-field">
+                    <label>期望对接时间</label>
+                    <select class="mp-select" aria-label="期望对接时间">
+                      <option>工作日内尽快安排</option>
+                      <option>本周内</option>
+                      <option>下周</option>
+                      <option>时间可协商</option>
+                    </select>
+                  </div>
+
+                  <div class="mp-field">
+                    <label>联系电话 <span class="req">*</span></label>
+                    <input class="mp-input" type="tel" value="+852 9*** 8126" aria-label="联系电话">
+                    <span class="hint">用于工作人员与您确认对接安排，不会对外公开。</span>
+                  </div>
+
+                  <div class="mp-field">
+                    <label>留言说明</label>
+                    <textarea class="mp-textarea" maxlength="200" placeholder="请简要说明您的合作意向、团队背景或希望了解的信息">我们是一支专注食品品牌设计的香港青年团队，希望了解园区入驻条件与品牌合作方式。</textarea>
+                    <span class="counter">42 / 200</span>
+                  </div>
+                </div>
+
+                <div class="privacy-note">
+                  <i data-icon="shield"></i>
+                  <span>提交后，平台工作人员将在 1—2 个工作日内与您联系。您的个人信息仅用于本次对接，不会用于其他用途。</span>
+                </div>
+
+                <div class="notice notice-neutral">
+                  <i data-icon="info"></i>
+                  <span>对接服务不收取任何费用。请勿在留言中填写银行卡、密码等敏感信息。</span>
+                </div>
+              </div>
+              <div class="action-bar">
+                <button class="btn btn-primary btn-block" data-toast="对接申请已提交，工作人员将尽快联系您"><i data-icon="send"></i>提交对接申请</button>
+              </div>
+            </section>
+
+          </div><!-- /screen-host -->
+
+          <!-- ============ 底部导航 ============ -->
+          <nav class="tabbar" id="tabbar" aria-label="主导航">
+            <button class="tab-item active" data-go="home"><i data-icon="home"></i><span>首页</span></button>
+            <button class="tab-item" data-go="projects"><i data-icon="building"></i><span>项目</span></button>
+            <button class="tab-item" data-go="news"><i data-icon="megaphone"></i><span>资讯</span></button>
+            <button class="tab-item" data-go="policies"><i data-icon="document"></i><span>政策</span></button>
+            <button class="tab-item" data-go="profile"><i data-icon="user"></i><span>我的</span></button>
+          </nav>
+
+          <div class="mp-toast hidden" id="toast" role="status"></div>
+        </div>
+      </div>
+
+      <p class="stage-caption"><i data-icon="info"></i>原型为静态高保真稿，内容与数据均为演示用途</p>
+    </main>
+
+    <!-- ================= 右侧说明 ================= -->
+    <aside class="mp-notes" id="notes" aria-label="页面说明">
+      <div class="notes-card">
+        <div class="notes-eyebrow"><i data-icon="compass"></i>页面说明</div>
+        <h2 class="notes-title" id="notesTitle">首页</h2>
+        <p class="notes-desc" id="notesDesc"></p>
+        <div class="notes-block">
+          <h5><i data-icon="sparkles"></i>设计要点</h5>
+          <ul class="notes-list" id="notesPoints"></ul>
+        </div>
+        <div class="notes-block">
+          <h5><i data-icon="shield"></i>状态与规则</h5>
+          <ul class="notes-list notes-rules" id="notesRules"></ul>
+        </div>
+      </div>
+      <div class="notes-card">
+        <div class="notes-nav">
+          <button class="btn btn-secondary btn-sm" id="prevScreen"><i data-icon="chevron-left"></i>上一页</button>
+          <span class="notes-counter" id="notesCounter">01 / 14</span>
+          <button class="btn btn-secondary btn-sm" id="nextScreen">下一页<i data-icon="chevron-right"></i></button>
+        </div>
+      </div>
+    </aside>
+
+  </div>
+</div>
+
+<script src="../assets/js/icons.js"></script>
+<script src="../assets/js/miniprogram.js"></script>
+</body>
+</html>

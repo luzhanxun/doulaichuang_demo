@@ -1,0 +1,1345 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>斗来创 · 后台管理系统原型</title>
+<!--
+  方向契约
+  THESIS    融媒体中心每天要用的一张工作台：知道今天该审什么、谁在等回复、哪条内容该下架。
+  OWN-WORLD 深青蓝侧栏建立政务专业感，浅底工作区把注意力留给数据与状态；
+            状态色是本端唯一的情绪来源，暖橙只标注"等你处理"。
+  STORY     登录 → 看待办 → 编辑内容 → 初审 → 甲方终审 → 发布 → 留痕。
+  FIRST VIEW 工作台首屏给出四组数字、今日待办队列与最近发布；不做装饰性图表墙。
+  FORM      232px 固定侧栏 + 流式内容区；表格密度高、留白克制；所有操作有明确结果反馈。
+-->
+<link rel="stylesheet" href="../assets/css/tokens.css">
+<link rel="stylesheet" href="../assets/css/base.css">
+<link rel="stylesheet" href="../assets/css/admin.css">
+</head>
+<body>
+
+<div class="admin-shell">
+
+  <!-- ================= 侧边栏 ================= -->
+  <aside class="admin-sidebar">
+    <div class="as-brand">
+      <div class="as-mark">斗</div>
+      <div class="as-brand-text">
+        <strong>斗来创</strong>
+        <span>内容管理后台</span>
+      </div>
+    </div>
+
+    <div class="as-scroll">
+      <div class="as-group">
+        <p class="as-group-label">概览</p>
+        <button class="as-item active" data-view="dashboard"><i data-icon="dashboard"></i><span>工作台</span></button>
+      </div>
+
+      <div class="as-group">
+        <p class="as-group-label">内容运营</p>
+        <button class="as-item" data-view="contents"><i data-icon="list"></i><span>内容管理</span></button>
+        <button class="as-item" data-view="review"><i data-icon="user-check"></i><span>审核管理</span><span class="as-count">12</span></button>
+      </div>
+
+      <div class="as-group">
+        <p class="as-group-label">会员与组织</p>
+        <button class="as-item" data-view="members"><i data-icon="clipboard"></i><span>入会申请</span><span class="as-count">7</span></button>
+        <button class="as-item" data-view="orgs"><i data-icon="users"></i><span>组织名录</span></button>
+      </div>
+
+      <div class="as-group">
+        <p class="as-group-label">系统</p>
+        <button class="as-item" data-view="accounts"><i data-icon="shield"></i><span>账号与权限</span></button>
+        <button class="as-item" data-view="logs"><i data-icon="clock"></i><span>操作记录</span></button>
+      </div>
+    </div>
+
+    <div class="as-foot">
+      <button class="as-user" data-logout>
+        <div class="as-avatar">陈</div>
+        <div class="as-user-text">
+          <strong>陈静</strong>
+          <span>内容管理员</span>
+        </div>
+      </button>
+    </div>
+  </aside>
+
+  <!-- ================= 主区 ================= -->
+  <div class="admin-main">
+
+    <header class="admin-topbar">
+      <div class="tb-crumb">
+        <span>斗来创后台</span>
+        <i data-icon="chevron-right"></i>
+        <strong id="crumb">工作台</strong>
+      </div>
+      <div class="tb-search">
+        <i data-icon="search"></i>
+        <input type="search" placeholder="搜索内容、申请人、组织" aria-label="全局搜索">
+      </div>
+      <div class="tb-actions">
+        <a class="tb-btn" href="../miniprogram/index.html" title="查看小程序原型"><i data-icon="external"></i></a>
+        <a class="tb-btn" href="../index.html" title="设计总览"><i data-icon="grid"></i></a>
+        <button class="tb-btn" title="通知" data-toast="3 条待处理通知"><i data-icon="bell"></i><span class="tb-dot"></span></button>
+        <span class="tb-sep"></span>
+        <button class="tb-account" data-toast="账号设置">
+          <span class="avatar">陈</span>
+          <span class="tb-account-text"><strong>陈静</strong><span>内容管理员</span></span>
+          <i data-icon="chevron-down"></i>
+        </button>
+      </div>
+    </header>
+
+    <div class="admin-content">
+
+      <!-- ============ 工作台 ============ -->
+      <section class="view active" data-view="dashboard" data-title="工作台">
+        <div class="page-head">
+          <div>
+            <h1>工作台</h1>
+            <p>2026 年 10 月 24 日 · 星期五 · 今日有 12 条内容待审核</p>
+          </div>
+          <div class="page-head-actions">
+            <button class="btn btn-secondary" data-toast="已导出本月数据（示例）"><i data-icon="download"></i>导出数据</button>
+            <button class="btn btn-primary" data-view="editor"><i data-icon="plus"></i>新建内容</button>
+          </div>
+        </div>
+
+        <div class="admin-note info" style="margin-bottom:16px;">
+          <i data-icon="info"></i>
+          <span>内容发布需经「编辑提交 → 平台初审 → 甲方终审」三步。终审通过后由系统自动发布，全流程留痕可追溯。</span>
+        </div>
+
+        <div class="kpi-grid">
+          <div class="kpi">
+            <div class="kpi-label"><i data-icon="clock"></i>待审核内容</div>
+            <div class="kpi-value">12<small>条</small></div>
+            <div class="kpi-foot"><span class="kpi-delta up"><i data-icon="arrow-up"></i>3</span><span>较昨日</span></div>
+          </div>
+          <div class="kpi">
+            <div class="kpi-label"><i data-icon="check-circle"></i>本月已发布</div>
+            <div class="kpi-value">48<small>条</small></div>
+            <div class="kpi-foot"><span class="kpi-delta up"><i data-icon="arrow-up"></i>12%</span><span>较上月</span></div>
+          </div>
+          <div class="kpi">
+            <div class="kpi-label"><i data-icon="user-check"></i>入会申请</div>
+            <div class="kpi-value">27<small>人</small></div>
+            <div class="kpi-foot"><span class="kpi-delta down"><i data-icon="arrow-down"></i>2</span><span>较上周</span></div>
+          </div>
+          <div class="kpi">
+            <div class="kpi-label"><i data-icon="chart"></i>小程序访问</div>
+            <div class="kpi-value">8,642<small>次</small></div>
+            <div class="kpi-foot"><span class="kpi-delta up"><i data-icon="arrow-up"></i>18%</span><span>近 7 日</span></div>
+          </div>
+        </div>
+
+        <div class="grid-2" style="margin-bottom:14px;">
+          <div class="panel">
+            <div class="panel-head">
+              <div>
+                <h3>内容发布趋势</h3>
+                <p>近 7 日 · 单位：条</p>
+              </div>
+              <div class="legend">
+                <span class="legend-item"><span class="legend-dot" style="background:var(--blue-600)"></span>已发布</span>
+                <span class="legend-item"><span class="legend-dot" style="background:var(--orange-500)"></span>待审核</span>
+              </div>
+            </div>
+            <div class="panel-body">
+              <div class="bar-chart">
+                <div class="bar-col">
+                  <div class="bar-stack">
+                    <div class="bar b-orange" style="height:18px"></div>
+                    <div class="bar b-blue" style="height:63px"></div>
+                  </div>
+                  <span class="bar-label">10/18</span>
+                </div>
+                <div class="bar-col">
+                  <div class="bar-stack">
+                    <div class="bar b-orange" style="height:12px"></div>
+                    <div class="bar b-blue" style="height:45px"></div>
+                  </div>
+                  <span class="bar-label">10/19</span>
+                </div>
+                <div class="bar-col">
+                  <div class="bar-stack">
+                    <div class="bar b-orange" style="height:24px"></div>
+                    <div class="bar b-blue" style="height:82px"></div>
+                  </div>
+                  <span class="bar-label">10/20</span>
+                </div>
+                <div class="bar-col">
+                  <div class="bar-stack">
+                    <div class="bar b-orange" style="height:14px"></div>
+                    <div class="bar b-blue" style="height:57px"></div>
+                  </div>
+                  <span class="bar-label">10/21</span>
+                </div>
+                <div class="bar-col">
+                  <div class="bar-stack">
+                    <div class="bar b-orange" style="height:21px"></div>
+                    <div class="bar b-blue" style="height:93px"></div>
+                  </div>
+                  <span class="bar-label">10/22</span>
+                </div>
+                <div class="bar-col">
+                  <div class="bar-stack">
+                    <div class="bar b-orange" style="height:33px"></div>
+                    <div class="bar b-blue" style="height:72px"></div>
+                  </div>
+                  <span class="bar-label">10/23</span>
+                </div>
+                <div class="bar-col">
+                  <div class="bar-stack">
+                    <div class="bar b-orange" style="height:27px"></div>
+                    <div class="bar b-blue" style="height:105px"></div>
+                  </div>
+                  <span class="bar-label">10/24</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-head">
+              <h3>待办事项</h3>
+              <button class="panel-link" data-view="review">全部 <i data-icon="chevron-right"></i></button>
+            </div>
+            <div class="panel-body flush">
+              <div class="todo-list">
+                <button class="todo-row" data-view="review">
+                  <span class="todo-icon orange"><i data-icon="clock"></i></span>
+                  <span class="todo-body"><h4>待初审内容</h4><p>需在 1 个工作日内处理</p></span>
+                  <span class="todo-num">8</span>
+                </button>
+                <button class="todo-row" data-view="review">
+                  <span class="todo-icon blue"><i data-icon="user-check"></i></span>
+                  <span class="todo-body"><h4>待甲方终审</h4><p>已初审通过，等待终审</p></span>
+                  <span class="todo-num">4</span>
+                </button>
+                <button class="todo-row" data-view="members">
+                  <span class="todo-icon green"><i data-icon="clipboard"></i></span>
+                  <span class="todo-body"><h4>入会申请待审核</h4><p>审核周期约 5 个工作日</p></span>
+                  <span class="todo-num">7</span>
+                </button>
+                <button class="todo-row" data-view="orgs">
+                  <span class="todo-icon red"><i data-icon="alert"></i></span>
+                  <span class="todo-body"><h4>组织信息待更新</h4><p>联系方式与成员数需核对</p></span>
+                  <span class="todo-num">2</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-2">
+          <div class="panel">
+            <div class="panel-head">
+              <h3>最近发布</h3>
+              <button class="panel-link" data-view="contents">内容管理 <i data-icon="chevron-right"></i></button>
+            </div>
+            <div class="panel-body flush">
+              <table class="dt">
+                <thead>
+                  <tr>
+                    <th>标题</th>
+                    <th style="width:88px;">类型</th>
+                    <th style="width:78px;">状态</th>
+                    <th style="width:96px;">发布时间</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="t-title">白蕉海鲈预制菜产业园招商启动</td>
+                    <td>产业项目</td>
+                    <td><span class="status status-published">已发布</span></td>
+                    <td class="t-num">10-24 09:12</td>
+                  </tr>
+                  <tr>
+                    <td class="t-title">区委统战部召开港澳青年乡创工作推进会</td>
+                    <td>重大信息</td>
+                    <td><span class="status status-published">已发布</span></td>
+                    <td class="t-num">10-24 08:40</td>
+                  </tr>
+                  <tr>
+                    <td class="t-title">港澳青年乡创研学营活动回顾</td>
+                    <td>重大信息</td>
+                    <td><span class="status status-pending">待审核</span></td>
+                    <td class="t-num">10-23 11:18</td>
+                  </tr>
+                  <tr>
+                    <td class="t-title">莲江村乡村民宿集群招募公告</td>
+                    <td>产业项目</td>
+                    <td><span class="status status-pending">待审核</span></td>
+                    <td class="t-num">10-23 09:05</td>
+                  </tr>
+                  <tr>
+                    <td class="t-title">斗门区乡村振兴产业扶持资金管理办法</td>
+                    <td>港澳政策</td>
+                    <td><span class="status status-published">已发布</span></td>
+                    <td class="t-num">10-22 15:30</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="panel-head">
+              <h3>内容类型分布</h3>
+              <p>共 106 条</p>
+            </div>
+            <div class="panel-body">
+              <div class="dist">
+                <div class="dist-row">
+                  <span class="dist-name">产业项目</span>
+                  <span class="dist-bar"><i style="width:79%;background:var(--green-500)"></i></span>
+                  <span class="dist-val">42</span>
+                </div>
+                <div class="dist-row">
+                  <span class="dist-name">重大信息</span>
+                  <span class="dist-bar"><i style="width:68%;background:var(--blue-600)"></i></span>
+                  <span class="dist-val">36</span>
+                </div>
+                <div class="dist-row">
+                  <span class="dist-name">港澳政策</span>
+                  <span class="dist-bar"><i style="width:53%;background:var(--orange-500)"></i></span>
+                  <span class="dist-val">28</span>
+                </div>
+              </div>
+              <div class="admin-note warn" style="margin-top:16px;">
+                <i data-icon="alert"></i>
+                <span>3 条已下架内容需在 7 日内完成整改或删除，操作记录已留存。</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 内容管理 ============ -->
+      <section class="view" data-view="contents" data-title="内容管理">
+        <div class="page-head">
+          <div>
+            <h1>内容管理</h1>
+            <p>统一管理产业项目、重大信息与港澳政策，支持编辑、审核、下架与删除。</p>
+          </div>
+          <div class="page-head-actions">
+            <button class="btn btn-secondary" data-toast="已导出内容清单（示例）"><i data-icon="download"></i>导出</button>
+            <button class="btn btn-primary" data-view="editor"><i data-icon="plus"></i>新建内容</button>
+          </div>
+        </div>
+
+        <div class="type-tabs">
+          <button class="type-tab active">全部<span class="n">106</span></button>
+          <button class="type-tab">产业项目<span class="n">42</span></button>
+          <button class="type-tab">重大信息<span class="n">36</span></button>
+          <button class="type-tab">港澳政策<span class="n">28</span></button>
+        </div>
+
+        <div class="toolbar">
+          <div class="toolbar-search">
+            <i data-icon="search"></i>
+            <input type="search" placeholder="搜索标题或关键词" aria-label="搜索内容">
+          </div>
+          <select class="select" aria-label="状态筛选" style="width:112px;">
+            <option>全部状态</option>
+            <option>草稿</option>
+            <option>待审核</option>
+            <option>已发布</option>
+            <option>已下架</option>
+          </select>
+          <select class="select" aria-label="分类筛选" style="width:120px;">
+            <option>全部分类</option>
+            <option>现代农业</option>
+            <option>文旅文创</option>
+            <option>民宿康养</option>
+          </select>
+          <select class="select" aria-label="时间筛选" style="width:118px;">
+            <option>近 30 天</option>
+            <option>近 7 天</option>
+            <option>本月</option>
+            <option>全部时间</option>
+          </select>
+          <span class="toolbar-spacer"></span>
+          <button class="btn btn-ghost btn-sm" data-toast="已重置筛选条件"><i data-icon="refresh"></i>重置</button>
+        </div>
+
+        <div class="table-wrap">
+          <table class="dt">
+            <thead>
+              <tr>
+                <th class="col-check"><input type="checkbox" aria-label="全选" data-check-all></th>
+                <th class="col-num">#</th>
+                <th>标题</th>
+                <th style="width:92px;">类型</th>
+                <th style="width:84px;">状态</th>
+                <th style="width:104px;">更新人</th>
+                <th style="width:118px;">更新时间</th>
+                <th class="col-act">操作</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="col-check"><input type="checkbox" aria-label="选择"></td>
+                <td class="col-num">01</td>
+                <td>
+                  <div class="t-title">白蕉海鲈预制菜产业园招商启动</div>
+                  <div class="t-sub">白蕉镇 · 现代农业</div>
+                </td>
+                <td><span class="tag tag-green">产业项目</span></td>
+                <td><span class="status status-published">已发布</span></td>
+                <td>陈静</td>
+                <td class="t-num">10-24 09:12</td>
+                <td class="col-act">
+                  <div class="row-actions">
+                    <button class="row-btn" data-view="editor">编辑</button>
+                    <button class="row-btn danger" data-toast="已下架该内容，小程序端同步隐藏">下架</button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td class="col-check"><input type="checkbox" aria-label="选择"></td>
+                <td class="col-num">02</td>
+                <td>
+                  <div class="t-title">区委统战部召开港澳青年乡创工作推进会</div>
+                  <div class="t-sub">统战工作 · 要闻</div>
+                </td>
+                <td><span class="tag tag-blue">重大信息</span></td>
+                <td><span class="status status-published">已发布</span></td>
+                <td>李明</td>
+                <td class="t-num">10-24 08:40</td>
+                <td class="col-act">
+                  <div class="row-actions">
+                    <button class="row-btn" data-view="editor">编辑</button>
+                    <button class="row-btn danger" data-toast="已下架该内容，小程序端同步隐藏">下架</button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td class="col-check"><input type="checkbox" aria-label="选择"></td>
+                <td class="col-num">03</td>
+                <td>
+                  <div class="t-title">斗门区支持港澳青年创新创业若干措施</div>
+                  <div class="t-sub">政策汇编 · 区科技创新局</div>
+                </td>
+                <td><span class="tag tag-orange">港澳政策</span></td>
+                <td><span class="status status-pending">待审核</span></td>
+                <td>王敏</td>
+                <td class="t-num">10-23 17:26</td>
+                <td class="col-act">
+                  <div class="row-actions">
+                    <button class="row-btn" data-view="review">审核</button>
+                    <button class="row-btn plain" data-toast="已打开编辑页">编辑</button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td class="col-check"><input type="checkbox" aria-label="选择"></td>
+                <td class="col-num">04</td>
+                <td>
+                  <div class="t-title">莲江村乡村民宿集群招募公告</div>
+                  <div class="t-sub">莲洲镇 · 民宿康养</div>
+                </td>
+                <td><span class="tag tag-green">产业项目</span></td>
+                <td><span class="status status-pending">待审核</span></td>
+                <td>李明</td>
+                <td class="t-num">10-23 15:02</td>
+                <td class="col-act">
+                  <div class="row-actions">
+                    <button class="row-btn" data-view="review">审核</button>
+                    <button class="row-btn plain" data-toast="已打开编辑页">编辑</button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td class="col-check"><input type="checkbox" aria-label="选择"></td>
+                <td class="col-num">05</td>
+                <td>
+                  <div class="t-title">港澳青年乡创研学营活动回顾</div>
+                  <div class="t-sub">统战工作 · 活动</div>
+                </td>
+                <td><span class="tag tag-blue">重大信息</span></td>
+                <td><span class="status status-draft">草稿</span></td>
+                <td>李明</td>
+                <td class="t-num">10-23 11:18</td>
+                <td class="col-act">
+                  <div class="row-actions">
+                    <button class="row-btn" data-view="editor">编辑</button>
+                    <button class="row-btn plain" data-toast="已删除草稿">删除</button>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td class="col-check"><input type="checkbox" aria-label="选择"></td>
+                <td class="col-num">06</td>
+                <td>
+                  <div class="t-title">斗门旧街文创街区合作运营方案</div>
+                  <div class="t-sub">斗门镇 · 文旅文创</div>
+                </td>
+                <td><span class="tag tag-green">产业项目</span></td>
+                <td><span class="status status-offline">已下架</span></td>
+                <td>陈静</td>
+                <td class="t-num">10-22 16:35</td>
+                <td class="col-act">
+                  <div class="row-actions">
+                    <button class="row-btn" data-toast="已重新提交审核">重新上架</button>
+                    <button class="row-btn danger" data-toast="已删除，操作记录已留存">删除</button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pager">
+          <span>共 106 条 · 每页 10 条</span>
+          <div class="pager-btns">
+            <button class="pg" disabled><i data-icon="chevron-left"></i></button>
+            <button class="pg active">1</button>
+            <button class="pg">2</button>
+            <button class="pg">3</button>
+            <button class="pg">…</button>
+            <button class="pg">11</button>
+            <button class="pg"><i data-icon="chevron-right"></i></button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 内容编辑 ============ -->
+      <section class="view" data-view="editor" data-title="内容管理 / 新建内容">
+        <div class="page-head">
+          <div>
+            <h1>新建内容</h1>
+            <p>内容保存为草稿后可继续编辑，提交审核后进入初审流程。</p>
+          </div>
+          <div class="page-head-actions">
+            <button class="btn btn-ghost" data-view="contents">取消</button>
+            <button class="btn btn-secondary" data-toast="草稿已保存"><i data-icon="file"></i>保存草稿</button>
+            <button class="btn btn-primary" data-toast="已提交审核，等待初审"><i data-icon="send"></i>提交审核</button>
+          </div>
+        </div>
+
+        <div class="editor-grid">
+          <div>
+            <div class="form-panel">
+              <h3><i data-icon="file"></i>基本信息</h3>
+              <div class="fp-body">
+                <div class="f-field">
+                  <label>内容标题<span class="req">*</span></label>
+                  <input class="input" type="text" placeholder="请输入标题，建议 12—28 字" value="莲江村乡村民宿集群招募公告">
+                  <p class="f-hint">标题将显示在小程序列表与详情页顶部，避免使用夸张表述。</p>
+                </div>
+
+                <div class="f-row">
+                  <div class="f-field">
+                    <label>内容类型<span class="req">*</span></label>
+                    <select class="select">
+                      <option>产业项目</option>
+                      <option>重大信息</option>
+                      <option>港澳政策</option>
+                    </select>
+                  </div>
+                  <div class="f-field">
+                    <label>所属分类<span class="req">*</span></label>
+                    <select class="select">
+                      <option>民宿康养</option>
+                      <option>现代农业</option>
+                      <option>文旅文创</option>
+                      <option>数字乡村</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="f-row">
+                  <div class="f-field">
+                    <label>所属镇街</label>
+                    <select class="select">
+                      <option>莲洲镇</option>
+                      <option>斗门镇</option>
+                      <option>白蕉镇</option>
+                      <option>井岸镇</option>
+                      <option>乾务镇</option>
+                    </select>
+                  </div>
+                  <div class="f-field">
+                    <label>项目状态</label>
+                    <select class="select">
+                      <option>招募中</option>
+                      <option>招商中</option>
+                      <option>合作运营</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="f-field">
+                  <label>内容摘要</label>
+                  <textarea class="textarea" rows="3" placeholder="用于列表页与分享卡片，建议 40—80 字">依托莲江村水乡院落资源，招募民宿主理人与运营团队，配套研学、骑行与农事体验业态。</textarea>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-panel">
+              <h3><i data-icon="edit"></i>正文内容</h3>
+              <p class="fp-desc">支持标题、段落、列表与图片。正文发布前须经甲方终审。</p>
+              <div class="fp-body">
+                <div>
+                  <div class="editor-toolbar">
+                    <button class="et-btn" title="加粗"><i data-icon="bold"></i></button>
+                    <button class="et-btn" title="斜体"><i data-icon="italic"></i></button>
+                    <span class="et-sep"></span>
+                    <button class="et-btn" title="标题"><i data-icon="type"></i></button>
+                    <button class="et-btn" title="列表"><i data-icon="list"></i></button>
+                    <button class="et-btn" title="引用"><i data-icon="quote"></i></button>
+                    <span class="et-sep"></span>
+                    <button class="et-btn" title="插入图片"><i data-icon="image"></i></button>
+                    <button class="et-btn" title="插入链接"><i data-icon="link"></i></button>
+                    <span class="et-sep"></span>
+                    <button class="et-btn" title="撤销"><i data-icon="undo"></i></button>
+                    <button class="et-btn" title="重做"><i data-icon="redo"></i></button>
+                  </div>
+                  <div class="editor-area" contenteditable="true">
+                    <h4>项目简介</h4>
+                    <p>莲江村位于斗门区莲洲镇，保留完整的水乡村落格局。本次招募面向民宿主理人、乡村运营团队与研学机构，共同打造乡村民宿集群。</p>
+                    <h4>合作内容</h4>
+                    <p>村集体提供院落与基础设施，合作方负责空间改造、内容运营与客群导入。首批开放 12 个院落，可按单院或组团方式合作。</p>
+                    <h4>支持措施</h4>
+                    <p>入驻项目可按规定申请乡创基地租金补贴，并纳入平台项目推介与研学线路。</p>
+                  </div>
+                </div>
+
+                <div class="f-field">
+                  <label>图片素材</label>
+                  <div class="upload-grid">
+                    <div class="up-item media tone-teal"><button class="up-del" aria-label="删除图片"><i data-icon="x"></i></button></div>
+                    <div class="up-item media tone-green"><button class="up-del" aria-label="删除图片"><i data-icon="x"></i></button></div>
+                    <div class="up-item media tone-warm"><button class="up-del" aria-label="删除图片"><i data-icon="x"></i></button></div>
+                    <button class="up-add" data-toast="演示环境暂不支持上传"><i data-icon="plus"></i><span>上传图片</span></button>
+                  </div>
+                  <p class="f-hint">建议 3—6 张，单张不超过 5MB，尺寸 16:9 或 4:3。请确保图片版权清晰。</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="side-stack">
+            <div class="form-panel">
+              <h3><i data-icon="settings"></i>发布设置</h3>
+              <div class="fp-body" style="gap:0;">
+                <div class="meta-list">
+                  <div class="meta-row"><span class="k">内容编号</span><span class="v">自动生成</span></div>
+                  <div class="meta-row"><span class="k">创建人</span><span class="v">陈静</span></div>
+                  <div class="meta-row"><span class="k">创建时间</span><span class="v">2026-10-24 10:02</span></div>
+                  <div class="meta-row"><span class="k">当前状态</span><span class="status status-draft">草稿</span></div>
+                </div>
+                <div style="margin-top:14px;padding-top:14px;border-top:1px solid var(--line);">
+                  <div class="meta-row" style="margin-bottom:12px;">
+                    <span class="k">首页推荐</span>
+                    <label class="switch"><input type="checkbox"><span></span></label>
+                  </div>
+                  <div class="meta-row" style="margin-bottom:12px;">
+                    <span class="k">允许评论</span>
+                    <label class="switch"><input type="checkbox" checked><span></span></label>
+                  </div>
+                  <div class="meta-row">
+                    <span class="k">同步小程序</span>
+                    <label class="switch"><input type="checkbox" checked><span></span></label>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-panel">
+              <h3><i data-icon="shield"></i>审核流程</h3>
+              <div class="fp-body">
+                <div class="flow">
+                  <div class="flow-step done">
+                    <span class="fs-dot"><i data-icon="check"></i></span>
+                    <div class="fs-body"><h5>编辑撰写</h5><p>陈静 · 已完成</p></div>
+                  </div>
+                  <div class="flow-step current">
+                    <span class="fs-dot"></span>
+                    <div class="fs-body"><h5>平台初审</h5><p>王敏 · 待处理</p></div>
+                  </div>
+                  <div class="flow-step">
+                    <span class="fs-dot"></span>
+                    <div class="fs-body"><h5>甲方终审</h5><p>区委统战部 · 3 个工作日内</p></div>
+                  </div>
+                  <div class="flow-step">
+                    <span class="fs-dot"></span>
+                    <div class="fs-body"><h5>发布上线</h5><p>终审通过后自动发布</p></div>
+                  </div>
+                </div>
+                <div class="admin-note warn">
+                  <i data-icon="alert"></i>
+                  <span>涉及政策文号、数据与人物姓名时，须与原始材料逐字核对。</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 审核管理 ============ -->
+      <section class="view" data-view="review" data-title="审核管理">
+        <div class="page-head">
+          <div>
+            <h1>审核管理</h1>
+            <p>编辑提交后进入初审，初审通过后由甲方终审。全部操作留痕，可追溯。</p>
+          </div>
+          <div class="page-head-actions">
+            <button class="btn btn-secondary" data-toast="已切换为待终审队列">待终审 4</button>
+            <button class="btn btn-secondary" data-toast="已导出审核记录"><i data-icon="download"></i>导出记录</button>
+          </div>
+        </div>
+
+        <div class="admin-note info" style="margin-bottom:16px;">
+          <i data-icon="info"></i>
+          <span>甲方终审为发布前的必要环节，初审通过不代表可对外发布。终审意见将同步给编辑与初审人。</span>
+        </div>
+
+        <div class="review-grid">
+          <div class="queue">
+            <div class="queue-head">
+              <h3>待审核队列</h3>
+              <span class="tag tag-orange">12 条</span>
+            </div>
+            <button class="queue-item active">
+              <div class="qi-top"><span class="tag tag-orange">港澳政策</span><span class="tag tag-gray">待终审</span></div>
+              <div class="qi-title">斗门区支持港澳青年创新创业若干措施</div>
+              <div class="qi-meta"><i data-icon="user"></i>王敏 提交 · 10-23 17:26</div>
+            </button>
+            <button class="queue-item">
+              <div class="qi-top"><span class="tag tag-green">产业项目</span><span class="tag tag-gray">待终审</span></div>
+              <div class="qi-title">莲江村乡村民宿集群招募公告</div>
+              <div class="qi-meta"><i data-icon="user"></i>李明 提交 · 10-23 15:02</div>
+            </button>
+            <button class="queue-item">
+              <div class="qi-top"><span class="tag tag-blue">重大信息</span><span class="tag tag-gray">待初审</span></div>
+              <div class="qi-title">港澳青年乡创研学营活动回顾</div>
+              <div class="qi-meta"><i data-icon="user"></i>李明 提交 · 10-23 11:18</div>
+            </button>
+            <button class="queue-item">
+              <div class="qi-top"><span class="tag tag-orange">港澳政策</span><span class="tag tag-gray">待初审</span></div>
+              <div class="qi-title">关于港澳居民子女入学服务指引</div>
+              <div class="qi-meta"><i data-icon="user"></i>陈静 提交 · 10-22 16:40</div>
+            </button>
+            <button class="queue-item">
+              <div class="qi-top"><span class="tag tag-green">产业项目</span><span class="tag tag-gray">待初审</span></div>
+              <div class="qi-title">黄杨山生态茶园品牌共建招募</div>
+              <div class="qi-meta"><i data-icon="user"></i>李明 提交 · 10-22 14:08</div>
+            </button>
+          </div>
+
+          <div class="review-main">
+            <div class="rm-head">
+              <h2>斗门区支持港澳青年创新创业若干措施</h2>
+              <div class="rm-meta">
+                <span class="tag tag-orange">港澳政策</span>
+                <span>政策汇编</span>
+                <span>·</span>
+                <span>提交人：王敏</span>
+                <span>·</span>
+                <span>提交时间：2026-10-23 17:26</span>
+                <span class="status status-pending">待终审</span>
+              </div>
+            </div>
+            <div class="rm-body">
+              <div class="rm-cover media tone-blue"></div>
+              <div class="rm-text">
+                <p><strong>文号：</strong>斗府办〔2026〕18号　<strong>发布机关：</strong>珠海市斗门区人民政府　<strong>实施日期：</strong>2026-11-01</p>
+                <p>为支持港澳青年来斗门创新创业，融入粤港澳大湾区发展，结合本区实际，制定本措施。对符合条件的港澳青年创业项目，经评审给予最高 30 万元的创业资助，分阶段拨付。</p>
+                <p>对入驻区级乡创基地的港澳青年项目，前两年按租金 50% 给予补贴，单个项目每年最高 5 万元。支持港澳青年参加乡创培训、研学交流与项目路演。</p>
+                <p><strong>附件：</strong>斗府办〔2026〕18号 全文.pdf（1.2 MB）</p>
+              </div>
+            </div>
+            <div class="rm-foot">
+              <span class="rm-note"><i data-icon="alert"></i> 请核对文号、发文机关与政策原文是否一致</span>
+              <button class="btn btn-ghost" data-toast="已退回编辑，需补充材料">退回修改</button>
+              <button class="btn btn-danger-soft" data-toast="已下架该内容"><i data-icon="trash"></i>下架</button>
+              <button class="btn btn-green" data-toast="终审通过，内容已发布"><i data-icon="check"></i>终审通过并发布</button>
+            </div>
+
+            <div class="rm-body" style="border-top:1px solid var(--line);background:var(--surface-2);">
+              <div class="audit-head">
+                <h3>审核记录</h3>
+                <span>共 3 条</span>
+              </div>
+              <div class="audit">
+                <div class="audit-item done">
+                  <span class="au-dot"></span>
+                  <div class="au-body">
+                    <h5>李明 创建内容</h5>
+                    <p>2026-10-23 15:40 · 来源：区科技创新局提供材料</p>
+                  </div>
+                </div>
+                <div class="audit-item done">
+                  <span class="au-dot"></span>
+                  <div class="au-body">
+                    <h5>王敏 初审通过</h5>
+                    <p>2026-10-23 17:26 · 意见：文号与附件已核对，建议补充申报材料清单</p>
+                  </div>
+                </div>
+                <div class="audit-item now">
+                  <span class="au-dot"></span>
+                  <div class="au-body">
+                    <h5>待甲方终审</h5>
+                    <p>已推送至区委统战部审核人，剩余时限 2 个工作日</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 入会申请 ============ -->
+      <section class="view" data-view="members" data-title="入会申请">
+        <div class="page-head">
+          <div>
+            <h1>入会申请</h1>
+            <p>审核港澳青年提交的入会申请，支持查看材料、导出名单与结果通知。</p>
+          </div>
+          <div class="page-head-actions">
+            <button class="btn btn-secondary" data-toast="已导出申请名单（示例）"><i data-icon="download"></i>导出名单</button>
+            <button class="btn btn-primary" data-toast="已打开批量审核"><i data-icon="user-check"></i>批量审核</button>
+          </div>
+        </div>
+
+        <div class="admin-note warn" style="margin-bottom:16px;">
+          <i data-icon="shield"></i>
+          <span>申请人证件与联系方式属个人敏感信息，仅限授权人员查看。导出文件须加密保存并按期销毁。</span>
+        </div>
+
+        <div class="toolbar">
+          <div class="toolbar-search">
+            <i data-icon="search"></i>
+            <input type="search" placeholder="搜索姓名、证件号或组织" aria-label="搜索申请">
+          </div>
+          <select class="select" aria-label="状态筛选" style="width:112px;">
+            <option>全部状态</option>
+            <option>审核中</option>
+            <option>待终审</option>
+            <option>已通过</option>
+            <option>未通过</option>
+          </select>
+          <select class="select" aria-label="组织筛选" style="width:172px;">
+            <option>全部组织</option>
+            <option>港澳青年乡创联合会</option>
+            <option>新的社会阶层人士联谊会</option>
+            <option>莲洲镇乡村振兴促进会</option>
+          </select>
+          <span class="toolbar-spacer"></span>
+          <span style="font-size:11.5px;color:var(--ink-400)">共 27 条申请</span>
+        </div>
+
+        <div class="table-wrap">
+          <table class="dt">
+            <thead>
+              <tr>
+                <th class="col-check"><input type="checkbox" aria-label="全选" data-check-all></th>
+                <th>申请人</th>
+                <th style="width:76px;">地区</th>
+                <th>申请组织</th>
+                <th style="width:92px;">状态</th>
+                <th style="width:118px;">提交时间</th>
+                <th class="col-act">操作</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="col-check"><input type="checkbox" aria-label="选择"></td>
+                <td>
+                  <div style="display:flex;align-items:center;gap:8px;">
+                    <span class="avatar" style="width:26px;height:26px;font-size:11px;">陈</span>
+                    <div><div class="t-title">陈晓琳</div><div class="t-sub">港澳居民来往内地通行证</div></div>
+                  </div>
+                </td>
+                <td>香港</td>
+                <td>斗门区港澳青年乡创联合会</td>
+                <td><span class="status status-review">审核中</span></td>
+                <td class="t-num">10-18 10:20</td>
+                <td class="col-act"><div class="row-actions"><button class="row-btn" data-toast="打开申请详情">查看</button><button class="row-btn" data-toast="已通过初审">初审通过</button></div></td>
+              </tr>
+              <tr>
+                <td class="col-check"><input type="checkbox" aria-label="选择"></td>
+                <td>
+                  <div style="display:flex;align-items:center;gap:8px;">
+                    <span class="avatar" style="width:26px;height:26px;font-size:11px;">黄</span>
+                    <div><div class="t-title">黄志强</div><div class="t-sub">澳门永久性居民身份证</div></div>
+                  </div>
+                </td>
+                <td>澳门</td>
+                <td>斗门区新的社会阶层人士联谊会</td>
+                <td><span class="status status-pending">待终审</span></td>
+                <td class="t-num">10-17 16:05</td>
+                <td class="col-act"><div class="row-actions"><button class="row-btn" data-toast="打开申请详情">查看</button><button class="row-btn" data-toast="已提交终审">提交终审</button></div></td>
+              </tr>
+              <tr>
+                <td class="col-check"><input type="checkbox" aria-label="选择"></td>
+                <td>
+                  <div style="display:flex;align-items:center;gap:8px;">
+                    <span class="avatar" style="width:26px;height:26px;font-size:11px;">李</span>
+                    <div><div class="t-title">李婉婷</div><div class="t-sub">港澳居民来往内地通行证</div></div>
+                  </div>
+                </td>
+                <td>香港</td>
+                <td>莲洲镇乡村振兴促进会</td>
+                <td><span class="status status-approved">已通过</span></td>
+                <td class="t-num">10-16 09:48</td>
+                <td class="col-act"><div class="row-actions"><button class="row-btn" data-toast="打开申请详情">查看</button><button class="row-btn plain" data-toast="已发送结果通知">通知</button></div></td>
+              </tr>
+              <tr>
+                <td class="col-check"><input type="checkbox" aria-label="选择"></td>
+                <td>
+                  <div style="display:flex;align-items:center;gap:8px;">
+                    <span class="avatar" style="width:26px;height:26px;font-size:11px;">周</span>
+                    <div><div class="t-title">周家豪</div><div class="t-sub">澳门非永久性居民身份证</div></div>
+                  </div>
+                </td>
+                <td>澳门</td>
+                <td>斗门区港澳青年乡创联合会</td>
+                <td><span class="status status-rejected">未通过</span></td>
+                <td class="t-num">10-15 14:32</td>
+                <td class="col-act"><div class="row-actions"><button class="row-btn" data-toast="打开申请详情">查看</button><button class="row-btn plain" data-toast="已发送未通过说明">说明</button></div></td>
+              </tr>
+              <tr>
+                <td class="col-check"><input type="checkbox" aria-label="选择"></td>
+                <td>
+                  <div style="display:flex;align-items:center;gap:8px;">
+                    <span class="avatar" style="width:26px;height:26px;font-size:11px;">吴</span>
+                    <div><div class="t-title">吴嘉敏</div><div class="t-sub">港澳居民来往内地通行证</div></div>
+                  </div>
+                </td>
+                <td>香港</td>
+                <td>斗门区青年企业家协会</td>
+                <td><span class="status status-approved">已通过</span></td>
+                <td class="t-num">10-14 11:10</td>
+                <td class="col-act"><div class="row-actions"><button class="row-btn" data-toast="打开申请详情">查看</button><button class="row-btn plain" data-toast="已发送结果通知">通知</button></div></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pager">
+          <span>共 27 条 · 每页 10 条</span>
+          <div class="pager-btns">
+            <button class="pg" disabled><i data-icon="chevron-left"></i></button>
+            <button class="pg active">1</button>
+            <button class="pg">2</button>
+            <button class="pg">3</button>
+            <button class="pg"><i data-icon="chevron-right"></i></button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 组织名录 ============ -->
+      <section class="view" data-view="orgs" data-title="组织名录">
+        <div class="page-head">
+          <div>
+            <h1>组织名录</h1>
+            <p>维护联合会、统战社团、乡创基地等组织信息，控制小程序端展示状态。</p>
+          </div>
+          <div class="page-head-actions">
+            <button class="btn btn-primary" data-toast="已打开新增组织表单"><i data-icon="plus"></i>新增组织</button>
+          </div>
+        </div>
+
+        <div class="table-wrap standalone">
+          <table class="dt">
+            <thead>
+              <tr>
+                <th class="col-num">#</th>
+                <th>组织名称</th>
+                <th style="width:100px;">类型</th>
+                <th style="width:96px;">联系人</th>
+                <th style="width:84px;">成员数</th>
+                <th style="width:86px;">状态</th>
+                <th class="col-act">操作</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="col-num">01</td>
+                <td>
+                  <div class="t-title">斗门区港澳青年乡创联合会</div>
+                  <div class="t-sub">2021 年成立 · 16 场年度活动</div>
+                </td>
+                <td>联合会</td>
+                <td>陈志明</td>
+                <td class="t-num">128</td>
+                <td><span class="status status-published">已上线</span></td>
+                <td class="col-act"><div class="row-actions"><button class="row-btn" data-toast="已打开组织编辑">编辑</button><button class="row-btn plain" data-toast="已下线该组织">下线</button></div></td>
+              </tr>
+              <tr>
+                <td class="col-num">02</td>
+                <td>
+                  <div class="t-title">斗门区新的社会阶层人士联谊会</div>
+                  <div class="t-sub">2020 年成立 · 12 场年度活动</div>
+                </td>
+                <td>统战社团</td>
+                <td>黄丽华</td>
+                <td class="t-num">86</td>
+                <td><span class="status status-published">已上线</span></td>
+                <td class="col-act"><div class="row-actions"><button class="row-btn" data-toast="已打开组织编辑">编辑</button><button class="row-btn plain" data-toast="已下线该组织">下线</button></div></td>
+              </tr>
+              <tr>
+                <td class="col-num">03</td>
+                <td>
+                  <div class="t-title">莲洲镇乡村振兴促进会</div>
+                  <div class="t-sub">2022 年成立 · 9 场年度活动</div>
+                </td>
+                <td>乡村组织</td>
+                <td>梁伟强</td>
+                <td class="t-num">64</td>
+                <td><span class="status status-published">已上线</span></td>
+                <td class="col-act"><div class="row-actions"><button class="row-btn" data-toast="已打开组织编辑">编辑</button><button class="row-btn plain" data-toast="已下线该组织">下线</button></div></td>
+              </tr>
+              <tr>
+                <td class="col-num">04</td>
+                <td>
+                  <div class="t-title">斗门区青年企业家协会</div>
+                  <div class="t-sub">2019 年成立 · 21 场年度活动</div>
+                </td>
+                <td>行业协会</td>
+                <td>李国强</td>
+                <td class="t-num">152</td>
+                <td><span class="status status-offline">已下线</span></td>
+                <td class="col-act"><div class="row-actions"><button class="row-btn" data-toast="已打开组织编辑">编辑</button><button class="row-btn" data-toast="已重新上线">上线</button></div></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="admin-note info" style="margin-top:16px;">
+          <i data-icon="info"></i>
+          <span>组织信息变更需记录操作人与时间。小程序端组织详情页的联系方式仅对已登录用户展示。</span>
+        </div>
+      </section>
+
+      <!-- ============ 账号与权限 ============ -->
+      <section class="view" data-view="accounts" data-title="账号与权限">
+        <div class="page-head">
+          <div>
+            <h1>账号与权限</h1>
+            <p>按角色分配功能权限，遵循最小权限原则。所有账号操作均记录日志。</p>
+          </div>
+          <div class="page-head-actions">
+            <button class="btn btn-primary" data-toast="已打开新增账号表单"><i data-icon="plus"></i>新增账号</button>
+          </div>
+        </div>
+
+        <div class="panel" style="margin-bottom:14px;">
+          <div class="panel-head">
+            <div>
+              <h3>账号列表</h3>
+              <p>共 4 个账号 · 均为实名账号</p>
+            </div>
+            <div class="toolbar-search" style="width:200px;height:30px;">
+              <i data-icon="search"></i>
+              <input type="search" placeholder="搜索姓名或角色" aria-label="搜索账号">
+            </div>
+          </div>
+          <div class="panel-body flush">
+            <table class="dt">
+              <thead>
+                <tr>
+                  <th>姓名</th>
+                  <th style="width:140px;">角色</th>
+                  <th style="width:220px;">权限范围</th>
+                  <th style="width:96px;">状态</th>
+                  <th style="width:140px;">最近登录</th>
+                  <th class="col-act">操作</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <div style="display:flex;align-items:center;gap:8px;">
+                      <span class="avatar" style="width:26px;height:26px;font-size:11px;">陈</span>
+                      <div><div class="t-title">陈静</div><div class="t-sub">chenjing@doulaichuang.cn</div></div>
+                    </div>
+                  </td>
+                  <td>内容管理员</td>
+                  <td>内容编辑、审核、发布、组织维护</td>
+                  <td><span class="status status-published">启用</span></td>
+                  <td class="t-num">10-24 09:02</td>
+                  <td class="col-act"><div class="row-actions"><button class="row-btn" data-toast="已打开账号编辑">编辑</button><button class="row-btn plain" data-toast="已重置密码">重置密码</button></div></td>
+                </tr>
+                <tr>
+                  <td>
+                    <div style="display:flex;align-items:center;gap:8px;">
+                      <span class="avatar" style="width:26px;height:26px;font-size:11px;">王</span>
+                      <div><div class="t-title">王敏</div><div class="t-sub">wangmin@doulaichuang.cn</div></div>
+                    </div>
+                  </td>
+                  <td>审核员</td>
+                  <td>内容初审、入会申请审核</td>
+                  <td><span class="status status-published">启用</span></td>
+                  <td class="t-num">10-24 08:36</td>
+                  <td class="col-act"><div class="row-actions"><button class="row-btn" data-toast="已打开账号编辑">编辑</button><button class="row-btn plain" data-toast="已重置密码">重置密码</button></div></td>
+                </tr>
+                <tr>
+                  <td>
+                    <div style="display:flex;align-items:center;gap:8px;">
+                      <span class="avatar" style="width:26px;height:26px;font-size:11px;">李</span>
+                      <div><div class="t-title">李明</div><div class="t-sub">liming@doulaichuang.cn</div></div>
+                    </div>
+                  </td>
+                  <td>融媒体编辑</td>
+                  <td>内容编辑、素材上传</td>
+                  <td><span class="status status-published">启用</span></td>
+                  <td class="t-num">10-23 18:12</td>
+                  <td class="col-act"><div class="row-actions"><button class="row-btn" data-toast="已打开账号编辑">编辑</button><button class="row-btn plain" data-toast="已重置密码">重置密码</button></div></td>
+                </tr>
+                <tr>
+                  <td>
+                    <div style="display:flex;align-items:center;gap:8px;">
+                      <span class="avatar" style="width:26px;height:26px;font-size:11px;">张</span>
+                      <div><div class="t-title">张伟</div><div class="t-sub">zhangwei@doulaichuang.cn</div></div>
+                    </div>
+                  </td>
+                  <td>系统管理员</td>
+                  <td>全部权限，含账号与日志</td>
+                  <td><span class="status status-published">启用</span></td>
+                  <td class="t-num">10-22 16:30</td>
+                  <td class="col-act"><div class="row-actions"><button class="row-btn" data-toast="已打开账号编辑">编辑</button><button class="row-btn plain" data-toast="已重置密码">重置密码</button></div></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="panel">
+          <div class="panel-head">
+            <div>
+              <h3>角色权限矩阵</h3>
+              <p>勾选后立即生效，变更记录写入操作日志</p>
+            </div>
+            <button class="btn btn-secondary btn-sm" data-toast="权限已保存">保存变更</button>
+          </div>
+          <div class="panel-body flush">
+            <table class="perm-table">
+              <thead>
+                <tr>
+                  <th>功能权限</th>
+                  <th style="width:96px;">系统管理员</th>
+                  <th style="width:96px;">内容管理员</th>
+                  <th style="width:96px;">审核员</th>
+                  <th style="width:96px;">融媒体编辑</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="group-row"><td colspan="5">内容管理</td></tr>
+                <tr><td>查看内容列表</td><td><input class="perm-check" type="checkbox" checked></td><td><input class="perm-check" type="checkbox" checked></td><td><input class="perm-check" type="checkbox" checked></td><td><input class="perm-check" type="checkbox" checked></td></tr>
+                <tr><td>新建 / 编辑内容</td><td><input class="perm-check" type="checkbox" checked></td><td><input class="perm-check" type="checkbox" checked></td><td><span class="muted">—</span></td><td><input class="perm-check" type="checkbox" checked></td></tr>
+                <tr><td>删除内容</td><td><input class="perm-check" type="checkbox" checked></td><td><input class="perm-check" type="checkbox" checked></td><td><span class="muted">—</span></td><td><span class="muted">—</span></td></tr>
+                <tr><td>下架 / 恢复内容</td><td><input class="perm-check" type="checkbox" checked></td><td><input class="perm-check" type="checkbox" checked></td><td><input class="perm-check" type="checkbox" checked></td><td><span class="muted">—</span></td></tr>
+
+                <tr class="group-row"><td colspan="5">审核与发布</td></tr>
+                <tr><td>初审</td><td><input class="perm-check" type="checkbox" checked></td><td><input class="perm-check" type="checkbox" checked></td><td><input class="perm-check" type="checkbox" checked></td><td><span class="muted">—</span></td></tr>
+                <tr><td>甲方终审</td><td><input class="perm-check" type="checkbox" checked></td><td><span class="muted">—</span></td><td><span class="muted">—</span></td><td><span class="muted">—</span></td></tr>
+                <tr><td>发布上线</td><td><input class="perm-check" type="checkbox" checked></td><td><input class="perm-check" type="checkbox" checked></td><td><span class="muted">—</span></td><td><span class="muted">—</span></td></tr>
+
+                <tr class="group-row"><td colspan="5">会员与组织</td></tr>
+                <tr><td>查看入会申请</td><td><input class="perm-check" type="checkbox" checked></td><td><input class="perm-check" type="checkbox" checked></td><td><input class="perm-check" type="checkbox" checked></td><td><span class="muted">—</span></td></tr>
+                <tr><td>审核入会申请</td><td><input class="perm-check" type="checkbox" checked></td><td><span class="muted">—</span></td><td><input class="perm-check" type="checkbox" checked></td><td><span class="muted">—</span></td></tr>
+                <tr><td>导出申请名单</td><td><input class="perm-check" type="checkbox" checked></td><td><span class="muted">—</span></td><td><span class="muted">—</span></td><td><span class="muted">—</span></td></tr>
+                <tr><td>维护组织名录</td><td><input class="perm-check" type="checkbox" checked></td><td><input class="perm-check" type="checkbox" checked></td><td><span class="muted">—</span></td><td><span class="muted">—</span></td></tr>
+
+                <tr class="group-row"><td colspan="5">系统</td></tr>
+                <tr><td>账号管理</td><td><input class="perm-check" type="checkbox" checked></td><td><span class="muted">—</span></td><td><span class="muted">—</span></td><td><span class="muted">—</span></td></tr>
+                <tr><td>查看操作日志</td><td><input class="perm-check" type="checkbox" checked></td><td><input class="perm-check" type="checkbox" checked></td><td><span class="muted">—</span></td><td><span class="muted">—</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ 操作记录 ============ -->
+      <section class="view" data-view="logs" data-title="操作记录">
+        <div class="page-head">
+          <div>
+            <h1>操作记录</h1>
+            <p>记录内容发布、审核、下架与账号变更等关键操作，日志保留 180 天。</p>
+          </div>
+          <div class="page-head-actions">
+            <button class="btn btn-secondary" data-toast="已导出操作日志（示例）"><i data-icon="download"></i>导出日志</button>
+          </div>
+        </div>
+
+        <div class="toolbar">
+          <div class="toolbar-search">
+            <i data-icon="search"></i>
+            <input type="search" placeholder="搜索操作人或对象" aria-label="搜索日志">
+          </div>
+          <select class="select" aria-label="操作类型" style="width:126px;">
+            <option>全部操作</option>
+            <option>发布内容</option>
+            <option>审核通过</option>
+            <option>下架内容</option>
+            <option>删除内容</option>
+            <option>账号变更</option>
+          </select>
+          <select class="select" aria-label="时间范围" style="width:118px;">
+            <option>近 7 天</option>
+            <option>近 30 天</option>
+            <option>今天</option>
+          </select>
+          <span class="toolbar-spacer"></span>
+          <span style="font-size:11.5px;color:var(--ink-400)">共 1,284 条记录</span>
+        </div>
+
+        <div class="table-wrap">
+          <table class="dt">
+            <thead>
+              <tr>
+                <th style="width:140px;">时间</th>
+                <th style="width:96px;">操作人</th>
+                <th style="width:112px;">角色</th>
+                <th style="width:110px;">操作类型</th>
+                <th>对象</th>
+                <th style="width:112px;">IP 地址</th>
+                <th style="width:76px;">结果</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="t-num">10-24 09:12:36</td>
+                <td>陈静</td>
+                <td>内容管理员</td>
+                <td><span class="tag tag-blue">发布内容</span></td>
+                <td class="t-title">白蕉海鲈预制菜产业园招商启动</td>
+                <td class="t-num">10.12.8.31</td>
+                <td><span class="status status-approved">成功</span></td>
+              </tr>
+              <tr>
+                <td class="t-num">10-24 08:40:12</td>
+                <td>李明</td>
+                <td>融媒体编辑</td>
+                <td><span class="tag tag-gray">提交审核</span></td>
+                <td class="t-title">区委统战部召开港澳青年乡创工作推进会</td>
+                <td class="t-num">10.12.8.44</td>
+                <td><span class="status status-approved">成功</span></td>
+              </tr>
+              <tr>
+                <td class="t-num">10-23 17:26:05</td>
+                <td>王敏</td>
+                <td>审核员</td>
+                <td><span class="tag tag-green">初审通过</span></td>
+                <td class="t-title">斗门区支持港澳青年创新创业若干措施</td>
+                <td class="t-num">10.12.8.27</td>
+                <td><span class="status status-approved">成功</span></td>
+              </tr>
+              <tr>
+                <td class="t-num">10-23 15:02:41</td>
+                <td>李明</td>
+                <td>融媒体编辑</td>
+                <td><span class="tag tag-blue">编辑内容</span></td>
+                <td class="t-title">莲江村乡村民宿集群招募公告</td>
+                <td class="t-num">10.12.8.44</td>
+                <td><span class="status status-approved">成功</span></td>
+              </tr>
+              <tr>
+                <td class="t-num">10-22 16:35:18</td>
+                <td>张伟</td>
+                <td>系统管理员</td>
+                <td><span class="tag tag-red">下架内容</span></td>
+                <td class="t-title">斗门旧街文创街区合作运营方案</td>
+                <td class="t-num">10.12.8.12</td>
+                <td><span class="status status-approved">成功</span></td>
+              </tr>
+              <tr>
+                <td class="t-num">10-22 10:05:52</td>
+                <td>王敏</td>
+                <td>审核员</td>
+                <td><span class="tag tag-orange">退回修改</span></td>
+                <td class="t-title">港澳青年乡创研学营活动回顾</td>
+                <td class="t-num">10.12.8.27</td>
+                <td><span class="status status-approved">成功</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pager">
+          <span>共 1,284 条 · 每页 20 条</span>
+          <div class="pager-btns">
+            <button class="pg" disabled><i data-icon="chevron-left"></i></button>
+            <button class="pg active">1</button>
+            <button class="pg">2</button>
+            <button class="pg">3</button>
+            <button class="pg">…</button>
+            <button class="pg">65</button>
+            <button class="pg"><i data-icon="chevron-right"></i></button>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</div>
+
+<!-- ================= 登录 ================= -->
+<div class="admin-login" id="adminLogin">
+  <div class="al-visual">
+    <div class="al-brand">
+      <div class="as-mark">斗</div>
+      <div>
+        <strong>斗来创</strong>
+        <span>港澳青年乡创线上推广平台</span>
+      </div>
+    </div>
+    <div class="al-copy">
+      <h2>内容可信，<br>来自<em>每一次</em>审核。</h2>
+      <p>统一管理产业项目、重大信息与港澳政策内容，支撑编辑、初审、终审与发布全流程，让每一条对外信息都有据可查。</p>
+    </div>
+    <div class="al-foot">
+      <span><i data-icon="shield"></i>政务内容审核流程</span>
+      <span><i data-icon="clock"></i>全程操作留痕</span>
+    </div>
+  </div>
+
+  <div class="al-form">
+    <button class="tb-btn al-close" id="loginClose" title="关闭" aria-label="关闭登录"><i data-icon="x"></i></button>
+    <div class="al-form-inner">
+      <h3>登录管理后台</h3>
+      <p class="al-sub">请使用平台分配的账号登录，账号由系统管理员开通。</p>
+
+      <div class="al-fields">
+        <div class="al-field">
+          <label for="acct">账号</label>
+          <div class="al-field-wrap">
+            <i data-icon="user"></i>
+            <input class="input" id="acct" type="text" value="chenjing@doulaichuang.cn" autocomplete="username">
+          </div>
+        </div>
+        <div class="al-field">
+          <label for="pwd">密码</label>
+          <div class="al-field-wrap">
+            <i data-icon="lock"></i>
+            <input class="input" id="pwd" type="password" value="doulaichuang2026" autocomplete="current-password">
+            <button class="al-eye" aria-label="显示密码" data-toast="演示环境：密码已隐藏"><i data-icon="eye"></i></button>
+          </div>
+        </div>
+        <div class="al-row">
+          <label class="check"><input type="checkbox" checked><span>记住账号</span></label>
+          <button class="al-link" data-toast="请联系系统管理员重置密码">忘记密码？</button>
+        </div>
+        <button class="btn btn-primary btn-block al-submit" id="loginBtn">登 录</button>
+      </div>
+
+      <div class="al-demo">
+        演示账号：chenjing@doulaichuang.cn　密码：任意<br>
+        本页面为高保真原型，不连接真实数据。
+      </div>
+      <p class="al-skip">仅浏览界面？<button id="loginSkip">直接进入工作台</button></p>
+    </div>
+  </div>
+</div>
+
+<div class="admin-toast" id="adminToast"></div>
+
+<script src="../assets/js/icons.js"></script>
+<script src="../assets/js/admin.js"></script>
+</body>
+</html>
