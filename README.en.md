@@ -90,9 +90,9 @@ Two hard rules follow from this:
 
 | # | Screen | Purpose |
 | --- | --- | --- |
-| 01 | Home | Brand, simplified / traditional toggle, notifications; admin-configurable carousel (3 slides); 42 / 18 / 36 stats; six module entries; lazy-loaded promo video; featured projects; latest information; upcoming activities; organization banner. |
+| 01 | Home | The 斗来创 brand and simplified / traditional toggle float over the carousel; admin-configurable carousel (3 slides); six module entries; lazy-loaded promo video placed below the six entries; featured projects; latest information; upcoming activities; organization banner. |
 | 02 | Find Projects | Search, sector chips, featured card, project cards with district / cooperation model / status. |
-| 03 | Project detail | Hero with tags, four fact cells, intro, highlights, gallery; contacts require login; favorite / share / contact bar. |
+| 03 | Project detail | Hero with tags, four fact cells, intro, highlights, gallery; contacts require login; share / contact bar. |
 | 04 | Find Information | Merges the former "major updates" and "Hong Kong and Macau policies"; category tabs, lead card, list, policy entries. |
 | 05 | Information detail | Lead block, body, captioned figure, source and editor, review note. |
 | 06 | Policy detail | Deep-blue hero, document metadata, 3–5 key points, full text, login-gated attachments. |
@@ -106,7 +106,7 @@ Two hard rules follow from this:
 | 14 | Find Activities | All / open / study tour / roadshow tabs, activity cards (time · venue · quota), signup notice, load more. |
 | 15 | Activity detail | Hero, fact grid (deadline / quota / signed up / fee), intro, agenda, signup form (name / phone / party size / questions), submit. |
 | 16 | Login | Benefits first, one-tap WeChat login, skippable. |
-| 17 | Profile | Verified identity tags, application / favorite / view stats, grouped menus. |
+| 17 | Profile | Verified identity tags, application / view stats, grouped menus. |
 | 18 | My applications | Status filters, application numbers, three-stage timeline (submitted → under review → result). |
 | 19 | Contact request | Project recap, contact channel, preferred time, phone, 200-character message, free-of-charge notice. |
 
@@ -137,7 +137,7 @@ Two hard rules follow from this:
 | --- | --- |
 | Dashboard | Four KPIs (pending review, published this month, signups to confirm, mini-program visits), seven-day published / pending chart, to-dos, recent publications, content mix, takedown warning. |
 | Contents | Type tabs (all / projects / information / jobs / supply / activities), search and status / category / date filters, bulk selection, row actions (edit, take down, republish, delete), pagination. |
-| Editor | Metadata, rich-text toolbar with editable body, image slots, publishing settings (homepage feature, sync to mini-program), three-step review explanation. The comment switch has been removed. |
+| Content detail | Metadata, rich-text toolbar with editable body, image slots, publishing settings (homepage feature), status plus a take-down action, three-step review explanation. The comment switch and the "sync to mini-program" switch have both been removed. |
 | Review | Pending queue, content detail with attachments, return for revision / reject / approve and publish, single-level audit timeline. |
 | Carousel | Slide table (thumbnail, copy, order, status, editor), copy and typography form (title, subtitle, size, weight, color, alignment, image), live mini-program preview, link target and enable switch. |
 | Activities | Type tabs, activity table (time / venue / signups / quota / status), create, edit, signups, republish, delete. |

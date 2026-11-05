@@ -548,15 +548,16 @@
       </section>
 
       <!-- ============ 内容编辑 ============ -->
-      <section class="view" data-view="editor" data-title="内容管理 / 新建内容">
+      <section class="view" data-view="editor" data-title="内容管理 / 内容详情">
         <div class="page-head">
           <div>
-            <h1>新建内容</h1>
-            <p>内容保存为草稿后可继续编辑；提交审核后进入单层审核，通过即发布。</p>
+            <h1>内容详情</h1>
+            <p>已发布内容可直接下架；修改后需重新提交审核，审核通过前小程序端保持上一版本。</p>
           </div>
           <div class="page-head-actions">
-            <button class="btn btn-ghost" data-view="contents">取消</button>
-            <button class="btn btn-secondary" data-toast="草稿已保存"><i data-icon="file"></i>保存草稿</button>
+            <button class="btn btn-ghost" data-view="contents">返回列表</button>
+            <button class="btn btn-danger-soft" data-toast="已下架该内容，小程序端不再展示"><i data-icon="x"></i>下架</button>
+            <button class="btn btn-secondary" data-toast="修改已保存为草稿"><i data-icon="file"></i>保存修改</button>
             <button class="btn btn-primary" data-toast="已提交审核，等待审核结论"><i data-icon="send"></i>提交审核</button>
           </div>
         </div>
@@ -675,16 +676,12 @@
                   <div class="meta-row"><span class="k">内容编号</span><span class="v">自动生成</span></div>
                   <div class="meta-row"><span class="k">创建人</span><span class="v">陈静</span></div>
                   <div class="meta-row"><span class="k">创建时间</span><span class="v">2026-10-24 10:02</span></div>
-                  <div class="meta-row"><span class="k">当前状态</span><span class="status status-draft">草稿</span></div>
+                  <div class="meta-row"><span class="k">当前状态</span><span class="status status-published">已发布</span></div>
                 </div>
                 <div style="margin-top:14px;padding-top:14px;border-top:1px solid var(--line);">
-                  <div class="meta-row" style="margin-bottom:12px;">
+                  <div class="meta-row">
                     <span class="k">首页推荐</span>
                     <label class="switch"><input type="checkbox"><span></span></label>
-                  </div>
-                  <div class="meta-row">
-                    <span class="k">同步小程序</span>
-                    <label class="switch"><input type="checkbox" checked><span></span></label>
                   </div>
                 </div>
               </div>
