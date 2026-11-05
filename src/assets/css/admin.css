@@ -28,7 +28,7 @@ body { background: var(--bg); }
 .as-brand { display: flex; align-items: center; gap: 10px; padding: 0 6px 18px; }
 .as-mark {
   width: 34px; height: 34px; border-radius: 9px;
-  background: linear-gradient(150deg, #2F7FD1, #1F5FAF);
+  background: var(--grad-brand);
   color: #fff; font-size: 17px; font-weight: 700;
   display: flex; align-items: center; justify-content: center;
   letter-spacing: .02em; flex: none;
@@ -64,7 +64,7 @@ body { background: var(--bg); }
   padding: 1px 6px; border-radius: var(--r-pill);
   background: rgba(255,255,255,.16); color: #fff;
 }
-.as-item.active .as-count { background: var(--orange-500); color: #3A1E00; }
+.as-item.active .as-count { background: var(--orange-500); color: var(--ink-900); }
 .as-foot { padding-top: 12px; border-top: 1px solid rgba(255,255,255,.1); }
 .as-user {
   display: flex; align-items: center; gap: 9px;
@@ -442,9 +442,9 @@ body { background: var(--bg); }
   font-size: 11.5px; line-height: 1.7;
 }
 .admin-note i[data-icon] { font-size: 14px; flex: none; margin-top: 1px; }
-.admin-note.info { background: var(--blue-50); color: var(--blue-700); border: 1px solid #D3E2F5; }
-.admin-note.warn { background: var(--warn-50); color: #7A5310; border: 1px solid #F3E0B5; }
-.admin-note.danger { background: var(--danger-50); color: #9B2C2C; border: 1px solid #F5C9C9; }
+.admin-note.info { background: var(--blue-50); color: var(--blue-700); border: 1px solid var(--blue-100); }
+.admin-note.warn { background: var(--warn-50); color: var(--warn-700); border: 1px solid var(--warn-100); }
+.admin-note.danger { background: var(--danger-50); color: var(--danger-700); border: 1px solid var(--danger-100); }
 
 /* ---------- 空状态 ---------- */
 .mini-empty { padding: 34px 16px; text-align: center; color: var(--ink-400); font-size: 11.5px; }
@@ -484,7 +484,7 @@ body { background: var(--bg); }
 .al-visual::before {
   content: ""; position: absolute; inset: 0;
   background:
-    radial-gradient(circle at 78% 16%, rgba(242, 140, 40, .22), transparent 46%),
+    radial-gradient(circle at 78% 16%, rgba(255, 107, 74, .22), transparent 46%),
     radial-gradient(circle at 14% 86%, rgba(47, 127, 209, .34), transparent 52%);
 }
 .al-visual::after {
@@ -498,7 +498,7 @@ body { background: var(--bg); }
 .al-brand span { display: block; color: rgba(255,255,255,.6); font-size: 10.5px; margin-top: 3px; letter-spacing: .02em; }
 .al-copy { position: relative; max-width: 430px; }
 .al-copy h2 { color: #fff; font-size: 30px; font-weight: 700; line-height: 1.4; letter-spacing: -.01em; }
-.al-copy h2 em { font-style: normal; color: #FFC48A; }
+.al-copy h2 em { font-style: normal; color: var(--orange-300); }
 .al-copy p { color: rgba(255,255,255,.66); font-size: 12.5px; line-height: 1.85; margin-top: 14px; }
 .al-foot { position: relative; display: flex; align-items: center; gap: 14px; color: rgba(255,255,255,.45); font-size: 10.5px; }
 .al-foot span { display: flex; align-items: center; gap: 5px; }
