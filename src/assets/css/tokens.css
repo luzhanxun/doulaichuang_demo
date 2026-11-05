@@ -55,6 +55,7 @@
   --surface: #FFFFFF;
   --surface-2: #FAFBFE;
   --surface-inverse: #0B1220;
+  --on-dark: #FFFFFF;
 
   /* ---------- 原语 · 状态色 ---------- */
   --success: #047857;
@@ -72,6 +73,7 @@
   --danger-50: #FEF2F2;
 
   /* ---------- 圆角 ---------- */
+  --r-2xs: 4px;
   --r-xs: 6px;
   --r-sm: 8px;
   --r-md: 12px;
@@ -131,6 +133,7 @@
   --fs-caption: 12.5px;
   --fs-micro: 11.5px;
   --fs-tag: 11px;
+  --fs-kpi: 30px;
 
   /* ---------- 行高与字距（繁体模式下整体上调一档，见下方 .lang-hant） ---------- */
   --lh-tight: 1.25;
