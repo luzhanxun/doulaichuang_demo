@@ -132,6 +132,19 @@
   --fs-micro: 11.5px;
   --fs-tag: 11px;
 
+  /* ---------- 行高与字距（繁体模式下整体上调一档，见下方 .lang-hant） ---------- */
+  --lh-tight: 1.25;
+  --lh-snug: 1.45;
+  --lh-normal: 1.6;
+  --lh-body: 1.75;
+  --lh-relaxed: 1.85;
+  --ls-tight: -.015em;
+  --ls-snug: -.01em;
+  --ls-normal: .01em;
+  --ls-wide: .02em;
+  --ls-wider: .04em;
+  --ls-caps: .08em;
+
   /* ---------- 动效 ---------- */
   --dur-instant: 80ms;
   --dur-fast: 120ms;
@@ -174,4 +187,26 @@
   --z-drawer: 60;
   --z-modal: 80;
   --z-toast: 100;
+}
+
+/* 繁体脚本笔画更密：行高、字距、最小字号各上调一档。
+   .lang-hant 由简繁切换加在设备容器上，:lang() 兜底给独立打开的页面。 */
+:lang(zh-Hant),
+.lang-hant {
+  --lh-tight: 1.3;
+  --lh-snug: 1.5;
+  --lh-normal: 1.7;
+  --lh-body: 1.85;
+  --lh-relaxed: 1.9;
+  --ls-tight: 0;
+  --ls-snug: 0;
+  --ls-normal: .02em;
+  --ls-wide: .04em;
+  --ls-wider: .05em;
+  --fs-micro: 12px;
+  --fs-tag: 12px;
+
+  /* 让未显式声明排版的长文本也吃到繁体档位 */
+  line-height: var(--lh-body);
+  letter-spacing: var(--ls-normal);
 }

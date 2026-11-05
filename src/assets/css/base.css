@@ -11,16 +11,15 @@ body {
   margin: 0;
   font-family: var(--font);
   font-size: var(--fs-body);
-  line-height: 1.7;
-  letter-spacing: .01em;
+  line-height: var(--lh-body);
+  letter-spacing: var(--ls-normal);
   color: var(--ink-700);
   background: var(--bg);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
 
-/* 繁体脚本笔画更密：行高与字距各留一档余量（需配合 <html lang> 切换） */
-:lang(zh-Hant) { letter-spacing: .02em; line-height: 1.85; }
+/* 繁体模式的行高 / 字距 / 最小字号由 tokens.css 的 .lang-hant 覆盖令牌实现 */
 
 h1, h2, h3, h4, h5, p, figure, blockquote, dl, dd { margin: 0; }
 ul, ol { margin: 0; padding: 0; list-style: none; }
