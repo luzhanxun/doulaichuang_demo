@@ -3,17 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>斗来创 · 设计系统</title>
+<title>斗来创 · 设计系统 v2.0</title>
 <!--
   方向契约
   THESIS    一个让大湾区青年看得懂、信得过、愿意迈出第一步的斗门机遇入口；不是政务信息发布页。
-  OWN-WORLD 湾区青蓝承载政务可信度，暖橙只用于"青年此刻可行动"的位置，生态绿归属斗门的产业与生态底色；
-            水乡波纹是唯一装饰语言，出现在头图与图片占位里，不进入内容区。
+  OWN-WORLD 电光青蓝（#2563EB→#06B6D4）撑起可信与结构，珊瑚橙（#FF6B4A）只给"青年此刻可行动"的位置，
+            生态绿只表达状态；水乡波纹是唯一装饰语言，只出现在头图与图片占位里，不进入内容区。
   STORY     看见斗门 → 找到项目 → 找到信息 → 找到组织 → 找到工作 → 找到供需 → 找到活动 → 留下联系方式。
   FIRST VIEW 首屏用可配置轮播图说明平台是什么，紧跟六个模块入口与一条宣传片；
             轮播文案与样式由后台配置，宣传片懒加载、不自动播放。
   FORM      小程序 390×844 内容优先单列；后台深青蓝侧栏 + 浅底工作区，状态先于装饰。
   SCOPE     小程序 19 屏（六大模块 + 账户与对接流程）、后台 11 视图；内容审核为单层。
+  RULES     只动 transform / opacity；动效一律走 --dur-* 与 --ease-*；prefers-reduced-motion 降到 120ms 纯淡入。
 -->
 <link rel="stylesheet" href="assets/css/tokens.css">
 <link rel="stylesheet" href="assets/css/base.css">
@@ -25,10 +26,15 @@
   <div class="ov-nav-inner">
     <a class="ov-brand" href="index.html">
       <span class="ov-mark">斗</span>
-      <strong>斗来创 · 设计系统</strong>
+      <strong>斗来创 · 设计系统 v2.0</strong>
     </a>
     <div class="ov-nav-links">
-      
+      <a class="ov-nav-link" href="#palette">配色</a>
+      <a class="ov-nav-link" href="#type">字体</a>
+      <a class="ov-nav-link" href="#shape">形状</a>
+      <a class="ov-nav-link" href="#comp">组件</a>
+      <a class="ov-nav-link" href="#motion">动效</a>
+      <a class="ov-nav-link" href="#icons">图标</a>
     </div>
     <div class="ov-nav-actions">
       <a class="btn btn-secondary btn-sm" href="miniprogram/index.html"><i data-icon="phone"></i>小程序原型</a>
@@ -41,20 +47,22 @@
   <div class="ov-hero-inner">
     <div class="ov-brand">
       <span class="ov-mark">斗</span>
-      <strong style="color:#fff">“斗来创” 斗门机遇一站式对接平台</strong>
+      <strong style="color:var(--on-dark)">“斗来创” 斗门机遇一站式对接平台</strong>
     </div>
-    <h1>湾区青蓝托住可信，<br><em>暖橙</em> 留给青年可行动的那一下。</h1>
+    <h1>电光青蓝撑住可信，<br><em>珊瑚橙</em> 留给青年可行动的那一下。</h1>
     <p class="ov-hero-desc">
-      面向大湾区青年的斗门机遇对接平台，一端是微信小程序的内容与申请入口，一端是融媒体中心的
-      内容审核与运营后台。本页是两端共用的设计依据：颜色、字阶、图标、组件与状态用语都从这里取值。
+      面向港澳台侨胞与大湾区青年的斗门机遇对接平台：一端是微信小程序的内容与申请入口，
+      一端是融媒体中心的内容审核与运营后台。v2 把原来的“政务青蓝 + 1px 细线”换成
+      更饱和的品牌蓝、更强的圆角与阴影层级、以及一套有预算的微交互——但不动任何功能、接口与数据结构。
     </p>
     <div class="ov-hero-actions">
       <a class="btn btn-accent" href="miniprogram/index.html"><i data-icon="phone"></i>查看小程序 19 屏</a>
       <a class="btn btn-glass" href="admin/index.html"><i data-icon="dashboard"></i>查看后台 11 视图</a>
     </div>
     <div class="ov-hero-stats">
-      <div class="ov-stat"><strong>3</strong><span>主色 · 60-30-10</span></div>
-      <div class="ov-stat"><strong>7</strong><span>字阶</span></div>
+      <div class="ov-stat"><strong>5</strong><span>色彩阶梯</span></div>
+      <div class="ov-stat"><strong>11</strong><span>字阶</span></div>
+      <div class="ov-stat"><strong>9</strong><span>圆角 · 4 阴影</span></div>
       <div class="ov-stat"><strong>71</strong><span>线性图标</span></div>
       <div class="ov-stat"><strong>30</strong><span>界面</span></div>
     </div>
@@ -63,15 +71,388 @@
 
 <main class="ov-page">
 
+  <section class="ov-section" id="palette">
+    <div class="ov-section-head">
+      <h2>一、配色</h2>
+      <p>
+        60 : 30 : 10 的比例<strong>保留</strong>——它不是造成“政务感”的原因，问题在色相、饱和度和使用位置。
+        色块徽标是对比度：<b>≥ 4.5 : 1</b> 可承载正文，<b>3–4.5 : 1</b> 只可用于大字或图形，
+        <b>&lt; 3 : 1</b> 不可承载任何文字。浅色徽标一律标注“深字”，即用 <code>--ink-900</code> 叠加在该色上的比值。
+      </p>
+    </div>
+<div class="sw-scale">
+  <h3 class="ov-sub">品牌蓝 · 电光青蓝</h3>
+  <p class="ov-sub-desc">承载“可信”与结构：头图底、主行动、链接、选中态。占比 30% 的结构色。</p>
+  <div class="sw-grid">
+    <div class="sw"><div class="sw-chip" style="background:var(--blue-800)"><span class="sw-ratio">白字 16.5</span></div><div class="sw-body"><div class="sw-name">--blue-800</div><div class="sw-hex">#0B1F3A</div><div class="sw-use">深色块：hero 底、深色页头、页脚</div></div></div>
+    <div class="sw"><div class="sw-chip" style="background:var(--blue-700)"><span class="sw-ratio">白字 6.7</span></div><div class="sw-body"><div class="sw-name">--blue-700</div><div class="sw-hex">#1D4ED8</div><div class="sw-use">按钮按压态、正文链接、info 状态</div></div></div>
+    <div class="sw"><div class="sw-chip" style="background:var(--blue-600)"><span class="sw-ratio">白字 5.2</span></div><div class="sw-body"><div class="sw-name">--blue-600</div><div class="sw-hex">#2563EB</div><div class="sw-use">主色：主按钮、选中态、焦点环、品牌渐变起点</div></div></div>
+    <div class="sw"><div class="sw-chip" style="background:var(--blue-500)"><span class="sw-ratio">深字 5.1</span></div><div class="sw-body"><div class="sw-name">--blue-500</div><div class="sw-hex">#3B82F6</div><div class="sw-use">图标主色、hover 提亮，不承载正文</div></div></div>
+    <div class="sw"><div class="sw-chip" style="background:var(--blue-300)"><span class="sw-ratio">深字 10.4</span></div><div class="sw-body"><div class="sw-name">--blue-300</div><div class="sw-hex">#93C5FD</div><div class="sw-use">深底上的次级文字、分割线</div></div></div>
+    <div class="sw"><div class="sw-chip" style="background:var(--blue-100)"><span class="sw-ratio">深字 15.3</span></div><div class="sw-body"><div class="sw-name">--blue-100</div><div class="sw-hex">#DBEAFE</div><div class="sw-use">浅底标签、选中底</div></div></div>
+    <div class="sw"><div class="sw-chip" style="background:var(--blue-50)"><span class="sw-ratio">深字 17.2</span></div><div class="sw-body"><div class="sw-name">--blue-50</div><div class="sw-hex">#EFF6FF</div><div class="sw-use">信息块浅底、选中行底</div></div></div>
+  </div>
+</div>
+<div class="sw-scale">
+  <h3 class="ov-sub">科技青 · 点缀</h3>
+  <p class="ov-sub-desc">只做“适度科技感”的点缀：进度、数据可视化、AI / 智能类标签。不做主按钮底色。</p>
+  <div class="sw-grid">
+    <div class="sw"><div class="sw-chip" style="background:var(--cyan-700)"><span class="sw-ratio">白字 5.4</span></div><div class="sw-body"><div class="sw-name">--cyan-700</div><div class="sw-hex">#0E7490</div><div class="sw-use">青色系正文、青色标签文字</div></div></div>
+    <div class="sw"><div class="sw-chip" style="background:var(--cyan-500)"><span class="sw-ratio">深字 7.7</span></div><div class="sw-body"><div class="sw-name">--cyan-500</div><div class="sw-hex">#06B6D4</div><div class="sw-use">图标、装饰渐变终点、数据可视化，不承载正文</div></div></div>
+    <div class="sw"><div class="sw-chip" style="background:var(--cyan-100)"><span class="sw-ratio">深字 16.7</span></div><div class="sw-body"><div class="sw-name">--cyan-100</div><div class="sw-hex">#CFFAFE</div><div class="sw-use">浅底标签</div></div></div>
+    <div class="sw"><div class="sw-chip" style="background:var(--cyan-50)"><span class="sw-ratio">深字 18.0</span></div><div class="sw-body"><div class="sw-name">--cyan-50</div><div class="sw-hex">#ECFEFF</div><div class="sw-use">最浅底、科技感提示块</div></div></div>
+  </div>
+</div>
+<div class="sw-scale">
+  <h3 class="ov-sub">生态绿 · 状态</h3>
+  <p class="ov-sub-desc">只表达“成功 / 已通过 / 已发布 / 在线”，不再承担装饰。</p>
+  <div class="sw-grid">
+    <div class="sw"><div class="sw-chip" style="background:var(--green-700)"><span class="sw-ratio">白字 5.5</span></div><div class="sw-body"><div class="sw-name">--green-700</div><div class="sw-hex">#047857</div><div class="sw-use">成功 / 已发布 / 已通过的文字与实底按钮</div></div></div>
+    <div class="sw"><div class="sw-chip" style="background:var(--green-600)"><span class="sw-ratio">深字 5.0</span></div><div class="sw-body"><div class="sw-name">--green-600</div><div class="sw-hex">#059669</div><div class="sw-use">图标、进度条，不承载正文</div></div></div>
+    <div class="sw"><div class="sw-chip" style="background:var(--green-500)"><span class="sw-ratio">深字 7.4</span></div><div class="sw-body"><div class="sw-name">--green-500</div><div class="sw-hex">#10B981</div><div class="sw-use">图标辅色、装饰</div></div></div>
+    <div class="sw"><div class="sw-chip" style="background:var(--green-100)"><span class="sw-ratio">深字 16.5</span></div><div class="sw-body"><div class="sw-name">--green-100</div><div class="sw-hex">#D1FAE5</div><div class="sw-use">浅底</div></div></div>
+    <div class="sw"><div class="sw-chip" style="background:var(--green-50)"><span class="sw-ratio">深字 17.8</span></div><div class="sw-body"><div class="sw-name">--green-50</div><div class="sw-hex">#ECFDF5</div><div class="sw-use">成功态浅底</div></div></div>
+  </div>
+</div>
+<div class="sw-scale">
+  <h3 class="ov-sub">珊瑚橙 · 行动</h3>
+  <p class="ov-sub-desc">原 #F28C28 偏黄、灰度高，换成更年轻、更“珊瑚”的橙。10% 的行动色。</p>
+  <div class="sw-grid">
+    <div class="sw"><div class="sw-chip" style="background:var(--orange-700)"><span class="sw-ratio">白字 5.2</span></div><div class="sw-body"><div class="sw-name">--orange-700</div><div class="sw-hex">#C2410C</div><div class="sw-use">唯一可承载白字的橙色：强调文字、实底按钮</div></div></div>
+    <div class="sw"><div class="sw-chip" style="background:var(--orange-600)"><span class="sw-ratio">深字 5.3</span></div><div class="sw-body"><div class="sw-name">--orange-600</div><div class="sw-hex">#EA580C</div><div class="sw-use">按钮按压态、图标、强调数字</div></div></div>
+    <div class="sw"><div class="sw-chip" style="background:var(--orange-500)"><span class="sw-ratio">深字 6.6</span></div><div class="sw-body"><div class="sw-name">--orange-500</div><div class="sw-hex">#FF6B4A</div><div class="sw-use">圆点、进度、装饰，不承载白字</div></div></div>
+    <div class="sw"><div class="sw-chip" style="background:var(--orange-300)"><span class="sw-ratio">深字 14.0</span></div><div class="sw-body"><div class="sw-name">--orange-300</div><div class="sw-hex">#FFD9A8</div><div class="sw-use">深底上的暖色强调：hero 的 em、薪资等数值</div></div></div>
+    <div class="sw"><div class="sw-chip" style="background:var(--orange-100)"><span class="sw-ratio">深字 15.5</span></div><div class="sw-body"><div class="sw-name">--orange-100</div><div class="sw-hex">#FFE4DC</div><div class="sw-use">浅底、暖色标签</div></div></div>
+    <div class="sw"><div class="sw-chip" style="background:var(--orange-50)"><span class="sw-ratio">深字 17.0</span></div><div class="sw-body"><div class="sw-name">--orange-50</div><div class="sw-hex">#FFF1ED</div><div class="sw-use">活动 / 提醒类浅底</div></div></div>
+  </div>
+</div>
+<div class="sw-scale">
+  <h3 class="ov-sub">中性 · 文本与表面</h3>
+  <p class="ov-sub-desc">中性色偏冷（带蓝调），让白底不发灰、深底不发脏。</p>
+  <div class="sw-grid">
+    <div class="sw"><div class="sw-chip" style="background:var(--ink-900)"><span class="sw-ratio">白字 18.7</span></div><div class="sw-body"><div class="sw-name">--ink-900</div><div class="sw-hex">#0B1220</div><div class="sw-use">标题、KPI 数字</div></div></div>
+    <div class="sw"><div class="sw-chip" style="background:var(--ink-700)"><span class="sw-ratio">白字 10.4</span></div><div class="sw-body"><div class="sw-name">--ink-700</div><div class="sw-hex">#334155</div><div class="sw-use">正文</div></div></div>
+    <div class="sw"><div class="sw-chip" style="background:var(--ink-500)"><span class="sw-ratio">白字 5.5</span></div><div class="sw-body"><div class="sw-name">--ink-500</div><div class="sw-hex">#5B6A7E</div><div class="sw-use">次要说明、辅助信息、placeholder</div></div></div>
+    <div class="sw"><div class="sw-chip" style="background:var(--ink-400)"><span class="sw-ratio">深字 5.3</span></div><div class="sw-body"><div class="sw-name">--ink-400</div><div class="sw-hex">#7C8AA0</div><div class="sw-use">图标、装饰；不得用于 14px 以下正文</div></div></div>
+    <div class="sw"><div class="sw-chip" style="background:var(--ink-300)"><span class="sw-ratio">深字 12.6</span></div><div class="sw-body"><div class="sw-name">--ink-300</div><div class="sw-hex">#CBD5E1</div><div class="sw-use">禁用文字、非文本图形</div></div></div>
+    <div class="sw"><div class="sw-chip" style="background:var(--line)"><span class="sw-ratio">深字 15.3</span></div><div class="sw-body"><div class="sw-name">--line</div><div class="sw-hex">#E4E9F0</div><div class="sw-use">1px 分割线，不承载信息</div></div></div>
+    <div class="sw"><div class="sw-chip" style="background:var(--bg)"><span class="sw-ratio">深字 17.6</span></div><div class="sw-body"><div class="sw-name">--bg</div><div class="sw-hex">#F6F8FC</div><div class="sw-use">页面底色</div></div></div>
+    <div class="sw"><div class="sw-chip" style="background:var(--bg-deep)"><span class="sw-ratio">深字 16.7</span></div><div class="sw-body"><div class="sw-name">--bg-deep</div><div class="sw-hex">#EEF2F8</div><div class="sw-use">下沉区域、分段控件槽</div></div></div>
+    <div class="sw"><div class="sw-chip" style="background:var(--surface-2)"><span class="sw-ratio">深字 18.1</span></div><div class="sw-body"><div class="sw-name">--surface-2</div><div class="sw-hex">#FAFBFE</div><div class="sw-use">次级面板、内嵌块</div></div></div>
+  </div>
+</div>
+
+    <div class="spec" style="margin-top:var(--sp-6)">
+      <h4>60 : 30 : 10 的落地方式</h4>
+      <div class="ratio-bar">
+        <span style="flex:60;background:var(--bg);color:var(--ink-700)">60% 中性：表面 / 文本</span>
+        <span style="flex:30;background:var(--blue-600)">30% 品牌蓝 + 科技青</span>
+        <span style="flex:10;background:var(--orange-500);color:var(--ink-900)">10% 珊瑚橙</span>
+      </div>
+      <div class="spec-row"><span class="k">深色块预算</span><span class="v">--blue-800 面积 ≤ 15%（hero / 深色页头）</span></div>
+      <div class="spec-row"><span class="k">橙色白字</span><span class="v">只允许 --orange-700（5.18 : 1）</span></div>
+      <div class="spec-row"><span class="k">深底暖色强调</span><span class="v">--orange-300（blue-800 上 12.38 : 1）</span></div>
+      <div class="spec-row"><span class="k">正文下限</span><span class="v">4.5 : 1　大字（≥ 19px / 700）3 : 1</span></div>
+    </div>
+  </section>
+
+  <section class="ov-section" id="type">
+    <div class="ov-section-head">
+      <h2>二、字体与排版</h2>
+      <p>
+        全系统字体，不引外部字体文件，保证 file:// 离线可用。简体走 PingFang SC / 微软雅黑，
+        繁体走 PingFang TC / 微软正黑——同一套字阶，繁体的行高与字距整体上调一档。
+      </p>
+    </div>
+    <div class="type-list">
+      <div class="type-row"><div class="type-meta"><strong>--fs-display</strong>28px · 700</div><div style="font-size:var(--fs-display);font-weight:700;color:var(--ink-900);line-height:var(--lh-tight);letter-spacing:var(--ls-snug)">湾区机遇，一键对接</div><div class="type-use">页面主标题、空态大标题</div></div>
+      <div class="type-row"><div class="type-meta"><strong>--fs-h1</strong>24px · 700</div><div style="font-size:var(--fs-h1);font-weight:700;color:var(--ink-900);line-height:var(--lh-tight);letter-spacing:var(--ls-snug)">找到项目</div><div class="type-use">屏内一级标题</div></div>
+      <div class="type-row"><div class="type-meta"><strong>--fs-h2</strong>20px · 600</div><div style="font-size:var(--fs-h2);font-weight:600;color:var(--ink-900);line-height:var(--lh-tight);letter-spacing:var(--ls-snug)">珠海市斗门区青年创业大赛</div><div class="type-use">详情页标题、卡片主标题</div></div>
+      <div class="type-row"><div class="type-meta"><strong>--fs-h3</strong>17px · 600</div><div style="font-size:var(--fs-h3);font-weight:600;color:var(--ink-900);line-height:var(--lh-tight);letter-spacing:var(--ls-snug)">报名参加湾区青年创客营</div><div class="type-use">区块标题</div></div>
+      <div class="type-row"><div class="type-meta"><strong>--fs-title</strong>16px · 600</div><div style="font-size:var(--fs-title);font-weight:600;color:var(--ink-900);line-height:var(--lh-tight);letter-spacing:var(--ls-snug)">机会对接 · 项目申报</div><div class="type-use">列表主标题</div></div>
+      <div class="type-row"><div class="type-meta"><strong>--fs-body-lg</strong>15px · 400</div><div style="font-size:var(--fs-body-lg);font-weight:400;color:var(--ink-900);line-height:var(--lh-tight);letter-spacing:var(--ls-snug)">斗门区面向大湾区青年发布 128 个机会</div><div class="type-use">引导语、摘要</div></div>
+      <div class="type-row"><div class="type-meta"><strong>--fs-body</strong>14px · 400</div><div style="font-size:var(--fs-body);font-weight:400;color:var(--ink-900);line-height:var(--lh-tight);letter-spacing:var(--ls-snug)">项目申报截止 6 月 30 日，逾期不再受理。</div><div class="type-use">正文默认</div></div>
+      <div class="type-row"><div class="type-meta"><strong>--fs-caption</strong>12.5px · 400</div><div style="font-size:var(--fs-caption);font-weight:400;color:var(--ink-900);line-height:var(--lh-tight);letter-spacing:var(--ls-snug)">更新时间 2026-06-12 · 来源：斗门区人社局</div><div class="type-use">辅助信息、元数据</div></div>
+      <div class="type-row"><div class="type-meta"><strong>--fs-micro</strong>11.5px · 400</div><div style="font-size:var(--fs-micro);font-weight:400;color:var(--ink-900);line-height:var(--lh-tight);letter-spacing:var(--ls-snug)">仅展示已审核通过的内容</div><div class="type-use">最小正文、脚注</div></div>
+      <div class="type-row"><div class="type-meta"><strong>--fs-tag</strong>11px · 500</div><div style="font-size:var(--fs-tag);font-weight:500;color:var(--ink-900);line-height:var(--lh-tight);letter-spacing:var(--ls-snug)">标签 · 已通过</div><div class="type-use">标签、徽标内文字</div></div>
+      <div class="type-row"><div class="type-meta"><strong>--fs-kpi</strong>30px · 700</div><div style="font-size:var(--fs-kpi);font-weight:700;color:var(--ink-900);line-height:var(--lh-tight);letter-spacing:var(--ls-snug)">1,284</div><div class="type-use">后台 KPI 数字（唯一超出字阶的例外）</div></div>
+    </div>
+
+    <div class="spec-grid" style="margin-top:var(--sp-6)">
+      <div class="spec">
+        <h4>简体 / 繁体同一段话</h4>
+        <p class="lang-pair">找到项目，提交申报，等待审核结果。斗门区面向港澳台侨胞青年开放 128 个机会。</p>
+        <p class="lang-pair lang-hant">找到項目，提交申報，等待審核結果。斗門區面向港澳台僑胞青年開放 128 個機會。</p>
+        <div class="spec-row"><span class="k">简体</span><span class="v">--lh-body 1.75 / --ls-normal .01em</span></div>
+        <div class="spec-row"><span class="k">繁体</span><span class="v">--lh-body 1.85 / --ls-normal .02em</span></div>
+      </div>
+      <div class="spec">
+        <h4>行高与字距令牌</h4>
+        <div class="spec-row"><span class="k">--lh-tight</span><span class="v">1.25 → 1.3</span></div>
+        <div class="spec-row"><span class="k">--lh-snug</span><span class="v">1.45 → 1.5</span></div>
+        <div class="spec-row"><span class="k">--lh-normal</span><span class="v">1.6 → 1.7</span></div>
+        <div class="spec-row"><span class="k">--lh-body</span><span class="v">1.75 → 1.85</span></div>
+        <div class="spec-row"><span class="k">--lh-relaxed</span><span class="v">1.85 → 1.9</span></div>
+        <div class="spec-row"><span class="k">--ls-tight / --ls-snug</span><span class="v">-.015em / -.01em → 0</span></div>
+        <div class="spec-row"><span class="k">--ls-normal / --ls-wide</span><span class="v">.01em / .02em → .02em / .04em</span></div>
+        <div class="spec-row"><span class="k">最小字号</span><span class="v">--fs-micro 11.5 → 12　--fs-tag 11 → 12</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ov-section" id="shape">
+    <div class="ov-section-head">
+      <h2>三、形状：圆角 / 阴影 / 间距</h2>
+      <p>
+        年轻化的主要抓手是“圆角变大、描边退场、阴影变双层”。v1 用 1px 淡线划分一切，看起来像政务官网；
+        v2 让卡片靠阴影浮起，1px 线只留给表格、列表分隔这类确实需要对齐的场合。
+      </p>
+    </div>
+    <div class="spec-grid">
+      <div class="spec">
+        <h4>圆角阶梯</h4>
+        <div class="radius-demo">
+          <div class="radius-box" style="border-radius:var(--r-2xs)">2xs</div>
+          <div class="radius-box" style="border-radius:var(--r-xs)">xs</div>
+          <div class="radius-box" style="border-radius:var(--r-sm)">sm</div>
+          <div class="radius-box" style="border-radius:var(--r-md)">md</div>
+          <div class="radius-box" style="border-radius:var(--r-lg)">lg</div>
+          <div class="radius-box" style="border-radius:var(--r-xl)">xl</div>
+          <div class="radius-box" style="border-radius:var(--r-2xl)">2xl</div>
+          <div class="radius-box" style="border-radius:var(--r-3xl)">3xl</div>
+        </div>
+        <div class="spec-row"><span class="k">按钮 / 输入框</span><span class="v">--r-md 12px</span></div>
+        <div class="spec-row"><span class="k">卡片</span><span class="v">--r-lg 16px</span></div>
+        <div class="spec-row"><span class="k">弹层 / 抽屉</span><span class="v">--r-xl ~ --r-2xl</span></div>
+        <div class="spec-row"><span class="k">标签 / 分段控件</span><span class="v">--r-pill</span></div>
+      </div>
+      <div class="spec">
+        <h4>阴影阶梯（双层、冷调、低透明）</h4>
+        <div class="shadow-demo">
+          <div class="shadow-box" style="box-shadow:var(--sh-1)">卡片默认</div>
+          <div class="shadow-box" style="box-shadow:var(--sh-2)">卡片 hover / 浮层</div>
+          <div class="shadow-box" style="box-shadow:var(--sh-3)">抽屉 / 弹层</div>
+          <div class="shadow-box" style="box-shadow:var(--sh-4)">模态</div>
+        </div>
+        <div class="spec-row"><span class="k">--sh-brand</span><span class="v">主按钮的蓝色辉光</span></div>
+        <div class="spec-row"><span class="k">--sh-warm</span><span class="v">行动按钮的暖色辉光</span></div>
+        <div class="spec-row"><span class="k">同屏上限</span><span class="v">最多 2 种阴影层级</span></div>
+      </div>
+      <div class="spec">
+        <h4>间距（4px 基线）</h4>
+        <div class="sp-demo">
+          <div class="sp-row"><span class="sp-k">--sp-1</span><span class="sp-bar" style="width:var(--sp-1)"></span><span class="sp-v">4px</span></div>
+          <div class="sp-row"><span class="sp-k">--sp-2</span><span class="sp-bar" style="width:var(--sp-2)"></span><span class="sp-v">8px</span></div>
+          <div class="sp-row"><span class="sp-k">--sp-3</span><span class="sp-bar" style="width:var(--sp-3)"></span><span class="sp-v">12px</span></div>
+          <div class="sp-row"><span class="sp-k">--sp-4</span><span class="sp-bar" style="width:var(--sp-4)"></span><span class="sp-v">16px</span></div>
+          <div class="sp-row"><span class="sp-k">--sp-5</span><span class="sp-bar" style="width:var(--sp-5)"></span><span class="sp-v">20px</span></div>
+          <div class="sp-row"><span class="sp-k">--sp-6</span><span class="sp-bar" style="width:var(--sp-6)"></span><span class="sp-v">24px</span></div>
+          <div class="sp-row"><span class="sp-k">--sp-8</span><span class="sp-bar" style="width:var(--sp-8)"></span><span class="sp-v">32px</span></div>
+          <div class="sp-row"><span class="sp-k">--sp-10</span><span class="sp-bar" style="width:var(--sp-10)"></span><span class="sp-v">40px</span></div>
+          <div class="sp-row"><span class="sp-k">--sp-12</span><span class="sp-bar" style="width:var(--sp-12)"></span><span class="sp-v">48px</span></div>
+          <div class="sp-row"><span class="sp-k">--sp-16</span><span class="sp-bar" style="width:var(--sp-16)"></span><span class="sp-v">64px</span></div>
+        </div>
+        <div class="spec-row"><span class="k">页面左右安全边距</span><span class="v">--sp-4 16px</span></div>
+        <div class="spec-row"><span class="k">卡片内边距</span><span class="v">--card-pad 16px</span></div>
+        <div class="spec-row"><span class="k">区块之间</span><span class="v">--sp-6 ~ --sp-8</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ov-section" id="comp">
+    <div class="ov-section-head">
+      <h2>四、组件与状态</h2>
+      <p>
+        每个组件都必须有 default / hover / active / focus-visible / disabled / selected / loading 的完整状态；
+        hover 只在 <code>@media (hover: hover) and (pointer: fine)</code> 下生效，触屏不做 hover。
+      </p>
+    </div>
+    <div class="spec-grid">
+      <div class="spec">
+        <h4>按钮</h4>
+        <div class="demo-row">
+          <button class="btn btn-primary">主要行动</button>
+          <button class="btn btn-accent">立即申报</button>
+          <button class="btn btn-secondary">次要</button>
+          <button class="btn btn-ghost">弱化</button>
+        </div>
+        <div class="demo-row">
+          <button class="btn btn-primary btn-sm">小号 34</button>
+          <button class="btn btn-primary">默认 44</button>
+          <button class="btn btn-primary btn-lg">大号 52</button>
+        </div>
+        <div class="demo-row">
+          <button class="btn btn-primary" disabled>禁用</button>
+          <button class="btn btn-primary is-loading">提交中</button>
+        </div>
+        <div class="spec-row"><span class="k">按压</span><span class="v">scale(--press-scale) + --dur-instant</span></div>
+        <div class="spec-row"><span class="k">可点区域</span><span class="v">≥ 44 × 44px（小号补透明热区）</span></div>
+      </div>
+      <div class="spec">
+        <h4>标签与状态徽标</h4>
+        <div class="demo-row">
+          <span class="tag">默认</span>
+          <span class="tag tag-blue">项目</span>
+          <span class="tag tag-green">已发布</span>
+          <span class="tag tag-orange">即将截止</span>
+          <span class="tag tag-tech">智能推荐</span>
+          <span class="tag tag-outline">标签</span>
+        </div>
+        <div class="demo-row">
+          <span class="status status-approved">已通过</span>
+          <span class="status status-review">审核中</span>
+          <span class="status status-rejected">未通过</span>
+          <span class="status status-draft">草稿</span>
+        </div>
+        <div class="spec-row"><span class="k">标签</span><span class="v">--r-pill / 高 22px / --fs-tag</span></div>
+        <div class="spec-row"><span class="k">状态</span><span class="v">6px 圆点 + 文字，不只靠颜色</span></div>
+      </div>
+      <div class="spec">
+        <h4>输入 / 分段 / 开关</h4>
+        <div class="demo-row">
+          <div class="input-affix" style="width:100%">
+            <i data-icon="search"></i>
+            <input class="input" placeholder="搜索项目、组织或活动">
+          </div>
+        </div>
+        <div class="demo-row">
+          <div class="segmented">
+            <button class="active">全部</button>
+            <button>项目</button>
+            <button>活动</button>
+          </div>
+          <label class="switch"><input type="checkbox" checked></label>
+          <label class="switch"><input type="checkbox"></label>
+        </div>
+        <div class="spec-row"><span class="k">控件高度</span><span class="v">--control-h 44px</span></div>
+        <div class="spec-row"><span class="k">焦点</span><span class="v">--ring（2px 白 + 2px 蓝）</span></div>
+      </div>
+      <div class="spec">
+        <h4>提示与反馈</h4>
+        <div class="demo-row" style="display:block">
+          <div class="notice"><i data-icon="info"></i><span>信息以官方发布为准，平台提供导办，最终结果以主管部门要求为准。</span></div>
+          <div class="notice notice-warn" style="margin-top:8px"><i data-icon="clock"></i><span>该申报将在 3 天后截止。</span></div>
+        </div>
+        <div class="demo-row" style="margin-top:12px">
+          <div class="skeleton" style="height:12px;width:70%;border-radius:var(--r-xs)"></div>
+        </div>
+        <div class="demo-row">
+          <div class="skeleton" style="height:12px;width:45%;border-radius:var(--r-xs)"></div>
+        </div>
+        <div class="spec-row"><span class="k">骨架屏</span><span class="v">只动 background-position</span></div>
+        <div class="spec-row"><span class="k">toast</span><span class="v">--dur-slow / --ease-out，2.6s 后淡出</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ov-section" id="motion">
+    <div class="ov-section-head">
+      <h2>五、动效</h2>
+      <p>
+        动效只回答两个问题：“这一下发生了什么”和“我从哪来、到哪去”。<b>只动 transform 与 opacity</b>，
+        绝不动 width / height / top / left / margin——那会触发重排。下面每一行都可以点一下看效果。
+      </p>
+    </div>
+    <div class="spec-grid">
+      <div class="spec">
+        <h4>时长阶梯</h4>
+        <div class="spec-row"><span class="k">--dur-instant</span><span class="v">80ms · 按压、开关、hover 换色</span></div>
+        <div class="spec-row"><span class="k">--dur-fast</span><span class="v">120ms · 图标位移、tooltip、微反馈</span></div>
+        <div class="spec-row"><span class="k">--dur</span><span class="v">200ms · 按钮、卡片、折叠展开（默认）</span></div>
+        <div class="spec-row"><span class="k">--dur-slow</span><span class="v">300ms · 弹层进出、抽屉、toast</span></div>
+        <div class="spec-row"><span class="k">--dur-slower</span><span class="v">420ms · 页面转场、列表逐项进入的总时长</span></div>
+      </div>
+      <div class="spec">
+        <h4>缓动曲线</h4>
+        <div class="spec-row"><span class="k">--ease</span><span class="v">通用默认</span></div>
+        <div class="spec-row"><span class="k">--ease-out</span><span class="v">进入、弹层、toast</span></div>
+        <div class="spec-row"><span class="k">--ease-in</span><span class="v">退出、收起</span></div>
+        <div class="spec-row"><span class="k">--ease-snap</span><span class="v">开关、分段控件、轮播切换</span></div>
+        <div class="spec-row"><span class="k">禁止</span><span class="v">带回弹的 spring / bounce 曲线</span></div>
+      </div>
+      <div class="spec">
+        <h4>实时演示（点击重放）</h4>
+        <div class="demo-row">
+          <button class="btn btn-secondary btn-sm motion-trigger" data-anim="fade-up">卡片进入</button>
+          <button class="btn btn-secondary btn-sm motion-trigger" data-anim="fade-in">淡入</button>
+          <button class="btn btn-secondary btn-sm motion-trigger" data-anim="toast-in">toast</button>
+        </div>
+        <div class="motion-stage">
+          <div class="motion-box" id="motionBox">斗来创</div>
+        </div>
+        <div class="spec-row"><span class="k">列表 stagger</span><span class="v">--stagger 40ms，最多 8 项</span></div>
+        <div class="spec-row"><span class="k">单次动效上限</span><span class="v">≤ 420ms，同时动画元素 ≤ 8</span></div>
+      </div>
+    </div>
+    <div class="notice notice-neutral" style="margin-top:var(--sp-4)">
+      <i data-icon="eye"></i>
+      <span>
+        <b>降级方案：</b>系统开启“减少动态效果”（<code>prefers-reduced-motion: reduce</code>）时，
+        所有位移、缩放、逐项进入全部取消，只保留 120ms 的纯透明度淡入；轮播不再自动切换。
+        内容与状态变化不依赖动画传达——动画消失后信息必须依然完整。
+      </span>
+    </div>
+  </section>
+
+  <section class="ov-section" id="icons">
+    <div class="ov-section-head">
+      <h2>六、图标</h2>
+      <p>
+        71 个内联 SVG 线性图标，统一 1.75 描边、圆角端点，随 <code>currentColor</code> 取色。
+        不用 emoji 当图标：emoji 在不同系统上字形不一致，也无法跟随主题色。
+      </p>
+    </div>
+    <div class="icon-grid" id="iconGrid"></div>
+  </section>
+
+  <section class="ov-section" id="pages">
+    <div class="ov-section-head">
+      <h2>七、原型入口</h2>
+      <p>两端共用同一套令牌与组件，改一处即两端同步。</p>
+    </div>
+    <div class="page-cards">
+      <a class="page-card" href="miniprogram/index.html">
+        <div class="pc-visual blue">
+          <div class="pc-glyph"><i data-icon="phone"></i><span>390 × 844</span></div>
+          <div class="pc-mini"><i></i><i></i><i></i><i></i></div>
+        </div>
+        <div class="pc-body">
+          <h3>微信小程序 · 19 屏</h3>
+          <p>六大模块入口、各类详情、登录与个人中心、申请与联系方式。首页轮播可后台配置，简繁一键切换。</p>
+          <div class="pc-tags">
+            <span class="tag tag-blue">内容优先单列</span>
+            <span class="tag tag-tech">简 / 繁</span>
+          </div>
+          <div class="pc-go">查看原型 <i data-icon="arrow-right"></i></div>
+        </div>
+      </a>
+      <a class="page-card" href="admin/index.html">
+        <div class="pc-visual deep">
+          <div class="pc-glyph"><i data-icon="dashboard"></i><span>≥ 1280</span></div>
+          <div class="pc-mini"><i></i><i></i><i></i><i></i></div>
+        </div>
+        <div class="pc-body">
+          <h3>运营后台 · 11 视图</h3>
+          <p>内容审核、轮播配置、活动与报名、组织与会员、账号与日志。单层审核，任何修改均重新审核。</p>
+          <div class="pc-tags">
+            <span class="tag tag-gray">深色侧栏</span>
+            <span class="tag tag-gray">状态先于装饰</span>
+          </div>
+          <div class="pc-go">查看原型 <i data-icon="arrow-right"></i></div>
+        </div>
+      </a>
+    </div>
+  </section>
+
   <section class="ov-section" id="confirm">
     <div class="ov-section-head">
-      <h2>待甲方确认</h2>
+      <h2>八、待甲方确认</h2>
       <p>以下十项会直接影响视觉与流程，当前原型按“标注的默认值”实现，确认后即可按结论调整，不影响整体结构。</p>
     </div>
     <div class="confirm-list">
-      <div class="confirm-item"><i data-icon="info"></i><span>主风格方向与三色比例：湾区青蓝承载可信、生态绿归属斗门底色、行动暖橙留给可行动的位置。<em style="font-style:normal;color:var(--ink-400)">当前 60-30-10</em></span></div>
+      <div class="confirm-item"><i data-icon="info"></i><span>主风格方向与三色比例：电光青蓝承载可信、生态绿只表达状态、珊瑚橙留给可行动的位置。<em style="font-style:normal;color:var(--ink-400)">当前 60-30-10，深色块 ≤ 15%</em></span></div>
       <div class="confirm-item"><i data-icon="info"></i><span>首页六大模块排序与首页内容优先级。<em style="font-style:normal;color:var(--ink-400)">当前 项目 &gt; 信息 &gt; 组织 &gt; 工作 &gt; 供需 &gt; 活动</em></span></div>
-      <div class="confirm-item"><i data-icon="info"></i><span>轮播图配置范围：张数上限、可配置的文案样式项、是否自动切换。<em style="font-style:normal;color:var(--ink-400)">当前 3 张 · 手动切换</em></span></div>
+      <div class="confirm-item"><i data-icon="info"></i><span>轮播图配置范围：张数上限、可配置的文案样式项、是否自动切换。<em style="font-style:normal;color:var(--ink-400)">当前 最多 5 张 · 16:9 · 手动切换</em></span></div>
       <div class="confirm-item"><i data-icon="info"></i><span>宣传片的视频源、时长与封面图。<em style="font-style:normal;color:var(--ink-400)">当前 懒加载、不自动播放、示例时长 02:18</em></span></div>
       <div class="confirm-item"><i data-icon="info"></i><span>简体 / 繁体用字规范与转换边界。<em style="font-style:normal;color:var(--ink-400)">当前 仅转换静态界面元素，后台输出内容不转换</em></span></div>
       <div class="confirm-item"><i data-icon="info"></i><span>联系与留言入口的开放规则：未登录是否可见、登录后如何提交。<em style="font-style:normal;color:var(--ink-400)">当前：可见但需登录后提交</em></span></div>
@@ -92,11 +473,33 @@
 <script>
   (function () {
     var grid = document.getElementById('iconGrid');
-    var names = Object.keys(window.DLC.icons).sort();
-    grid.innerHTML = names.map(function (n) {
-      return '<div class="icon-cell"><i data-icon="' + n + '"></i><span>' + n + '</span></div>';
-    }).join('');
-    window.DLC.hydrateIcons(grid);
+    if (grid && window.DLC && window.DLC.icons) {
+      var names = Object.keys(window.DLC.icons).sort();
+      grid.innerHTML = names.map(function (n) {
+        return '<div class="icon-cell"><i data-icon="' + n + '"></i><span>' + n + '</span></div>';
+      }).join('');
+      window.DLC.hydrateIcons(grid);
+    }
+
+    var box = document.getElementById('motionBox');
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+    Array.prototype.forEach.call(document.querySelectorAll('.motion-trigger'), function (btn) {
+      btn.addEventListener('click', function () {
+        var name = btn.getAttribute('data-anim');
+        box.classList.remove('anim-up', 'anim-in', 'demo-toast');
+        void box.offsetWidth;
+        box.style.animation = 'none';
+        void box.offsetWidth;
+        box.style.animation = '';
+        if (reduce.matches) {
+          box.classList.add('anim-in');
+        } else if (name === 'toast-in') {
+          box.classList.add('demo-toast');
+        } else {
+          box.classList.add(name === 'fade-in' ? 'anim-in' : 'anim-up');
+        }
+      });
+    });
   })();
 </script>
 </body>
