@@ -58,35 +58,82 @@
     }
   });
 
-  // 内容类型 tab
-  document.querySelectorAll('.type-tab').forEach(function (tab) {
-    tab.addEventListener('click', function () {
-      tab.parentElement.querySelectorAll('.type-tab').forEach(function (t) {
-        t.classList.remove('active');
-      });
-      tab.classList.add('active');
+  // 内容类型 tab（委托，兼容新增视图）
+  document.addEventListener('click', function (e) {
+    var tab = e.target.closest('.type-tab');
+    if (!tab) return;
+    tab.parentElement.querySelectorAll('.type-tab').forEach(function (t) {
+      t.classList.remove('active');
+    });
+    tab.classList.add('active');
+  });
+
+  // 审核队列（委托）
+  document.addEventListener('click', function (e) {
+    var item = e.target.closest('.queue-item');
+    if (!item) return;
+    document.querySelectorAll('.queue-item').forEach(function (i) {
+      i.classList.remove('active');
+    });
+    item.classList.add('active');
+  });
+
+  // 表格全选（委托）
+  document.addEventListener('change', function (e) {
+    var master = e.target.closest('[data-check-all]');
+    if (!master) return;
+    var table = master.closest('table');
+    table.querySelectorAll('tbody input[type="checkbox"]').forEach(function (cb) {
+      cb.checked = master.checked;
     });
   });
 
-  // 审核队列
-  document.querySelectorAll('.queue-item').forEach(function (item) {
-    item.addEventListener('click', function () {
-      document.querySelectorAll('.queue-item').forEach(function (i) {
-        i.classList.remove('active');
-      });
-      item.classList.add('active');
-    });
-  });
+  // 轮播图配置 → 预览实时联动
+  (function () {
+    var title = document.getElementById('carPreviewTitle');
+    var sub = document.getElementById('carPreviewSub');
+    var wrap = document.getElementById('carPreviewText');
+    if (!title || !sub || !wrap) return;
 
-  // 表格全选
-  document.querySelectorAll('[data-check-all]').forEach(function (master) {
-    master.addEventListener('change', function () {
-      var table = master.closest('table');
-      table.querySelectorAll('tbody input[type="checkbox"]').forEach(function (cb) {
-        cb.checked = master.checked;
-      });
+    var titleInput = document.getElementById('carTitle');
+    var subInput = document.getElementById('carSub');
+    var sizeSel = document.getElementById('carSize');
+    var weightSel = document.getElementById('carWeight');
+    var colorSel = document.getElementById('carColor');
+    var alignBox = document.getElementById('carAlign');
+
+    function syncText() {
+      title.textContent = (titleInput.value || '轮播图标题').trim();
+      sub.textContent = (subInput.value || '').trim();
+    }
+    function syncStyle() {
+      title.style.fontSize = sizeSel.value + 'px';
+      title.style.fontWeight = weightSel.value;
+      title.style.color = colorSel.value;
+    }
+
+    [titleInput, subInput].forEach(function (el) {
+      el.addEventListener('input', syncText);
     });
-  });
+    [sizeSel, weightSel, colorSel].forEach(function (el) {
+      el.addEventListener('change', syncStyle);
+    });
+
+    if (alignBox) {
+      alignBox.addEventListener('click', function (e) {
+        var btn = e.target.closest('[data-align]');
+        if (!btn) return;
+        alignBox.querySelectorAll('button').forEach(function (b) {
+          b.classList.toggle('active', b === btn);
+        });
+        wrap.classList.toggle('is-center', btn.dataset.align === 'center');
+        wrap.classList.toggle('is-right', btn.dataset.align === 'right');
+      });
+    }
+
+    syncText();
+    syncStyle();
+  })();
 
   // 登录
   function closeLogin() {

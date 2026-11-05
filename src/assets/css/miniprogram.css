@@ -1084,6 +1084,298 @@
 .radio-pill input:checked + span { border-color: var(--blue-500); background: var(--blue-50); color: var(--blue-700); font-weight: 600; }
 .radio-pill input:focus-visible + span { box-shadow: var(--ring); }
 
+/* ---------- 首页顶栏 ---------- */
+.home-top {
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 11px 16px;
+  background: #fff;
+  border-bottom: 1px solid var(--line);
+}
+.home-top .ht-brand { display: flex; align-items: center; gap: 9px; min-width: 0; }
+.home-top .hero-mark {
+  width: 30px; height: 30px; border-radius: 9px;
+  background: linear-gradient(150deg, var(--blue-600), var(--blue-800));
+  color: #fff; font-size: 15px;
+  display: flex; align-items: center; justify-content: center;
+  flex: none;
+}
+.home-top .ht-brand strong { display: block; font-size: 15px; font-weight: 700; color: var(--ink-900); line-height: 1.25; }
+.home-top .ht-brand span { display: block; font-size: 9.5px; color: var(--ink-400); }
+.home-top .ht-actions { display: flex; align-items: center; gap: 5px; flex: none; }
+.lang-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  height: 27px;
+  padding: 0 9px;
+  border-radius: 99px;
+  border: 1px solid var(--line-strong);
+  background: #fff;
+  font-size: 10.5px;
+  color: var(--ink-400);
+  transition: border-color var(--dur) var(--ease), color var(--dur) var(--ease);
+}
+.lang-toggle:hover { border-color: var(--blue-300); }
+.lang-toggle .lt-sep { color: var(--ink-200); }
+.lang-toggle .lt-opt { font-weight: 500; }
+.lang-toggle .lt-opt.active { color: var(--blue-700); font-weight: 700; }
+
+/* ---------- 首页轮播 ---------- */
+.hero-carousel {
+  flex: none;
+  position: relative;
+  background: var(--blue-800);
+  overflow: hidden;
+}
+.hc-viewport { overflow: hidden; }
+.hc-track { display: flex; transition: transform var(--dur-slow) var(--ease); }
+.hc-slide { position: relative; flex: 0 0 100%; height: 228px; overflow: hidden; }
+.hc-bg { position: absolute; inset: 0; }
+.hc-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 390 228' preserveAspectRatio='none'%3E%3Cg fill='none' stroke='%23ffffff' stroke-width='1' opacity='0.14'%3E%3Cpath d='M-20 150 Q70 118 160 142 T410 128'/%3E%3Cpath d='M-20 172 Q80 142 170 164 T410 150'/%3E%3Cpath d='M-20 194 Q90 166 180 186 T410 172'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 100% 100%;
+}
+.hc-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(15, 53, 87, .12) 0%, rgba(15, 53, 87, .58) 55%, rgba(15, 53, 87, .9) 100%);
+}
+.hc-copy {
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 0 18px 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+.hc-copy.hc-center { align-items: center; text-align: center; }
+.hc-copy.hc-right { align-items: flex-end; text-align: right; }
+.hc-title {
+  font-size: var(--hc-size, 22px);
+  font-weight: var(--hc-weight, 700);
+  color: var(--hc-color, #fff);
+  line-height: 1.36;
+  letter-spacing: -.015em;
+  max-width: 300px;
+}
+.hc-copy.hc-center .hc-title { max-width: 320px; }
+.hc-copy.hc-right .hc-title { max-width: 300px; }
+.hc-title em { font-style: normal; color: var(--hc-em, #FFC98F); }
+.hc-sub {
+  font-size: var(--hc-sub-size, 11.5px);
+  color: var(--hc-sub-color, rgba(255, 255, 255, .8));
+  letter-spacing: .01em;
+}
+.hc-copy .btn { align-self: flex-start; height: 32px; padding: 0 13px; font-size: 12px; border-radius: 9px; margin-top: 2px; }
+.hc-copy.hc-center .btn { align-self: center; }
+.hc-copy.hc-right .btn { align-self: flex-end; }
+.hc-dots {
+  position: absolute;
+  left: 50%;
+  bottom: 10px;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  z-index: 3;
+}
+.hc-dot {
+  width: 5px; height: 5px;
+  border-radius: 99px;
+  background: rgba(255, 255, 255, .42);
+  transition: background var(--dur) var(--ease);
+}
+.hc-dot.active { width: 14px; background: #fff; }
+.hc-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(15, 53, 87, .34);
+  color: #fff;
+  backdrop-filter: blur(4px);
+  opacity: .85;
+  transition: opacity var(--dur) var(--ease), background var(--dur) var(--ease);
+}
+.hc-nav:hover { opacity: 1; background: rgba(15, 53, 87, .55); }
+.hc-nav i[data-icon] { font-size: 15px; }
+.hc-nav.prev { left: 8px; }
+.hc-nav.next { right: 8px; }
+
+/* 首页数据条 */
+.home-stats {
+  flex: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  background: #fff;
+  border-bottom: 1px solid var(--line);
+  padding: 11px 16px;
+}
+.home-stats .stat { display: flex; flex-direction: column; align-items: center; gap: 1px; }
+.home-stats .stat + .stat { border-left: 1px solid var(--line); }
+.home-stats strong { font-family: var(--font-num); font-size: 16px; font-weight: 600; color: var(--ink-900); letter-spacing: .01em; }
+.home-stats span { font-size: 9.5px; color: var(--ink-400); }
+
+/* ---------- 宣传片（点击后懒加载） ---------- */
+.promo-card {
+  margin: 16px 16px 0;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  overflow: hidden;
+  background: #fff;
+}
+.promo-stage { position: relative; height: 152px; background: var(--blue-800); }
+.promo-stage video { display: block; width: 100%; height: 100%; object-fit: cover; background: #0F3557; }
+.promo-poster { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+.promo-poster .pp-scrim {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(15, 53, 87, .08) 0%, rgba(15, 53, 87, .52) 100%);
+}
+.promo-poster .pp-tag {
+  position: absolute; left: 12px; top: 11px;
+  display: inline-flex; align-items: center; gap: 4px;
+  height: 21px; padding: 0 8px; border-radius: 99px;
+  background: rgba(15, 53, 87, .5);
+  color: rgba(255, 255, 255, .9);
+  font-size: 9.5px;
+  backdrop-filter: blur(4px);
+}
+.promo-poster .pp-tag i[data-icon] { font-size: 11px; }
+.promo-play {
+  position: relative; z-index: 1;
+  width: 46px; height: 46px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, .94);
+  color: var(--blue-700);
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: var(--sh-2);
+  transition: transform var(--dur) var(--ease);
+}
+.promo-play:hover { transform: scale(1.06); }
+.promo-play i[data-icon] { font-size: 19px; margin-left: 2px; }
+.promo-meta { padding: 11px 13px; display: flex; align-items: center; gap: 10px; }
+.promo-meta .pm-text { flex: 1; min-width: 0; }
+.promo-meta h4 { font-size: 13px; font-weight: 600; color: var(--ink-900); line-height: 1.4; }
+.promo-meta p { margin-top: 2px; font-size: 10px; color: var(--ink-400); }
+.promo-meta .pm-dur { font-family: var(--font-num); font-size: 10px; color: var(--ink-400); flex: none; }
+
+/* ---------- 岗位 ---------- */
+.job-card {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  padding: 13px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  text-align: left;
+  transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+}
+.job-card:hover { border-color: var(--blue-300); box-shadow: var(--sh-1); }
+.jc-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+.jc-top h4 { font-size: 14px; font-weight: 600; color: var(--ink-900); line-height: 1.45; }
+.jc-org { margin-top: 3px; font-size: 10.5px; color: var(--ink-400); }
+.jc-meta { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; font-size: 10px; color: var(--ink-400); }
+.jc-meta span { display: inline-flex; align-items: center; gap: 3px; }
+.jc-meta i[data-icon] { font-size: 11px; }
+.jc-foot { display: flex; align-items: center; gap: 8px; padding-top: 8px; border-top: 1px dashed var(--line); }
+.jc-salary { font-family: var(--font-num); font-size: 14px; font-weight: 700; color: var(--orange-700); }
+.jc-time { margin-left: auto; font-size: 10px; color: var(--ink-400); }
+.job-hero {
+  flex: none;
+  padding: 16px 16px 18px;
+  background: linear-gradient(150deg, #2A6DBB 0%, #1B528F 58%, #0F3557 100%);
+  color: #fff;
+}
+.job-hero h1 { font-size: 20px; font-weight: 700; line-height: 1.35; letter-spacing: -.01em; }
+.job-hero .jh-org { margin-top: 6px; font-size: 11.5px; color: rgba(255, 255, 255, .78); }
+.job-hero .jh-salary { margin-top: 12px; font-family: var(--font-num); font-size: 22px; font-weight: 700; color: #FFC98F; letter-spacing: .01em; }
+.job-hero .jh-tags { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 5px; }
+.job-hero .jh-tags .tag { background: rgba(255, 255, 255, .14); border-color: rgba(255, 255, 255, .2); color: rgba(255, 255, 255, .9); }
+
+/* ---------- 供需 ---------- */
+.supply-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 13px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  text-align: left;
+  transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+}
+.supply-card:hover { border-color: var(--blue-300); box-shadow: var(--sh-1); }
+.sc-head { display: flex; align-items: center; gap: 6px; }
+.sc-head .tag:last-child { margin-left: auto; }
+.supply-card h4 { font-size: 14px; font-weight: 600; color: var(--ink-900); line-height: 1.45; }
+.supply-card .sc-desc { font-size: 11px; color: var(--ink-500); line-height: 1.65; }
+.supply-card .sc-meta { display: flex; align-items: center; flex-wrap: wrap; gap: 9px; font-size: 10px; color: var(--ink-400); }
+.supply-card .sc-meta span { display: inline-flex; align-items: center; gap: 3px; }
+.supply-card .sc-meta i[data-icon] { font-size: 11px; }
+.supply-card .sc-contact { margin-left: auto; color: var(--blue-600); }
+.form-hint { font-size: 10.5px; color: var(--ink-400); line-height: 1.65; }
+
+/* ---------- 活动 ---------- */
+.activity-card {
+  display: flex;
+  gap: 12px;
+  padding: 12px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  text-align: left;
+  transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+}
+.activity-card:hover { border-color: var(--blue-300); box-shadow: var(--sh-1); }
+.ac-date {
+  flex: none;
+  width: 48px;
+  height: 52px;
+  border-radius: 10px;
+  background: var(--blue-50);
+  border: 1px solid var(--blue-100);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+}
+.ac-date strong { font-family: var(--font-num); font-size: 18px; font-weight: 700; color: var(--blue-700); line-height: 1.1; }
+.ac-date span { font-size: 9px; color: var(--blue-600); }
+.ac-body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 5px; }
+.ac-tags { display: flex; align-items: center; gap: 5px; flex-wrap: wrap; }
+.ac-body h4 { font-size: 13.5px; font-weight: 600; color: var(--ink-900); line-height: 1.45; }
+.ac-meta { display: flex; align-items: center; gap: 4px; font-size: 10px; color: var(--ink-400); }
+.ac-meta i[data-icon] { font-size: 11px; }
+.ac-foot { display: flex; align-items: center; justify-content: space-between; gap: 8px; font-size: 9.5px; color: var(--ink-400); }
+.ac-count { font-family: var(--font-num); color: var(--ink-500); }
+.activity-hero {
+  flex: none;
+  padding: 16px;
+  background: linear-gradient(150deg, #2A6DBB 0%, #1B528F 58%, #0F3557 100%);
+  color: #fff;
+}
+.activity-hero .ah-tags { display: flex; gap: 5px; flex-wrap: wrap; }
+.activity-hero .ah-tags .tag { background: rgba(255, 255, 255, .14); border-color: rgba(255, 255, 255, .2); color: rgba(255, 255, 255, .9); }
+.activity-hero h1 { margin-top: 10px; font-size: 20px; font-weight: 700; line-height: 1.35; letter-spacing: -.01em; }
+.activity-hero .ah-meta { margin-top: 9px; display: flex; flex-direction: column; gap: 4px; font-size: 11px; color: rgba(255, 255, 255, .8); }
+.activity-hero .ah-meta span { display: inline-flex; align-items: center; gap: 5px; }
+.activity-hero .ah-meta i[data-icon] { font-size: 12px; }
+.agenda-list { display: flex; flex-direction: column; gap: 9px; }
+.agenda-item { display: flex; gap: 10px; font-size: 11.5px; color: var(--ink-600); line-height: 1.6; }
+.agenda-item .ag-time { flex: none; width: 44px; font-family: var(--font-num); font-size: 10.5px; color: var(--blue-600); font-weight: 600; padding-top: 1px; }
+
 /* ---------- 说明面板 ---------- */
 .mp-notes {
   grid-area: notes;

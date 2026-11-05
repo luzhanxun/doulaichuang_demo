@@ -6,13 +6,14 @@
 <title>斗来创 · 设计系统</title>
 <!--
   方向契约
-  THESIS    一个让港澳青年看得懂、信得过、愿意迈出第一步的乡创入口；不是政务信息发布页。
-  OWN-WORLD 湾区青蓝承载政务可信度，暖橙只用于"青年此刻可行动"的位置，生态绿归属乡创本身；
+  THESIS    一个让大湾区青年看得懂、信得过、愿意迈出第一步的斗门机遇入口；不是政务信息发布页。
+  OWN-WORLD 湾区青蓝承载政务可信度，暖橙只用于"青年此刻可行动"的位置，生态绿归属斗门的产业与生态底色；
             水乡波纹是唯一装饰语言，出现在头图与图片占位里，不进入内容区。
-  STORY     看见斗门 → 读懂机会 → 查清政策 → 找到组织 → 提交申请 → 等待反馈。
-  FIRST VIEW 首屏一句话说明平台是什么，紧跟三个可点的内容入口与一条最新重大信息；
-            不做轮播横幅、不做纯装饰大图。
+  STORY     看见斗门 → 找到项目 → 找到信息 → 找到组织 → 找到工作 → 找到供需 → 找到活动 → 留下联系方式。
+  FIRST VIEW 首屏用可配置轮播图说明平台是什么，紧跟六个模块入口与一条宣传片；
+            轮播文案与样式由后台配置，宣传片懒加载、不自动播放。
   FORM      小程序 390×844 内容优先单列；后台深青蓝侧栏 + 浅底工作区，状态先于装饰。
+  SCOPE     小程序 19 屏（六大模块 + 账户与对接流程）、后台 11 视图；内容审核为单层。
 -->
 <link rel="stylesheet" href="assets/css/tokens.css">
 <link rel="stylesheet" href="assets/css/base.css">
@@ -40,22 +41,22 @@
   <div class="ov-hero-inner">
     <div class="ov-brand">
       <span class="ov-mark">斗</span>
-      <strong style="color:#fff">“斗来创” 港澳青年乡创线上推广平台</strong>
+      <strong style="color:#fff">“斗来创” 斗门机遇一站式对接平台</strong>
     </div>
     <h1>湾区青蓝托住可信，<br><em>暖橙</em> 留给青年可行动的那一下。</h1>
     <p class="ov-hero-desc">
-      面向港澳青年的斗门乡创推广平台，一端是微信小程序的内容与申请入口，一端是融媒体中心的
-      内容管理与甲方终审后台。本页是两端共用的设计依据：颜色、字阶、图标、组件与状态用语都从这里取值。
+      面向大湾区青年的斗门机遇对接平台，一端是微信小程序的内容与申请入口，一端是融媒体中心的
+      内容审核与运营后台。本页是两端共用的设计依据：颜色、字阶、图标、组件与状态用语都从这里取值。
     </p>
     <div class="ov-hero-actions">
-      <a class="btn btn-accent" href="miniprogram/index.html"><i data-icon="phone"></i>查看小程序 14 屏</a>
-      <a class="btn btn-glass" href="admin/index.html"><i data-icon="dashboard"></i>查看后台 8 视图</a>
+      <a class="btn btn-accent" href="miniprogram/index.html"><i data-icon="phone"></i>查看小程序 19 屏</a>
+      <a class="btn btn-glass" href="admin/index.html"><i data-icon="dashboard"></i>查看后台 11 视图</a>
     </div>
     <div class="ov-hero-stats">
       <div class="ov-stat"><strong>3</strong><span>主色 · 60-30-10</span></div>
       <div class="ov-stat"><strong>7</strong><span>字阶</span></div>
       <div class="ov-stat"><strong>71</strong><span>线性图标</span></div>
-      <div class="ov-stat"><strong>22</strong><span>界面</span></div>
+      <div class="ov-stat"><strong>30</strong><span>界面</span></div>
     </div>
   </div>
 </header>
@@ -65,22 +66,24 @@
   <section class="ov-section" id="confirm">
     <div class="ov-section-head">
       <h2>待甲方确认</h2>
-      <p>以下八项会直接影响视觉与流程，当前原型按“标注的默认值”实现，确认后即可按结论调整，不影响整体结构。</p>
+      <p>以下十项会直接影响视觉与流程，当前原型按“标注的默认值”实现，确认后即可按结论调整，不影响整体结构。</p>
     </div>
     <div class="confirm-list">
-      <div class="confirm-item"><i data-icon="info"></i><span>是否认可“湾区青蓝 · 乡创暖橙”的主风格方向，或需结合斗门区现有视觉规范调整。<em style="font-style:normal;color:var(--ink-400)">当前按认可实现</em></span></div>
-      <div class="confirm-item"><i data-icon="info"></i><span>主色、辅助色与点缀色的具体色值及使用比例。<em style="font-style:normal;color:var(--ink-400)">当前 60-30-10</em></span></div>
-      <div class="confirm-item"><i data-icon="info"></i><span>首页内容优先级：产业项目、重大信息、港澳政策、找到组织的排序。<em style="font-style:normal;color:var(--ink-400)">当前 项目 &gt; 重大信息 &gt; 政策 &gt; 组织</em></span></div>
-      <div class="confirm-item"><i data-icon="info"></i><span>联系对接入口的开放规则：未登录用户是否可见、登录后如何使用。<em style="font-style:normal;color:var(--ink-400)">当前：可见但需登录</em></span></div>
-      <div class="confirm-item"><i data-icon="info"></i><span>入会申请表单字段与审核状态定义。<em style="font-style:normal;color:var(--ink-400)">当前：6 个必填 + 4 个状态</em></span></div>
-      <div class="confirm-item"><i data-icon="info"></i><span>后台内容状态流转名称与审核环节设置。<em style="font-style:normal;color:var(--ink-400)">当前：草稿 → 待审核 → 已发布 / 已下架</em></span></div>
-      <div class="confirm-item"><i data-icon="info"></i><span>是否使用斗门区视觉元素、地图或标识，及其使用规范。<em style="font-style:normal;color:var(--ink-400)">当前未使用任何标识</em></span></div>
-      <div class="confirm-item"><i data-icon="info"></i><span>小程序端与后台的浏览器、移动端适配范围。<em style="font-style:normal;color:var(--ink-400)">当前：后台 ≥1280，窄屏降级到 900</em></span></div>
+      <div class="confirm-item"><i data-icon="info"></i><span>主风格方向与三色比例：湾区青蓝承载可信、生态绿归属斗门底色、行动暖橙留给可行动的位置。<em style="font-style:normal;color:var(--ink-400)">当前 60-30-10</em></span></div>
+      <div class="confirm-item"><i data-icon="info"></i><span>首页六大模块排序与首页内容优先级。<em style="font-style:normal;color:var(--ink-400)">当前 项目 &gt; 信息 &gt; 组织 &gt; 工作 &gt; 供需 &gt; 活动</em></span></div>
+      <div class="confirm-item"><i data-icon="info"></i><span>轮播图配置范围：张数上限、可配置的文案样式项、是否自动切换。<em style="font-style:normal;color:var(--ink-400)">当前 3 张 · 手动切换</em></span></div>
+      <div class="confirm-item"><i data-icon="info"></i><span>宣传片的视频源、时长与封面图。<em style="font-style:normal;color:var(--ink-400)">当前 懒加载、不自动播放、示例时长 02:18</em></span></div>
+      <div class="confirm-item"><i data-icon="info"></i><span>简体 / 繁体用字规范与转换边界。<em style="font-style:normal;color:var(--ink-400)">当前 仅转换静态界面元素，后台输出内容不转换</em></span></div>
+      <div class="confirm-item"><i data-icon="info"></i><span>联系与留言入口的开放规则：未登录是否可见、登录后如何提交。<em style="font-style:normal;color:var(--ink-400)">当前：可见但需登录后提交</em></span></div>
+      <div class="confirm-item"><i data-icon="info"></i><span>加入组织申请的表单字段与审批状态定义。<em style="font-style:normal;color:var(--ink-400)">当前：提交 → 审批 → 通过 / 不通过</em></span></div>
+      <div class="confirm-item"><i data-icon="info"></i><span>内容审核层级与状态名称。<em style="font-style:normal;color:var(--ink-400)">当前：单层审核，任何修改均重新审核</em></span></div>
+      <div class="confirm-item"><i data-icon="info"></i><span>活动报名是否需人工确认、名额上限与导出字段。<em style="font-style:normal;color:var(--ink-400)">当前：需后台确认，支持导出名单</em></span></div>
+      <div class="confirm-item"><i data-icon="info"></i><span>小程序端与后台的浏览器、移动端适配范围。<em style="font-style:normal;color:var(--ink-400)">当前：小程序 390×844；后台 ≥1280，窄屏降级到 900</em></span></div>
     </div>
   </section>
 
   <footer class="ov-foot">
-    <span>斗来创 · 设计系统 v1.0 · 演示数据均为虚构，正式内容由甲方终审后发布</span>
+    <span>斗来创 · 设计系统 v2.0 · 演示数据均为虚构，正式内容由审核通过后发布</span>
     <span><a class="link" href="miniprogram/index.html">小程序原型</a> · <a class="link" href="admin/index.html">后台原型</a></span>
   </footer>
 </main>
