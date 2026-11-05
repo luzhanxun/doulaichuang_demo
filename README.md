@@ -14,23 +14,23 @@
 
 ## 快速开始
 
-无需安装依赖，直接用浏览器打开 `index.html` 即可。图标由内联 SVG 注入，`file://` 协议下同样可以正常运行。
+无需安装依赖，直接用浏览器打开 `src/index.html` 即可。图标由内联 SVG 注入，`file://` 协议下同样可以正常运行。
 
 如需以 HTTP 方式预览：
 
 ```bash
 # 在仓库根目录执行
 python -m http.server 8080
-# 打开 http://localhost:8080/
+# 打开 http://localhost:8080/src/
 ```
 
 | 入口 | 路径 | 内容 |
 | --- | --- | --- |
-| 设计总览 | `index.html` | 设计方向说明与「待甲方确认」清单 |
-| 小程序原型 | `miniprogram/index.html` | 14 屏可交互原型，390×844 设备框 + 页面目录 + 设计说明面板 |
-| 后台原型 | `admin/index.html` | 8 个视图，登录遮罩 → 工作台 |
+| 设计总览 | `src/index.html` | 设计方向说明与「待甲方确认」清单 |
+| 小程序原型 | `src/miniprogram/index.html` | 14 屏可交互原型，390×844 设备框 + 页面目录 + 设计说明面板 |
+| 后台原型 | `src/admin/index.html` | 8 个视图，登录遮罩 → 工作台 |
 
-两个原型都支持 hash 直达，便于评审时逐屏对照，例如 `miniprogram/index.html#project-detail`、`admin/index.html#review`。
+两个原型都支持 hash 直达，便于评审时逐屏对照，例如 `src/miniprogram/index.html#project-detail`、`src/admin/index.html#review`。
 
 后台演示账号为 `chenjing@doulaichuang.cn`，密码任意；也可以点「直接进入工作台」跳过登录。
 
@@ -38,24 +38,27 @@ python -m http.server 8080
 
 ```text
 .
-├─ index.html                  设计总览页：设计方向 + 待确认事项
-├─ miniprogram/index.html      小程序原型：14 屏 + 页面目录 + 说明面板
-├─ admin/index.html            后台原型：8 视图 + 登录遮罩
-├─ assets/
-│  ├─ css/
-│  │  ├─ tokens.css            设计令牌：颜色、圆角、阴影、间距、字体、动效、层级
-│  │  ├─ base.css              重置样式与两端共享组件
-│  │  ├─ overview.css          设计总览页样式
-│  │  ├─ miniprogram.css       小程序展示外壳与 14 屏样式
-│  │  └─ admin.css             后台骨架、表格、编辑器、审核与登录样式
-│  └─ js/
-│     ├─ icons.js              71 个 24×24 线性图标 + 自动注入
-│     ├─ miniprogram.js        页面路由、说明面板、返回栈、键盘导航、表单计数
-│     └─ admin.js              视图切换、登录、全选、标签页、轻提示
-├─ 7a7734101140a60d75b8472954e62912.txt   第三方站点校验文件，请勿删除
+├─ src/                        可运行的原型源码，根目录只保留文档
+│  ├─ index.html               设计总览页：设计方向 + 待确认事项
+│  ├─ miniprogram/index.html   小程序原型：14 屏 + 页面目录 + 说明面板
+│  ├─ admin/index.html         后台原型：8 视图 + 登录遮罩
+│  ├─ assets/
+│  │  ├─ css/
+│  │  │  ├─ tokens.css         设计令牌：颜色、圆角、阴影、间距、字体、动效、层级
+│  │  │  ├─ base.css           重置样式与两端共享组件
+│  │  │  ├─ overview.css       设计总览页样式
+│  │  │  ├─ miniprogram.css    小程序展示外壳与 14 屏样式
+│  │  │  └─ admin.css          后台骨架、表格、编辑器、审核与登录样式
+│  │  └─ js/
+│  │     ├─ icons.js           71 个 24×24 线性图标 + 自动注入
+│  │     ├─ miniprogram.js     页面路由、说明面板、返回栈、键盘导航、表单计数
+│  │     └─ admin.js           视图切换、登录、全选、标签页、轻提示
+│  └─ 7a7734101140a60d75b8472954e62912.txt   第三方站点校验文件，随站点部署，请勿删除
 ├─ README.md
 └─ README.en.md
 ```
+
+`src/` 是一个自包含的静态站点：三个入口之间的相对链接（`../index.html`、`miniprogram/index.html`）和资源引用（`../assets/...`）都相对 `src/` 解析，因此可整目录部署到任意静态空间，也可直接拷贝分发；根目录只放说明文档。
 
 ## 设计方向
 
@@ -78,7 +81,7 @@ python -m http.server 8080
 
 ### 色彩（60-30-10）
 
-`assets/css/tokens.css` 定义全部色板，页面只引用令牌，不写裸色值。
+`src/assets/css/tokens.css` 定义全部色板，页面只引用令牌，不写裸色值。
 
 | 角色 | 令牌 | 色值 | 典型用法 |
 | --- | --- | --- | --- |
@@ -117,7 +120,7 @@ python -m http.server 8080
 
 ### 图标
 
-`assets/js/icons.js` 内置 71 个 24×24 线性图标（stroke 1.8、圆角端点、无填充），不使用图标字体，也没有外部 SVG 文件。
+`src/assets/js/icons.js` 内置 71 个 24×24 线性图标（stroke 1.8、圆角端点、无填充），不使用图标字体，也没有外部 SVG 文件。
 
 ```html
 <i data-icon="arrow-right"></i>
@@ -125,7 +128,7 @@ python -m http.server 8080
 
 `DOMContentLoaded` 时 `DLC.hydrateIcons()` 会把所有 `[data-icon]` 替换为内联 SVG；图标名拼错时回退为 `info`，不会出现空白。图标统一继承 `currentColor`，换色只需改文字颜色。
 
-### 共享组件（`assets/css/base.css`）
+### 共享组件（`src/assets/css/base.css`）
 
 - 按钮：`btn` + `-primary` / `-accent` / `-secondary` / `-ghost` / `-soft` / `-danger` / `-green` / `-glass`，尺寸 `-sm` / `-lg` / `-block` / `-icon`。
 - 标签：`tag` + `-blue` / `-green` / `-orange` / `-gray` / `-red` / `-warn` / `-outline`。
@@ -240,9 +243,9 @@ python -m http.server 8080
 
 ## 参与贡献
 
-1. 新增页面时先在 `assets/js/miniprogram.js` 的 `ORDER` 与 `NOTES` 中注册，说明面板会自动生成目录项。
+1. 新增页面时先在 `src/assets/js/miniprogram.js` 的 `ORDER` 与 `NOTES` 中注册，说明面板会自动生成目录项。
 2. 颜色、圆角、阴影一律引用 `tokens.css` 中的令牌，不在页面样式里写裸色值。
-3. 新增图标加入 `assets/js/icons.js` 的图标表，统一 24×24、stroke 1.8、无填充。
+3. 新增图标加入 `src/assets/js/icons.js` 的图标表，统一 24×24、stroke 1.8、无填充。
 4. 提交前确认三端在 1280 / 900 宽度下均可正常浏览，且键盘可完成主要操作。
 
 ## 版权与使用

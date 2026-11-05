@@ -14,20 +14,20 @@ A static, high-fidelity design prototype for a rural-entrepreneurship promotion 
 
 ## Quick start
 
-Open `index.html` in a browser — icons are injected as inline SVG, so it also works over `file://`.
+Open `src/index.html` in a browser — icons are injected as inline SVG, so it also works over `file://`.
 
 ```bash
 python -m http.server 8080
-# http://localhost:8080/
+# http://localhost:8080/src/
 ```
 
 | Entry | Path | Contents |
 | --- | --- | --- |
-| Design overview | `index.html` | Design direction and the list of items awaiting client confirmation |
-| Mini-program | `miniprogram/index.html` | 14 interactive screens in a 390×844 device frame, page index, design notes panel |
-| Admin console | `admin/index.html` | 8 views behind a login overlay |
+| Design overview | `src/index.html` | Design direction and the list of items awaiting client confirmation |
+| Mini-program | `src/miniprogram/index.html` | 14 interactive screens in a 390×844 device frame, page index, design notes panel |
+| Admin console | `src/admin/index.html` | 8 views behind a login overlay |
 
-Both prototypes support hash deep links, e.g. `miniprogram/index.html#project-detail` or `admin/index.html#review`.
+Both prototypes support hash deep links, e.g. `src/miniprogram/index.html#project-detail` or `src/admin/index.html#review`.
 
 Demo admin account: `chenjing@doulaichuang.cn`, any password; or use "直接进入工作台" to skip login.
 
@@ -35,24 +35,27 @@ Demo admin account: `chenjing@doulaichuang.cn`, any password; or use "直接进�
 
 ```text
 .
-├─ index.html                  Design overview
-├─ miniprogram/index.html      Mini-program: 14 screens + page index + notes panel
-├─ admin/index.html            Admin: 8 views + login overlay
-├─ assets/
-│  ├─ css/
-│  │  ├─ tokens.css            Design tokens: color, radius, shadow, spacing, type, motion, z-index
-│  │  ├─ base.css              Reset and shared components
-│  │  ├─ overview.css          Overview page styles
-│  │  ├─ miniprogram.css       Showcase shell and the 14 screens
-│  │  └─ admin.css             Shell, tables, editor, review, login
-│  └─ js/
-│     ├─ icons.js              71 inline 24×24 line icons + hydration
-│     ├─ miniprogram.js        Screen router, notes, back stack, keyboard nav, counters
-│     └─ admin.js              View switching, login, select-all, tabs, toast
-├─ 7a7734101140a60d75b8472954e62912.txt   Third-party site verification file, do not delete
+├─ src/                        Self-contained static site; the repo root keeps docs only
+│  ├─ index.html               Design overview
+│  ├─ miniprogram/index.html   Mini-program: 14 screens + page index + notes panel
+│  ├─ admin/index.html         Admin: 8 views + login overlay
+│  ├─ assets/
+│  │  ├─ css/
+│  │  │  ├─ tokens.css         Design tokens: color, radius, shadow, spacing, type, motion, z-index
+│  │  │  ├─ base.css           Reset and shared components
+│  │  │  ├─ overview.css       Overview page styles
+│  │  │  ├─ miniprogram.css    Showcase shell and the 14 screens
+│  │  │  └─ admin.css          Shell, tables, editor, review, login
+│  │  └─ js/
+│  │     ├─ icons.js           71 inline 24×24 line icons + hydration
+│  │     ├─ miniprogram.js     Screen router, notes, back stack, keyboard nav, counters
+│  │     └─ admin.js           View switching, login, select-all, tabs, toast
+│  └─ 7a7734101140a60d75b8472954e62912.txt   Third-party site verification file, do not delete
 ├─ README.md
 └─ README.en.md
 ```
+
+`src/` is a self-contained static site: the relative links between the three entries (`../index.html`, `miniprogram/index.html`) and the asset references (`../assets/...`) all resolve inside `src/`, so the folder can be deployed or copied as a whole.
 
 ## Design direction
 
