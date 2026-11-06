@@ -28,9 +28,9 @@ button, input, select, textarea { font: inherit; color: inherit; }
 button { background: none; border: 0; padding: 0; cursor: pointer; }
 a { color: inherit; text-decoration: none; }
 table { border-collapse: collapse; width: 100%; }
-:focus-visible { outline: 2px solid var(--blue-600); outline-offset: 2px; }
+:focus-visible { outline: 2px solid var(--action); outline-offset: 2px; }
 
-::selection { background: var(--blue-100); color: var(--blue-800); }
+::selection { background: var(--coral-100); color: var(--coral-800); }
 
 /* 滚动条 */
 .scroll-y { overflow-y: auto; }
@@ -84,7 +84,7 @@ svg.icon {
 .mb-3 { margin-bottom: var(--sp-3); }
 .mb-4 { margin-bottom: var(--sp-4); }
 .muted { color: var(--ink-500); }
-.dim { color: var(--ink-400); }
+.dim { color: var(--ink-500); }
 .strong { font-weight: 600; color: var(--ink-900); }
 .small { font-size: var(--fs-caption); }
 .tiny { font-size: var(--fs-tag); }
@@ -120,30 +120,30 @@ svg.icon {
 .btn i[data-icon] { font-size: 17px; }
 
 /* 变体只替换色值，尺寸与状态逻辑共用 */
-.btn-primary { background: var(--action); color: var(--on-dark); }
-.btn-accent { background: var(--accent); color: var(--on-dark); }
+.btn-primary { background: var(--action); color: var(--on-action); box-shadow: var(--sh-brand); }
+.btn-accent { background: var(--accent); color: var(--on-accent); }
 .btn-secondary { background: var(--surface); border-color: var(--line-strong); color: var(--ink-700); }
 .btn-ghost { background: transparent; color: var(--ink-600); }
-.btn-soft { background: var(--blue-50); color: var(--blue-700); }
+.btn-soft { background: var(--action-soft); color: var(--action-soft-ink); }
 .btn-danger { background: var(--danger); color: var(--on-dark); }
 .btn-danger-soft { background: var(--danger-50); color: var(--danger-700); }
 .btn-green { background: var(--green-700); color: var(--on-dark); }
-.btn-glass { background: rgba(255, 255, 255, .14); color: var(--on-dark); border-color: rgba(255, 255, 255, .28); backdrop-filter: blur(12px); }
+.btn-glass { background: rgba(255, 255, 255, .14); color: var(--on-dark); border-color: rgba(255, 255, 255, .28); backdrop-filter: blur(var(--glass-blur)); }
 
 /* hover 仅精细指针生效：触屏不实现，避免点击后卡在 hover 态 */
 @media (hover: hover) and (pointer: fine) {
-  .btn-primary:hover { background: var(--action-press); box-shadow: var(--sh-brand); transform: translateY(-1px); }
+  .btn-primary:hover { background: var(--action-press); box-shadow: var(--sh-glow); transform: translateY(-1px); }
   .btn-accent:hover { background: var(--accent-press); box-shadow: var(--sh-warm); transform: translateY(-1px); }
-  .btn-secondary:hover { border-color: var(--blue-300); color: var(--blue-700); background: var(--blue-50); }
+  .btn-secondary:hover { border-color: var(--coral-300); color: var(--action-press); background: var(--action-soft); }
   .btn-ghost:hover { background: var(--bg-deep); color: var(--ink-900); }
-  .btn-soft:hover { background: var(--blue-100); }
+  .btn-soft:hover { background: var(--action-soft-2); }
   .btn-danger:hover { background: var(--danger-800); }
   .btn-green:hover { background: var(--green-800); }
   .btn-glass:hover { background: rgba(255, 255, 255, .22); }
 }
 
 /* 按压只缩不位移，松开由 --ease-out 收回 */
-.btn:active { transform: scale(var(--press-scale)); }
+.btn:active { transform: scale(var(--press-scale)); box-shadow: none; }
 .btn:focus-visible { outline: none; box-shadow: var(--ring); }
 .btn:disabled,
 .btn[aria-disabled="true"] {
@@ -171,7 +171,7 @@ svg.icon {
   .btn-glass { background: rgba(11, 18, 32, .55); }
 }
 
-.btn-sm { height: 32px; padding: 0 12px; font-size: var(--fs-caption); border-radius: var(--r-md); gap: 5px; }
+.btn-sm { height: 32px; padding: 0 12px; font-size: var(--fs-caption); border-radius: var(--r-pill); gap: 5px; }
 .btn-sm i[data-icon] { font-size: 15px; }
 .btn-lg { height: 48px; padding: 0 24px; font-size: var(--fs-body-lg); border-radius: var(--btn-radius); }
 .btn-block { width: 100%; }
@@ -197,24 +197,34 @@ svg.icon {
 .icon-btn.light { color: rgba(255, 255, 255, .9); }
 
 .link {
-  color: var(--blue-600);
+  color: var(--action);
   font-weight: 500;
   cursor: pointer;
   transition: color var(--dur-fast) var(--ease);
 }
 .link:focus-visible { outline: none; box-shadow: var(--ring); border-radius: var(--r-xs); }
 @media (hover: hover) and (pointer: fine) {
-  .link:hover { color: var(--blue-700); text-decoration: underline; text-underline-offset: 3px; }
-  .link-more:hover { color: var(--blue-600); }
+  .link:hover { color: var(--action-press); text-decoration: underline; text-underline-offset: 3px; }
+  .link-more:hover { color: var(--action); }
 }
 .link-more {
   display: inline-flex;
   align-items: center;
   gap: 2px;
+  height: 28px;
+  padding: 0 var(--sp-2) 0 var(--sp-3);
+  border-radius: var(--r-pill);
+  background: var(--surface);
+  box-shadow: var(--sh-1);
   font-size: var(--fs-caption);
-  color: var(--ink-500);
-  font-weight: 500;
+  color: var(--ink-600);
+  font-weight: 600;
+  transition: background-color var(--dur-fast) var(--ease-out),
+              color var(--dur-fast) var(--ease-out),
+              box-shadow var(--dur-fast) var(--ease-out);
 }
+.link-more:hover { color: var(--action); box-shadow: var(--sh-2); }
+.link-more:active { transform: scale(.97); }
 .link-more i[data-icon] { font-size: 14px; }
 
 /* ---------- 标签 / 状态 ---------- */
@@ -233,8 +243,9 @@ svg.icon {
 }
 .tag-blue { background: var(--blue-50); color: var(--blue-700); }
 .tag-green { background: var(--green-50); color: var(--green-700); }
-.tag-orange { background: var(--orange-50); color: var(--orange-700); }
-.tag-tech { background: var(--cyan-50); color: var(--cyan-700); }
+.tag-coral { background: var(--coral-50); color: var(--coral-700); }
+.tag-amber { background: var(--amber-50); color: var(--amber-700); }
+.tag-tech { background: var(--blue-50); color: var(--blue-700); }
 .tag-gray { background: var(--surface-sunken); color: var(--ink-500); }
 .tag-red { background: var(--danger-50); color: var(--danger-700); }
 .tag-warn { background: var(--warn-50); color: var(--warn-700); }
@@ -246,9 +257,9 @@ svg.icon {
   cursor: pointer;
   transition: background-color var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
 }
-.tag-click[aria-selected="true"] { background: var(--blue-600); color: var(--on-dark); }
+.tag-click[aria-selected="true"] { background: var(--action); color: var(--on-action); }
 @media (hover: hover) and (pointer: fine) {
-  .tag-click:hover { background: var(--blue-100); color: var(--blue-700); }
+  .tag-click:hover { background: var(--action-soft-2); color: var(--action-soft-ink); }
 }
 
 .status {
@@ -287,11 +298,12 @@ svg.icon {
   height: 18px;
   padding: 0 5px;
   border-radius: var(--r-pill);
-  background: var(--orange-500);
-  color: var(--ink-900);
+  background: var(--action);
+  color: var(--on-action);
   font-size: var(--fs-tag);
   font-weight: 700;
   font-family: var(--font-num);
+  box-shadow: var(--sh-brand);
 }
 
 /* ---------- 卡片 ---------- */
@@ -337,7 +349,7 @@ svg.icon {
   padding: 0 14px;
   background: var(--surface);
   border: 1px solid var(--border-control);
-  border-radius: var(--r-md);
+  border-radius: var(--r-lg);
   font-size: var(--fs-body);
   color: var(--ink-900);
   transition: border-color var(--dur-fast) var(--ease), box-shadow var(--dur-fast) var(--ease);
@@ -346,11 +358,11 @@ svg.icon {
 .textarea { height: auto; min-height: 104px; padding: 12px 14px; line-height: 1.75; resize: vertical; }
 .input::placeholder, .textarea::placeholder { color: var(--ink-500); }
 @media (hover: hover) and (pointer: fine) {
-  .input:hover, .select:hover, .textarea:hover { border-color: var(--ink-400); }
+  .input:hover, .select:hover, .textarea:hover { border-color: var(--ink-500); }
 }
 .input:focus, .select:focus, .textarea:focus {
-  border-color: var(--blue-600);
-  box-shadow: inset 0 0 0 1px var(--blue-600), 0 0 0 3px rgba(37, 99, 235, .18);
+  border-color: var(--action);
+  box-shadow: inset 0 0 0 1px var(--action), 0 0 0 3px rgba(206, 68, 45, .18);
 }
 .input:disabled, .select:disabled, .textarea:disabled {
   background: var(--surface-sunken);
@@ -366,20 +378,20 @@ svg.icon {
   background-repeat: no-repeat;
   background-position: right 12px center;
 }
-.hint { font-size: 12px; color: var(--ink-400); line-height: 1.6; }
+.hint { font-size: 12px; color: var(--ink-500); line-height: 1.6; }
 .err-msg { font-size: 12px; color: var(--danger); display: flex; align-items: center; gap: 4px; }
 .err-msg i[data-icon] { font-size: 14px; }
 .field.has-error .input, .field.has-error .select, .field.has-error .textarea { border-color: var(--danger); }
 .input-affix { position: relative; display: flex; align-items: center; }
-.input-affix i[data-icon] { position: absolute; left: 12px; font-size: 18px; color: var(--ink-400); pointer-events: none; }
+.input-affix i[data-icon] { position: absolute; left: 12px; font-size: 18px; color: var(--ink-500); pointer-events: none; }
 .input-affix .input { padding-left: 38px; }
-.input-affix .affix-right { position: absolute; right: 12px; font-size: 18px; color: var(--ink-400); }
+.input-affix .affix-right { position: absolute; right: 12px; font-size: 18px; color: var(--ink-500); }
 
 .check { display: flex; align-items: flex-start; gap: 9px; cursor: pointer; font-size: 13px; color: var(--ink-600); line-height: 1.6; }
 .check input { appearance: none; width: 20px; height: 20px; margin: 0; border: 1.5px solid var(--border-control); border-radius: var(--r-xs); background: var(--surface); flex: none; cursor: pointer; transition: background-color var(--dur-fast) var(--ease), border-color var(--dur-fast) var(--ease); }
-.check input:checked { background: var(--blue-600); border-color: var(--blue-600); background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m5 12.5 4.5 4.5L19 7'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: center; }
+.check input:checked { background: var(--action); border-color: var(--action); background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m5 12.5 4.5 4.5L19 7'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: center; }
 .check input:focus-visible { box-shadow: var(--ring); }
-.check a { color: var(--blue-600); }
+.check a { color: var(--action); }
 
 .switch { position: relative; display: inline-flex; width: 44px; height: 26px; flex: none; }
 .switch input {
@@ -406,7 +418,7 @@ svg.icon {
   box-shadow: var(--sh-1);
   transition: transform var(--dur) var(--ease-snap);
 }
-.switch input:checked { background: var(--blue-600); border-color: var(--blue-600); }
+.switch input:checked { background: var(--action); border-color: var(--action); }
 .switch input:checked::after { transform: translateX(18px); }
 .switch input:focus-visible { outline: none; box-shadow: var(--ring); }
 .switch input:disabled { opacity: .5; cursor: not-allowed; }
@@ -432,15 +444,15 @@ svg.icon {
 @media (hover: hover) and (pointer: fine) {
   .segmented button:not(.active):hover { color: var(--ink-900); background: var(--ink-200); }
 }
-.segmented button.active { background: var(--surface); color: var(--blue-700); box-shadow: var(--sh-1); font-weight: 600; }
+.segmented button.active { background: var(--surface); color: var(--action-press); box-shadow: var(--sh-1); font-weight: 600; }
 
 /* ---------- 头像 / 媒体 ---------- */
 .avatar {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--blue-500), var(--blue-700));
-  color: var(--on-dark);
+  background: var(--grad-brand);
+  color: var(--on-action);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -451,14 +463,35 @@ svg.icon {
 .avatar-lg { width: 56px; height: 56px; font-size: 20px; }
 .avatar-sm { width: 30px; height: 30px; font-size: 12px; }
 .avatar-green { background: linear-gradient(135deg, var(--green-500), var(--green-700)); }
-.avatar-orange { background: linear-gradient(135deg, var(--orange-400), var(--orange-600)); }
+.avatar-orange { background: linear-gradient(135deg, var(--coral-400), var(--coral-600)); }
 .avatar-gray { background: linear-gradient(135deg, var(--ink-300), var(--ink-500)); }
+
+/* 叠层头像：用于「N 人已报名」这类社交证明 */
+.avatar-stack { display: inline-flex; align-items: center; }
+.avatar-stack > * { margin-left: -8px; box-shadow: 0 0 0 2px var(--surface); }
+.avatar-stack > *:first-child { margin-left: 0; }
+.avatar-stack .more {
+  width: 30px; height: 30px; border-radius: 50%;
+  background: var(--surface-sunken); color: var(--ink-600);
+  display: inline-flex; align-items: center; justify-content: center;
+  font-size: var(--fs-tag); font-weight: 600; font-family: var(--font-num);
+}
+
+/* 玻璃浮层：只用于压在图片/视频上的悬浮控件，必须有实色降级 */
+.glass {
+  background: rgba(255, 255, 255, .16);
+  border: 1px solid rgba(255, 255, 255, .28);
+  backdrop-filter: blur(var(--glass-blur)) saturate(140%);
+}
+@supports not (backdrop-filter: blur(1px)) {
+  .glass { background: rgba(13, 19, 33, .62); }
+}
 
 /* 抽象水乡纹理占位图 */
 .media {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(135deg, var(--blue-100) 0%, var(--green-100) 100%);
+  background: linear-gradient(135deg, var(--coral-100) 0%, var(--amber-200) 100%);
   isolation: isolate;
 }
 .media::before {
@@ -472,11 +505,14 @@ svg.icon {
 }
 .media > * { position: relative; z-index: 1; }
 .media.tone-blue { background: linear-gradient(135deg, var(--blue-100) 0%, var(--blue-300) 100%); }
-.media.tone-green { background: linear-gradient(135deg, var(--green-100) 0%, var(--green-500) 100%); }
-.media.tone-warm { background: linear-gradient(135deg, var(--orange-100) 0%, var(--orange-400) 100%); }
-.media.tone-teal { background: linear-gradient(135deg, var(--cyan-100) 0%, var(--cyan-500) 100%); }
+.media.tone-green { background: linear-gradient(135deg, var(--coral-100) 0%, var(--coral-400) 100%); }
+.media.tone-warm { background: linear-gradient(135deg, var(--coral-100) 0%, var(--coral-400) 100%); }
+.media.tone-sunset { background: linear-gradient(135deg, var(--coral-300) 0%, var(--amber-400) 100%); }
+.media.tone-teal { background: linear-gradient(135deg, var(--blue-100) 0%, var(--blue-500) 100%); }
 .media.tone-deep { background: linear-gradient(135deg, var(--blue-800) 0%, var(--ink-900) 100%); }
 .media.tone-deep::before { opacity: .35; }
+.media.tone-tech { background: var(--grad-tech); }
+.media.tone-tech::before { opacity: .5; }
 
 /* ---------- 分隔 / 空态 ---------- */
 .divider { height: 1px; background: var(--line); border: 0; margin: 0; }
@@ -489,21 +525,22 @@ svg.icon {
   gap: 10px;
   padding: 48px 24px;
   text-align: center;
-  color: var(--ink-400);
+  color: var(--ink-500);
 }
 .empty .empty-icon {
   width: 56px;
   height: 56px;
   border-radius: var(--r-lg);
-  background: var(--surface-sunken);
-  color: var(--ink-400);
+  background: var(--action-soft);
+  color: var(--action);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 26px;
 }
-.empty h4 { font-size: var(--fs-body); font-weight: 600; color: var(--ink-700); }
-.empty p { font-size: var(--fs-caption); line-height: 1.75; max-width: 260px; }
+.empty h4 { font-size: var(--fs-body); font-weight: 600; color: var(--ink-800); }
+.empty p { font-size: var(--fs-caption); line-height: 1.75; max-width: 260px; color: var(--ink-500); }
+.empty .empty-action { margin-top: var(--sp-2); }
 
 /* ---------- 提示条 ---------- */
 .notice {
@@ -513,8 +550,8 @@ svg.icon {
   padding: 12px 14px;
   border-radius: var(--r-md);
   border: 1px solid var(--blue-100);
-  font-size: 12.5px;
-  line-height: 1.65;
+  font-size: var(--fs-caption);
+  line-height: var(--lh-normal);
   background: var(--blue-50);
   color: var(--blue-700);
 }
@@ -526,7 +563,7 @@ svg.icon {
 
 /* ---------- 骨架屏 ---------- */
 .skeleton {
-  background: linear-gradient(90deg, var(--ink-200) 25%, var(--surface-2) 37%, var(--ink-200) 63%);
+  background: linear-gradient(90deg, var(--bg-deep) 25%, var(--surface-2) 37%, var(--bg-deep) 63%);
   background-size: 400% 100%;
   animation: skeleton 1.4s linear infinite;
   border-radius: var(--r-sm);

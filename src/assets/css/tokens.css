@@ -1,26 +1,43 @@
 /* =========================================================
    斗来创 · 设计令牌 (Design Tokens)
-   v2.0 · 电光青蓝 / 薄荷青 / 珊瑚橙
+   v3.0 · 湾区落日 · 电光
+     品牌暖 = 珊瑚（行动）  科技冷 = 电光蓝（信息）  结构 = 深墨  语义 = 绿
    规范见 DESIGN.md 第三～六章；页面样式不得写裸值
    ========================================================= */
 :root {
-  /* ---------- 原语 · 品牌蓝（电光青蓝） ---------- */
-  --blue-800: #0B1F3A;
-  --blue-700: #1D4ED8;
-  --blue-600: #2563EB;
-  --blue-500: #3B82F6;
-  --blue-300: #93C5FD;
-  --blue-200: #BFDBFE;
-  --blue-100: #DBEAFE;
-  --blue-50: #EFF6FF;
+  /* ---------- 原语 · 珊瑚（品牌 / 行动） ---------- */
+  --coral-950: #54140D;
+  --coral-900: #752017;
+  --coral-800: #982D1F;
+  --coral-700: #B93827;
+  --coral-600: #CE442D;
+  --coral-500: #ED5D3D;
+  --coral-400: #FF825B;
+  --coral-300: #FFAE8B;
+  --coral-200: #FFD0B8;
+  --coral-100: #FFE6D6;
+  --coral-50: #FFF4EC;
 
-  /* ---------- 原语 · 科技青（新增） ---------- */
-  --cyan-700: #0E7490;
-  --cyan-500: #06B6D4;
-  --cyan-100: #CFFAFE;
-  --cyan-50: #ECFEFF;
+  /* ---------- 原语 · 琥珀（日落渐变第二停 / 高亮） ---------- */
+  --amber-700: #A95C00;
+  --amber-600: #DA7F00;
+  --amber-500: #F59900;
+  --amber-400: #FFB94F;
+  --amber-200: #FFDFA8;
+  --amber-50: #FFF5E1;
 
-  /* ---------- 原语 · 生态绿 ---------- */
+  /* ---------- 原语 · 电光蓝（科技 / 信息，已从行动色降级） ---------- */
+  --blue-800: #174A92;
+  --blue-700: #0E66C8;
+  --blue-600: #1980E8;
+  --blue-500: #3B9CF6;
+  --blue-400: #6DB8F9;
+  --blue-300: #9FD2FB;
+  --blue-200: #C3E4FD;
+  --blue-100: #D0ECFF;
+  --blue-50: #ECF9FF;
+
+  /* ---------- 原语 · 生态绿（仅语义成功，禁止装饰性使用） ---------- */
   --green-800: #065F46;
   --green-700: #047857;
   --green-600: #059669;
@@ -28,40 +45,32 @@
   --green-100: #D1FAE5;
   --green-50: #ECFDF5;
 
-  /* ---------- 原语 · 珊瑚橙 ---------- */
-  --orange-800: #9A3412;
-  --orange-700: #C2410C;
-  --orange-600: #EA580C;
-  --orange-500: #FF6B4A;
-  --orange-400: #FF8A6B;
-  --orange-300: #FFD9A8;
-  --orange-100: #FFE4DC;
-  --orange-50: #FFF1ED;
-
-  /* ---------- 原语 · 中性 ---------- */
-  --ink-900: #0B1220;
-  --ink-800: #1E293B;
-  --ink-700: #334155;
-  --ink-600: #475569;
-  --ink-500: #5B6A7E;
-  --ink-400: #7C8AA0;
-  --ink-300: #CBD5E1;
-  --ink-200: #E2E8F0;
+  /* ---------- 原语 · 中性（深墨带蓝紫倾向，自带科技冷感） ---------- */
+  --ink-950: #0D1321;
+  --ink-900: #161F31;
+  --ink-800: #273348;
+  --ink-700: #3F4B60;
+  --ink-600: #55606F;
+  --ink-500: #636D7E;
+  --ink-400: #9099A6;
+  --ink-300: #BEC5CD;
+  --ink-200: #DADEE5;
+  --ink-100: #EDF0F4;
   --line: #E4E9F0;
   --line-strong: #CBD5E1;
-  --border-control: #7C8AA0;
+  --border-control: var(--ink-400);
   --bg: #F6F8FC;
   --bg-deep: #EEF2F8;
   --surface: #FFFFFF;
   --surface-2: #FAFBFE;
-  --surface-inverse: #0B1220;
+  --surface-inverse: var(--ink-950);
   --on-dark: #FFFFFF;
 
   /* ---------- 原语 · 状态色 ---------- */
   --success: #047857;
   --success-50: #ECFDF5;
-  --info: #1D4ED8;
-  --info-50: #EFF6FF;
+  --info: var(--blue-700);
+  --info-50: var(--blue-50);
   --warn: #B45309;
   --warn-700: #92400E;
   --warn-100: #FDE68A;
@@ -79,30 +88,45 @@
   --r-md: 12px;
   --r-lg: 16px;
   --r-xl: 20px;
-  --r-2xl: 28px;
+  --r-2xl: 24px;
   --r-3xl: 32px;
   --r-pill: 999px;
 
-  /* ---------- 阴影：双层、冷调、低透明度 ---------- */
-  --sh-1: 0 1px 2px rgba(11, 18, 32, .04), 0 1px 3px rgba(11, 18, 32, .06);
-  --sh-2: 0 2px 6px rgba(11, 18, 32, .05), 0 8px 20px rgba(11, 18, 32, .07);
-  --sh-3: 0 8px 20px rgba(11, 18, 32, .08), 0 20px 44px rgba(11, 18, 32, .12);
-  --sh-4: 0 24px 64px rgba(8, 16, 32, .18);
-  --sh-brand: 0 6px 18px rgba(37, 99, 235, .22);
-  --sh-warm: 0 6px 18px rgba(255, 107, 74, .22);
-  --ring: 0 0 0 2px var(--surface), 0 0 0 4px var(--blue-600);
+  /* ---------- 阴影：暖调双层 + 品牌柔光（v3.0 由冷灰转暖） ---------- */
+  --sh-1: 0 1px 2px rgba(84, 20, 13, .04), 0 2px 4px rgba(13, 19, 33, .05);
+  --sh-2: 0 2px 6px rgba(84, 20, 13, .05), 0 10px 22px rgba(13, 19, 33, .07);
+  --sh-3: 0 8px 20px rgba(84, 20, 13, .07), 0 22px 48px rgba(13, 19, 33, .12);
+  --sh-4: 0 24px 64px rgba(13, 19, 33, .20);
+  --sh-brand: 0 6px 18px rgba(206, 68, 45, .26);
+  --sh-warm: 0 6px 18px rgba(245, 153, 0, .24);
+  --sh-glow: 0 8px 28px -8px rgba(237, 93, 61, .45);
+  --sh-tech: 0 8px 28px -8px rgba(59, 156, 246, .40);
+  --ring: 0 0 0 2px var(--surface), 0 0 0 4px var(--coral-600);
+  --ring-tech: 0 0 0 2px var(--surface), 0 0 0 4px var(--blue-500);
 
   /* ---------- 描边 ---------- */
   --bw-hairline: 1px;
   --bw-control: 1px;
   --bw-control-focus: 1.5px;
   --bw-selected: 2px;
+  --hair-on-dark: 1px solid rgba(255, 255, 255, .10);
 
   /* ---------- 渐变 ---------- */
-  --grad-brand: linear-gradient(135deg, #2563EB 0%, #06B6D4 100%);
-  --grad-warm: linear-gradient(135deg, #FF6B4A 0%, #FFB020 100%);
-  --grad-ink: linear-gradient(180deg, rgba(11, 18, 32, 0) 0%, rgba(11, 18, 32, .72) 100%);
-  --grad-hero: linear-gradient(155deg, #1D4ED8 0%, #0B1F3A 58%, #0B1220 100%);
+  --grad-brand: linear-gradient(135deg, #ED5D3D 0%, #FFB94F 100%);
+  --grad-sunset: linear-gradient(160deg, #FFB94F 0%, #ED5D3D 45%, #982D1F 100%);
+  --grad-tech: linear-gradient(150deg, #3B9CF6 0%, #0E66C8 55%, #0D1321 100%);
+  --grad-warm: linear-gradient(135deg, #ED5D3D 0%, #FFB94F 100%);
+  --grad-ink: linear-gradient(180deg, rgba(13, 19, 33, 0) 0%, rgba(13, 19, 33, .78) 100%);
+  --grad-hero: linear-gradient(155deg, #982D1F 0%, #54140D 45%, #0D1321 100%);
+  --grad-glass: linear-gradient(180deg, rgba(255, 255, 255, .78) 0%, rgba(255, 255, 255, .62) 100%);
+  /* 承载白字的卡片底色：起点也要满足白字 ≥ 4.5:1 */
+  --grad-feat-warm: linear-gradient(150deg, #CE442D 0%, #982D1F 58%, #54140D 100%);
+  --grad-feat-tech: linear-gradient(150deg, #0E66C8 0%, #174A92 58%, #0D1321 100%);
+  /* night surfaces: dark tech base + warm bloom, keeps white text >= 15:1 */
+  --grad-night: linear-gradient(165deg, #273348 0%, #161F31 45%, #0D1321 100%);
+  --grad-night-glow:
+    radial-gradient(120% 85% at 88% -8%, rgba(237, 93, 61, .40) 0%, rgba(237, 93, 61, 0) 62%),
+    linear-gradient(165deg, #273348 0%, #161F31 45%, #0D1321 100%);
 
   /* ---------- 间距（4px 基线） ---------- */
   --sp-1: 4px;
@@ -128,10 +152,10 @@
   --fs-h2: 20px;
   --fs-h3: 17px;
   --fs-title: 16px;
-  --fs-body-lg: 15px;
-  --fs-body: 14px;
-  --fs-caption: 12.5px;
-  --fs-micro: 11.5px;
+  --fs-body-lg: 16px;
+  --fs-body: 15px;
+  --fs-caption: 13px;
+  --fs-micro: 12px;
   --fs-tag: 11px;
   --fs-kpi: 30px;
   --fs-hero: 40px;   /* 仅设计总览页大标题，业务页面不得使用 */
@@ -167,23 +191,38 @@
   --text-1: var(--ink-900);
   --text-2: var(--ink-700);
   --text-3: var(--ink-500);
+  --text-meta: var(--ink-500);
   --text-disabled: var(--ink-400);
   --surface-1: var(--surface);
   --surface-inset: var(--surface-2);
   --surface-sunken: var(--bg-deep);
+  --surface-dark: var(--ink-950);
   --border-hairline: var(--line);
-  --action: var(--blue-600);
-  --action-press: var(--blue-700);
-  --accent: var(--orange-700);
-  --accent-press: var(--orange-600);
-  --tech: var(--cyan-500);
+  --action: var(--coral-700);
+  --action-press: var(--coral-800);
+  --action-soft: var(--coral-50);
+  --action-soft-2: var(--coral-100);
+  --action-soft-ink: var(--coral-700);
+  --on-action: #FFFFFF;
+  --accent: var(--amber-400);
+  --accent-press: var(--amber-600);
+  --accent-ink: var(--amber-700);
+  --on-accent: var(--ink-900);
+  --tech: var(--blue-500);
+  --tech-ink: var(--blue-700);
+  --tech-soft: var(--blue-50);
+  --live: var(--blue-500);
+  --on-dark-2: rgba(255, 255, 255, .72);
+  --on-dark-3: rgba(255, 255, 255, .55);
   --focus-ring: var(--ring);
 
   /* ---------- 组件层 ---------- */
   --control-h: 44px;
-  --btn-radius: var(--r-md);
-  --card-radius: var(--r-lg);
+  --btn-radius: var(--r-pill);
+  --card-radius: var(--r-xl);
   --card-pad: var(--sp-4);
+  --glass-blur: 16px;
+  --dot-field: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, .16) 1px, transparent 0);
 
   /* 层级 */
   --z-sticky: 20;
@@ -191,6 +230,26 @@
   --z-drawer: 60;
   --z-modal: 80;
   --z-toast: 100;
+}
+
+/* 小程序表面层：暖白纸感画布。后台 CMS 不继承，保持冷色专业观感。 */
+.device {
+  --bg: #FBF8F4;
+  --bg-deep: #F5F0EA;
+  --surface-2: #FCFAF7;
+  --line: #EDE7DF;
+  --line-strong: #DCD4C9;
+  --ring: 0 0 0 2px var(--surface), 0 0 0 4px var(--coral-500);
+}
+
+/* 后台 CMS：行动色保持冷色，避免暖色削弱管理端的秩序感。 */
+.admin-shell {
+  --action: var(--blue-700);
+  --action-press: var(--blue-800);
+  --action-soft: var(--blue-50);
+  --action-soft-2: var(--blue-100);
+  --action-soft-ink: var(--blue-700);
+  --ring: 0 0 0 2px var(--surface), 0 0 0 4px var(--blue-600);
 }
 
 /* 繁体脚本笔画更密：行高、字距、最小字号各上调一档。

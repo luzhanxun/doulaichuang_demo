@@ -776,6 +776,11 @@
       opt.classList.toggle('active', opt.dataset.lang === currentLang);
     });
     device.classList.toggle('lang-hant', hant);
+
+    /* 纯视觉：重放一次交叉淡化，不改变任何状态或数据 */
+    device.classList.remove('lang-swap');
+    void device.offsetWidth;
+    device.classList.add('lang-swap');
   }
 
   var langToggle = document.getElementById('langToggle');
